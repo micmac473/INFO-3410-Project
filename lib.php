@@ -18,7 +18,7 @@ function checkLogin($email, $password){
 	if($db != NULL){
 		$res = $db->query($sql);
 		if ($res && $row = $res->fetch_assoc()){
-			if(($row['password'] == $password) &&  ($row['email'] == $email)) 
+			if(($row['password'] == $password)
 				return true;
 		}
 	}
