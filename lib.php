@@ -66,6 +66,19 @@ function saveTransactions($User1,$User2,$item1,$item2){
 	return FALSE;
 }
 
+function saveItem($picture,$itemDescription){
+	$sql = "INSERT INTO items(`userId`,`picture`,`itemDescription`) VALUES('$_SESSION['id']','$picture','$itemDescription')";
+	try{
+		$db = getDBConnection();
+		if ($db != NULL){
+			$db->query($sql);
+			$id = $db->insert_id;
+			if ($id >0)return TRUE;
+		}
+	}catch (Exception $e){}
+	return FALSE;
+}
+
 function saveRating ($username,$ratings){
 	//$oldrating = "SELECT rating FROM ratings WHERE username=$'username;";
 
