@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 15, 2016 at 08:55 PM
+-- Generation Time: Nov 23, 2016 at 06:12 PM
 -- Server version: 10.1.13-MariaDB
 -- PHP Version: 7.0.8
 
@@ -19,19 +19,19 @@ SET time_zone = "+00:00";
 --
 -- Database: `junktrade`
 --
-CREATE DATABASE IF NOT EXISTS `junktrade` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `junktrade`;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `profile`
+-- Table structure for table `items`
 --
 
-DROP TABLE IF EXISTS `profile`;
-CREATE TABLE `profile` (
-  `interests` varchar(100) DEFAULT NULL,
-  `tradables` varchar(1000) DEFAULT NULL
+CREATE TABLE `items` (
+  `itemId` int(11) NOT NULL,
+  `userId` int(11) NOT NULL,
+  `uploadDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `itemDescription` varchar(500) NOT NULL,
+  `picture` varchar(1000) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -40,7 +40,6 @@ CREATE TABLE `profile` (
 -- Table structure for table `ratings`
 --
 
-DROP TABLE IF EXISTS `ratings`;
 CREATE TABLE `ratings` (
   `ratingNumber` int(11) NOT NULL,
   `UserId` int(11) NOT NULL,
@@ -53,7 +52,6 @@ CREATE TABLE `ratings` (
 -- Table structure for table `transaction`
 --
 
-DROP TABLE IF EXISTS `transaction`;
 CREATE TABLE `transaction` (
   `TransactionId` int(11) NOT NULL,
   `User1` int(11) NOT NULL,
@@ -67,7 +65,6 @@ CREATE TABLE `transaction` (
 -- Table structure for table `users`
 --
 
-DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `username` varchar(30) NOT NULL,
@@ -92,6 +89,12 @@ INSERT INTO `users` (`id`, `username`, `firstname`, `lastname`, `email`, `contac
 --
 
 --
+-- Indexes for table `items`
+--
+ALTER TABLE `items`
+  ADD PRIMARY KEY (`itemId`);
+
+--
 -- Indexes for table `ratings`
 --
 ALTER TABLE `ratings`
@@ -113,6 +116,11 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for dumped tables
 --
 
+--
+-- AUTO_INCREMENT for table `items`
+--
+ALTER TABLE `items`
+  MODIFY `itemId` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `ratings`
 --

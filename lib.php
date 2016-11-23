@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 function getDBConnection(){
 	try{ 
 		$db = new mysqli("localhost","root","","junktrade");
@@ -13,16 +14,12 @@ function getDBConnection(){
 function checkLogin($email, $password){
 	$password = sha1($password);
 	$sql = "SELECT * FROM `users` where email='$email'";
-	//print($email);
+	print($email);
 	$db = getDBConnection();
 	if($db != NULL){
 		$res = $db->query($sql);
 		if ($res && $row = $res->fetch_assoc()){
 			if($row['password'] == $password)
-				$_SESSION["name"] = $row['firstname']." ".$row['lastname'];
-				$_SESSION['username'] = $row["username"];
-				//return true;
-				//$name = $_SESSION["name"];
 				return true;
 		}
 	}
@@ -59,6 +56,22 @@ function saveProfile($contact, $interest, $tradables){
 
 function saveTransactions($User1,$User2,$item1,$item2){
 	$sql = "INSERT INTO transaction(`user1`,`user2`,`item1`,`item2`) VALUES('$User1','$User2','$item1','$item2')";
+	try{
+		$db = getDBConnection();
+		if ($db != NULL){
+			$db->query($sql);
+			$id = $db->insert_id;
+			if ($id >0)return TRUE;
+		}
+	}catch (Exception $e){}
+	return FALSE;
+}
+
+function saveItem($picture,$itemDescription){
+	$userid =$_SESSION['id'];
+	$sql = "INSERT INTO items(`userId`,`picture`,`itemDescription`) VALUES('userid','$picture','$itemDescription')";
+	$userId = $_SESSION['id'];
+	$sql = "INSERT INTO items(`userId`,`picture`,`itemDescription`) VALUES('$userId','$picture','$itemDescription')";
 	try{
 		$db = getDBConnection();
 		if ($db != NULL){
@@ -124,6 +137,24 @@ function productViews($item){
 		}
 	}catch (Exception $e){}
 	return FALSE;
+}
+
+
+
+function getUserItems($userID){//should be session id here instead of useId
+	$sql ="SELECT `itemid`, `UploadDate`, `itemDescription`, `picture` FROM `items` where `userid` ='$userID';";
+	$items =[];
+	print($sql);
+		$db = getDBConnection();
+		if ($db != NULL){
+			$db->query($sql);
+			while($res && $row = $res->fetch_assoc()){
+			$items[] = $row;
+		}//while
+		$db->close();
+	}//if
+		
+		return $items;
 }
 
 ?>
