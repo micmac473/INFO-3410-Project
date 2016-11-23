@@ -70,10 +70,8 @@ function saveTransactions($User1,$User2,$item1,$item2){
 function saveItem($picture,$itemDescription){
 	$userid =$_SESSION['id'];
 	$sql = "INSERT INTO items(`userId`,`picture`,`itemDescription`) VALUES('userid','$picture','$itemDescription')";
-=======
 	$userId = $_SESSION['id'];
 	$sql = "INSERT INTO items(`userId`,`picture`,`itemDescription`) VALUES('$userId','$picture','$itemDescription')";
->>>>>>> 3eab02af8f303aeb89186a2ed57ea0a9504baf2e
 	try{
 		$db = getDBConnection();
 		if ($db != NULL){
@@ -146,7 +144,7 @@ function productViews($item){
 function getUserItems($userID){//should be session id here instead of useId
 	$sql ="SELECT `itemid`, `UploadDate`, `itemDescription`, `picture` FROM `items` where `userid` ='$userID';";
 	$items =[];
-	
+	print($sql);
 		$db = getDBConnection();
 		if ($db != NULL){
 			$db->query($sql);

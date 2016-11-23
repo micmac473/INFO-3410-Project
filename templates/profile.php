@@ -1,9 +1,9 @@
 <?php
-incude "lib.php";
- $userItems =getUserItems();
+include "lib.php";
+
+$useriD = 1;
+ $userItems =getUserItems($useriD);
  echo json_encode($userItems);
-
-
 
 ?>
 <!doctype html>
@@ -181,7 +181,7 @@ incude "lib.php";
     <thead>
     <tr>
       <th>Item #</th>
-      <th>Date Uploaded</th>
+      <th>Day Uploaded</th>
       <th>Item Description</th>
       <th>Uploaded Picture</th>
       <th>Controls</th>
