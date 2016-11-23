@@ -42,9 +42,9 @@ function login(){
     }
 
     console.log(user);
-    $.post("../index.php/users", user, function(res){
+    $.post("/index.php/users", user, function(res){
         alert(res);
-        var url="profile.phtml";
+        var url="homepage.php";
         window.open(url, "_self");
     });
     console.log("Hi");
@@ -77,7 +77,7 @@ function register(){
         "password" : password
     };
 
-    $.post("../index.php/register", regUser, function(res){
+    $.post("/index.php/register", regUser, function(res){
         alert(res);
         var url="login.phtml";
         window.open(url, "_self");

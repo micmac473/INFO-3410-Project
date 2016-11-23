@@ -144,10 +144,10 @@ function productViews($item){
 function getUserItems($userID){//should be session id here instead of useId
 	$sql ="SELECT `itemid`, `UploadDate`, `itemDescription`, `picture` FROM `items` where `userid` ='$userID';";
 	$items =[];
-	print($sql);
+	//print($sql);
 		$db = getDBConnection();
 		if ($db != NULL){
-			$db->query($sql);
+			$res = $db->query($sql);
 			while($res && $row = $res->fetch_assoc()){
 			$items[] = $row;
 		}//while
