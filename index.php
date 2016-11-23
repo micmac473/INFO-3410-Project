@@ -49,8 +49,9 @@ $app->post("/users", function(Request $request, Response $response){
 	$res = checkLogin($email, $password);
 	//print_r ($res);
 	if ($res){
-		$response = $response->withStatus(201);
-		//$response = $response->withJson(array( "id" => $res));
+		$name = $_SESSION["name"];
+		//$response = $response->withStatus(201);
+		$response = $response->withJson(array( "user" => $name));
 	} else {
 		$response = $response->withStatus(400);
 	}
@@ -72,7 +73,7 @@ $app->post("/register", function(Request $request, Response $response){
 	//print_r ($res);
 	if ($res){
 		$response = $response->withStatus(201);
-		//$response = $response->withJson(array( "id" => $res));
+		//$response = $response->withJson(array( "user" => $res));
 	} else {
 		$response = $response->withStatus(400);
 	}

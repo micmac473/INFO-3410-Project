@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 function getDBConnection(){
 	try{ 
 		$db = new mysqli("localhost","root","","junktrade");
@@ -13,12 +13,16 @@ function getDBConnection(){
 function checkLogin($email, $password){
 	$password = sha1($password);
 	$sql = "SELECT * FROM `users` where email='$email'";
-	print($email);
+	//print($email);
 	$db = getDBConnection();
 	if($db != NULL){
 		$res = $db->query($sql);
 		if ($res && $row = $res->fetch_assoc()){
-			if(($row['password'] == $password)
+			if($row['password'] == $password)
+				$_SESSION["name"] = $row['firstname']." ".$row['lastname'];
+				$_SESSION['username'] = $row["username"];
+				//return true;
+				//$name = $_SESSION["name"];
 				return true;
 		}
 	}

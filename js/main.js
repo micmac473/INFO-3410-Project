@@ -43,8 +43,9 @@ function login(){
 
     console.log(user);
     $.post("../index.php/users", user, function(res){
+        //alert("Welcome " + res.user);
         alert(res);
-        var url="base.phtml";
+        var url="profile.phtml";
         window.open(url, "_self");
     });
     console.log("Hi");
