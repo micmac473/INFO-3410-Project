@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 function getDBConnection(){
 	try{ 
@@ -67,8 +68,13 @@ function saveTransactions($User1,$User2,$item1,$item2){
 }
 
 function saveItem($picture,$itemDescription){
+<<<<<<< HEAD
 	$userid =$_SESSION['id'];
 	$sql = "INSERT INTO items(`userId`,`picture`,`itemDescription`) VALUES('userid','$picture','$itemDescription')";
+=======
+	$userId = $_SESSION['id'];
+	$sql = "INSERT INTO items(`userId`,`picture`,`itemDescription`) VALUES('$userId','$picture','$itemDescription')";
+>>>>>>> 3eab02af8f303aeb89186a2ed57ea0a9504baf2e
 	try{
 		$db = getDBConnection();
 		if ($db != NULL){
