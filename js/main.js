@@ -88,4 +88,28 @@ function register(){
 
 }
 
+function getItemsForUser(){//alter for slim 
+    $.get("profile.php", listUserItems, "json");
+}
+
+function listUserItems(records){
+    var key;
+    var sec_id = "#UserTable";
+    var htmlStr = $("#User_table_heading").html(); //Includes all the table, thead and tbody declarations
+
+    records.forEach(function(el){
+        htmlStr += "<tr>";
+        htmlStr += "<td>" + el['itemid'] + "</td>";
+        htmlStr += "<td>" + el['uploadDate'] + "</td>";
+        htmlStr += "<td>"+ el['itemDescription'] +"</td>";
+        htmlStr += "<td>"+ el['picture'] +"</td>";
+        htmlStr += "<td><button type="button" class="btn btn-warning"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button> ";
+        htmlStr += "<button type="button" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>";
+        htmlStr +=" </tr>" ;
+    });
+
+    htmlStr += "</tbody></table>";
+    $(sec_id).html(htmlStr);
+}
+
 console.log("JavaScript file was successfully loaded in the page");
