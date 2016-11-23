@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 function getDBConnection(){
 	try{ 
@@ -66,6 +67,20 @@ function saveTransactions($User1,$User2,$item1,$item2){
 	return FALSE;
 }
 
+function saveItem($picture,$itemDescription){
+	$userId = $_SESSION['id'];
+	$sql = "INSERT INTO items(`userId`,`picture`,`itemDescription`) VALUES('$userId','$picture','$itemDescription')";
+	try{
+		$db = getDBConnection();
+		if ($db != NULL){
+			$db->query($sql);
+			$id = $db->insert_id;
+			if ($id >0)return TRUE;
+		}
+	}catch (Exception $e){}
+	return FALSE;
+}
+
 function saveRating ($username,$ratings){
 	//$oldrating = "SELECT rating FROM ratings WHERE username=$'username;";
 
@@ -120,6 +135,24 @@ function productViews($item){
 		}
 	}catch (Exception $e){}
 	return FALSE;
+}
+
+
+
+function getUserItems($userID){//should be session id here instead of useId
+	$sql ="SELECT `itemid`, `UploadDate`, `itemDescription`, `picture` FROM `items` where `userid` ='$userID';";
+	$items =[];
+	
+		$db = getDBConnection();
+		if ($db != NULL){
+			$db->query($sql);
+			while($res && $row = $res->fetch_assoc()){
+			$items[] = $row;
+		}//while
+		$db->close();
+	}//if
+		
+		return $items;
 }
 
 ?>
