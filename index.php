@@ -22,11 +22,11 @@ $app = new App($container);
 
 // Uses a PHP templating system to display HTML when requested
 $app->get('/', function (Request $request, Response $response) {
-	return $this->renderer->render($response, "/index.phtml");//this should be index.phtml as opped to base
+	return $this->renderer->render($response, "/profile.phtml");//this should be index.phtml as opped to base
 });
 
 $app->get('/templates/login.phtml', function (Request $request, Response $response) {
-	return $this->renderer->render($response, "/index.phtml");//this should be index.phtml as opped to base
+	return $this->renderer->render($response, "/base.phtml");//this should be index.phtml as opped to base
 });
 $app->get('/templates/registration.phtml', function (Request $request, Response $response) {
 	return $this->renderer->render($response, "/registration.phtml");//this should be index.phtml as opped to base
