@@ -68,7 +68,6 @@ function saveTransactions($User1,$User2,$item1,$item2){
 }
 
 function saveItem($picture,$itemDescription){
-<<<<<<< HEAD
 	$userid =$_SESSION['id'];
 	$sql = "INSERT INTO items(`userId`,`picture`,`itemDescription`) VALUES('userid','$picture','$itemDescription')";
 =======
