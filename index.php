@@ -22,7 +22,7 @@ $app = new App($container);
 
 // Uses a PHP templating system to display HTML when requested
 $app->get('/', function (Request $request, Response $response) {
-	return $this->renderer->render($response, "/profile.php");//this should be index.phtml as opped to base
+	return $this->renderer->render($response, "/index.phtml");//this should be index.phtml as opped to base
 });
 
 $app->get('/templates/login.phtml', function (Request $request, Response $response) {
@@ -49,8 +49,9 @@ $app->post("/users", function(Request $request, Response $response){
 	$res = checkLogin($email, $password);
 	//print_r ($res);
 	if ($res){
-		$response = $response->withStatus(201);
-		//$response = $response->withJson(array( "id" => $res));
+		$name = $_SESSION["name"];
+		//$response = $response->withStatus(201);
+		$response = $response->withJson(array( "user" => $name));
 	} else {
 		$response = $response->withStatus(400);
 	}
@@ -72,7 +73,7 @@ $app->post("/register", function(Request $request, Response $response){
 	//print_r ($res);
 	if ($res){
 		$response = $response->withStatus(201);
-		//$response = $response->withJson(array( "id" => $res));
+		//$response = $response->withJson(array( "user" => $res));
 	} else {
 		$response = $response->withStatus(400);
 	}

@@ -42,9 +42,9 @@ function login(){
     }
 
     console.log(user);
-    $.post("../index.php/users", user, function(res){
+    $.post("/index.php/users", user, function(res){
         alert(res);
-        var url="base.phtml";
+        var url="homepage.php";
         window.open(url, "_self");
     });
     console.log("Hi");
@@ -77,7 +77,7 @@ function register(){
         "password" : password
     };
 
-    $.post("../index.php/register", regUser, function(res){
+    $.post("/index.php/register", regUser, function(res){
         alert(res);
         var url="login.phtml";
         window.open(url, "_self");
@@ -89,7 +89,12 @@ function register(){
 }
 
 function getItemsForUser(){//alter for slim 
-    $.get("profile.php", listUserItems, "json");
+    $.get("profile.php", processAllItems, "json");
+}
+
+function processAllItems(records){
+    console.log(records);
+    listUserItems(records)
 }
 
 function listUserItems(records){
@@ -103,8 +108,8 @@ function listUserItems(records){
         htmlStr += "<td>" + el['uploadDate'] + "</td>";
         htmlStr += "<td>"+ el['itemDescription'] +"</td>";
         htmlStr += "<td>"+ el['picture'] +"</td>";
-        htmlStr += "<td><button type="button" class="btn btn-warning"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button> ";
-        htmlStr += "<button type="button" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>";
+        htmlStr += "<td><button type='button' class='btn btn-warning'><i class='fa fa-pencil-square-o' aria-hidden='true'></i></button> ";
+        htmlStr += "<button type='button' class='btn btn-danger'><i class='fa fa-trash' aria-hidden='true'></i></button>";
         htmlStr +=" </tr>" ;
     });
 
