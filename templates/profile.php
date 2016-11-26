@@ -7,7 +7,6 @@ $userItems =getUserItems($useriD);
 json_encode($userItems);
 
 ?>
-
 <div class ="container controls">
 <div class ="row">
 <div class ="col-md-12">
@@ -20,9 +19,7 @@ json_encode($userItems);
 </div>
 </div>
 
-<div class ="container main">
-<div class ="row">
-<div class ="col-md-12">
+<!-- Add Item -->
 <div style ="display:none;" id ="uploadItem">
 <h2 style ="text-align: center;margin-bottom:3%; "> Upload a New Item </h2>
 
@@ -83,8 +80,8 @@ json_encode($userItems);
 <script src="js/main.js"></script> -->
 <div class="row">
   <div class="col-md-8 col-md-offset-2 table-responsive">
-    <h4>Products</h4>
-    <p>A table highlighting the available products</p>
+    <!--<h4>Products</h4>
+    <p>A table highlighting the available products</p> -->
     <div id="table_secp"></div>
   </div>
 </div>
