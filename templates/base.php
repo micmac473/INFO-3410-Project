@@ -45,6 +45,11 @@ session_start();
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
 
     <script src="../js/main.js"></script>
+    <style>
+      .city{
+        background-image:url(http://www.buyandsellnow.ca/wp-content/uploads/2016/06/3d_banner_background.png);
+      }
+    </style>
 
 </head>
 <body>
@@ -107,7 +112,7 @@ session_start();
         </div><!--/.navbar-collapse -->
       </div>
     </nav>
-        <div class="jumbotron">
+        <div class="jumbotron city">
       <div class="container">
         <h1 style="color:#096790 ;text-shadow: 4px 4px orange;font-family: 'Bowlby One SC', cursive;">Hi 
           <?php  echo $_SESSION["user"]?></h1>
