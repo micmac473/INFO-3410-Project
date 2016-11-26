@@ -45,6 +45,7 @@ function saveUser($username, $firstname, $lastname, $email, $contact, $address, 
 	return FALSE;
 }
 
+
 function saveProfile($contact, $interest, $tradables){
 	$sql = "INSERT INTO profile (`contact`,`interest`,`tradables`) VALUES ($contact, 'interest', 'tradables')";
 	try{
@@ -73,19 +74,20 @@ function saveTransactions($User1,$User2,$item1,$item2){
 
 function saveItem($picture,$itemDescription){
 
-	$userid =$_SESSION['id'];
-	$sql = "INSERT INTO items(`userId`,`picture`,`itemDescription`) VALUES('userid','$picture','$itemDescription')";
+	/*$userid =$_SESSION['id'];
+	$sql = "INSERT INTO items(`userId`,`picture`,`itemDescription`) VALUES('userid','$picture','$itemDescription')"; */
+	$db = getDBConnection();
 	$userId = $_SESSION['id'];
-	$sql = "INSERT INTO items(`userId`,`picture`,`itemDescription`) VALUES('$userId','$picture','$itemDescription')";
-	try{
-		$db = getDBConnection();
-		if ($db != NULL){
-			$db->query($sql);
+	$sql = "INSERT INTO items(`userid`,`picture`,`itemdescription`) VALUES('$userId','$picture','$itemDescription');";
+	$id = -1;
+	if ($db != NULL){
+		$res = $db->query($sql);
+			if ($res && $db->insert_id > 0){
 			$id = $db->insert_id;
-			if ($id >0)return TRUE;
 		}
-	}catch (Exception $e){}
-	return FALSE;
+		$db->close();
+	}
+	return $id;
 }
 
 function saveRating ($username,$ratings){

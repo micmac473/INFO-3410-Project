@@ -46,11 +46,25 @@ function login(){
 
     console.log(user);
     $.post("../index.php/users", user, function(res){
-        swal("Here's a message!")
-        var url="homepage.php";
-        window.open(url, "_self");
-    });
-    console.log("Hi");
+        if(res){
+            console.log(res);
+            swal({ 
+                title: "Welcome",
+                text: "You have logged in successfully",
+                type: "success" 
+            },
+                function(){
+                    window.location.href = 'homepage.php';
+            });
+            //window.location.href="homepage.php";
+            //return false;
+        }
+        else{
+            swal("Incorrect Login","Please try again","error")
+            //return false;
+        }
+    },"json");
+    //console.log("Hi");
     return false;
 }
 
@@ -84,7 +98,7 @@ function register(){
         alert(res);
         var url="login.php";
         window.open(url, "_self");
-    });
+    },"json");
 
     return false;
 
@@ -107,7 +121,7 @@ function listUserItems(records){
 
     records.forEach(function(el){
         htmlStr += "<tr>";
-        htmlStr += "<td><img src=\"" + el['picture'] + "\" width=\"128\" height=\"128\"></td>";
+        htmlStr += "<td><img src=\"" + el['picture'] + "\" width=\"150\" height=\"128\"></td>";
         htmlStr += "<td>" + el['uploaddate'] + "</td>";
         htmlStr += "<td>"+ el['itemdescription'] +"</td>";
         htmlStr += "<td><button type='button' class='btn btn-warning'><i class='fa fa-pencil-square-o' aria-hidden='true'></i></button> ";
@@ -136,7 +150,7 @@ function listItems(records){
 
     records.forEach(function(el){
         htmlStr += "<tr>";
-        htmlStr += "<td><img src=\"" + el['picture'] + "\" width=\"128\" height=\"128\"></td>";
+        htmlStr += "<td><img src=\"" + el['picture'] + "\" width=\"150\" height=\"128\"></td>";
         htmlStr += "<td>" + el['uploaddate'] + "</td>";
         htmlStr += "<td>"+ el['itemdescription'] +"</td>";
         htmlStr += "<td>"+ el['user'] +"</td>";
@@ -168,5 +182,28 @@ function showForm(){
 function hideForm(){
     $('#uploadItem').attr('style','display:none');
 
+}
+
+
+function addItem(){
+    var image = $("#image").val();
+    var itemDescription = $("#itemdescription").val();
+    //alert(image);
+    var slash = image.indexOf("\\",5);
+    image = image.substring(slash+1, image.length);
+    //alert(image);
+    var item = {
+        "image" : image,
+        "itemdescription" : itemDescription
+    };
+
+    console.log(item);
+    $.post("../index.php/additem", item, function(res){
+        if (res.id && res.id > 0)swal("Uploaded", "Item Saved", "success");
+        else swal("Upload Error", "Unable to save item", "error");
+        hideForm();
+        getUserItems();
+    },"json");
+    return false;
 }
 console.log("JavaScript file was successfully loaded in the page");
