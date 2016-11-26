@@ -11,7 +11,7 @@ json_encode($userItems);
 <div class ="container controls">
 <div class ="row">
 <div class ="col-md-12">
-<!--data-toggle="modal" data-target="#addItemModal" -->
+
     <button type="button"onclick ="showForm();" class="btn btn-info" ></a>Add Item
     </button>
     <button type="button" class="btn btn-info"><a href="views/addItem.html"></a>Find Item
@@ -52,6 +52,8 @@ json_encode($userItems);
   <label class="col-md-4 control-label" for="upload"></label>
   <div class="col-md-4">
     <button type ="submit" name="upload" class="btn btn-success" id="upload">Add</button>
+      <button type="button"onclick ="hideForm();" class="btn btn-info" ></a>Cancel
+    </button>
   </div>
 </div>
 

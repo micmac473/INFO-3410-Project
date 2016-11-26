@@ -165,4 +165,8 @@ function showForm(){
     $('#uploadItem').attr('style','');
 
 }
+function hideForm(){
+    $('#uploadItem').attr('style','display:none');
+
+}
 console.log("JavaScript file was successfully loaded in the page");
