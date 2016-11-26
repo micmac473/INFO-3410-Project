@@ -160,4 +160,9 @@ function displayRequests(records){
         $("#requests").append(htmlStr);
     });
 }
+
+function showForm(){
+    $('#uploadItem').attr('style','');
+
+}
 console.log("JavaScript file was successfully loaded in the page");
