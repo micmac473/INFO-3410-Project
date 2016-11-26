@@ -10,7 +10,7 @@ json_encode($userItems);
 <div class ="container controls">
 <div class ="row">
 <div class ="col-md-12">
-    <button type="button"onclick ="addItem();" class="btn btn-info"><a href="views/addItem.html"></a>Add Item
+    <button type="button"onclick ="addItem();" class="btn btn-info" data-toggle="modal" data-target="#addItemModal"><a href="views/addItem.html"></a>Add Item
     </button>
     <button type="button" class="btn btn-info"><a href="views/addItem.html"></a>Find Item
     </button>
@@ -82,6 +82,60 @@ json_encode($userItems);
     <div id="table_secp"></div>
   </div>
 </div>
+
+ <!-- Modal--------------------------------------------------- -->
+  <div class="modal fade" id="addItemModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Let's Add Some Junk!</h4>
+        </div>
+        <div class="modal-body">
+          <form class="form-horizontal">
+
+
+
+
+
+<!-- File Button --> 
+<div class="form-group">
+  <label class="col-md-4 control-label" for="uppic">Choose an Image </label>
+  <div class="col-md-4">
+    <input name="uppic" class="input-file" id="uppic" type="file">
+  </div>
+</div>
+
+<!-- Textarea -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="ItemDescription">Add a description</label>
+  <div class="col-md-4">                     
+    <textarea name="ItemDescription" class="form-control" id="ItemDescription">Tell us about your junk</textarea>
+  </div>
+</div>
+
+<!-- Button -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="upload"></label>
+  <div class="col-md-4">
+    <button name="upload" class="btn btn-success" id="upload">Add</button>
+  </div>
+</div>
+
+
+</form>
+
+        </div>
+        <div class="modal-footer">
+
+          <button type="button" class="btn btn-default" data-dismiss="modal">Candel</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
   <script type="text/template" id="table_headingp">
   <table class="table table-bordered">
     <thead>
