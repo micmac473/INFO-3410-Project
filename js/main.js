@@ -5,6 +5,9 @@ console.log("hello I'm connected to the world");
 
 $(document).ready(function(){
     console.log("All Elements in the Page was successfully loaded, we can begin our application logic");
+    getUserRequests();
+    getAllItems();
+    getUserItems();
 });  
 // this acts as the main function in Java
 
@@ -42,8 +45,8 @@ function login(){
     }
 
     console.log(user);
-    $.post("/index.php/users", user, function(res){
-        alert(res);
+    $.post("../index.php/users", user, function(res){
+        swal("Here's a message!")
         var url="homepage.php";
         window.open(url, "_self");
     });
@@ -77,9 +80,9 @@ function register(){
         "password" : password
     };
 
-    $.post("/index.php/register", regUser, function(res){
+    $.post("../index.php/register", regUser, function(res){
         alert(res);
-        var url="login.phtml";
+        var url="login.php";
         window.open(url, "_self");
     });
 
@@ -88,26 +91,55 @@ function register(){
 
 }
 
-function getItemsForUser(){//alter for slim 
-    $.get("profile.php", processAllItems, "json");
+function getUserItems(){//alter for slim 
+    $.get("../index.php/profile", processUserItems, "json");
 }
 
-function processAllItems(records){
+function processUserItems(records){
     console.log(records);
     listUserItems(records)
 }
 
 function listUserItems(records){
     var key;
-    var sec_id = "#UserTable";
-    var htmlStr = $("#User_table_heading").html(); //Includes all the table, thead and tbody declarations
+    var sec_id = "#table_secp";
+    var htmlStr = $("#table_headingp").html(); //Includes all the table, thead and tbody declarations
 
     records.forEach(function(el){
         htmlStr += "<tr>";
-        htmlStr += "<td>" + el['itemid'] + "</td>";
-        htmlStr += "<td>" + el['uploadDate'] + "</td>";
-        htmlStr += "<td>"+ el['itemDescription'] +"</td>";
-        htmlStr += "<td>"+ el['picture'] +"</td>";
+        htmlStr += "<td><img src=\"" + el['picture'] + "\" width=\"128\" height=\"128\"></td>";
+        htmlStr += "<td>" + el['uploaddate'] + "</td>";
+        htmlStr += "<td>"+ el['itemdescription'] +"</td>";
+        htmlStr += "<td><button type='button' class='btn btn-warning'><i class='fa fa-pencil-square-o' aria-hidden='true'></i></button> ";
+        htmlStr += "<button type='button' class='btn btn-danger'><i class='fa fa-trash' aria-hidden='true'></i></button>";
+        htmlStr +=" </tr>" ;
+    });
+
+    htmlStr += "</tbody></table>";
+    $(sec_id).html(htmlStr);
+} 
+
+
+function getAllItems(){//alter for slim 
+    $.get("../index.php/homepage", processAllItems, "json");
+}
+
+function processAllItems(records){
+    console.log(records);
+    listItems(records)
+}
+
+function listItems(records){
+    var key;
+    var sec_id = "#table_sec";
+    var htmlStr = $("#table_heading").html(); //Includes all the table, thead and tbody declarations
+
+    records.forEach(function(el){
+        htmlStr += "<tr>";
+        htmlStr += "<td><img src=\"" + el['picture'] + "\" width=\"128\" height=\"128\"></td>";
+        htmlStr += "<td>" + el['uploaddate'] + "</td>";
+        htmlStr += "<td>"+ el['itemdescription'] +"</td>";
+        htmlStr += "<td>"+ el['user'] +"</td>";
         htmlStr += "<td><button type='button' class='btn btn-warning'><i class='fa fa-pencil-square-o' aria-hidden='true'></i></button> ";
         htmlStr += "<button type='button' class='btn btn-danger'><i class='fa fa-trash' aria-hidden='true'></i></button>";
         htmlStr +=" </tr>" ;
@@ -117,4 +149,15 @@ function listUserItems(records){
     $(sec_id).html(htmlStr);
 }
 
+function getUserRequests(){
+    $.get("../index.php/requests", displayRequests, "json");  
+}
+
+function displayRequests(records){
+    console.log(records);
+    records.forEach(function(el){
+        var htmlStr = "<li><a href=profile.php>"+el.username + " requested "+ el.item + " "+"</a></li>";
+        $("#requests").append(htmlStr);
+    });
+}
 console.log("JavaScript file was successfully loaded in the page");

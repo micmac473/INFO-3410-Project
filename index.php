@@ -33,11 +33,42 @@ $app->get('/templates/registration.phtml', function (Request $request, Response 
 });
 
 $app->get("/users", function(Request $request, Response $response){
-	$countries = getAllUsers();
+	$users = getAllUsers();
 	
-	$response = $response->withJson($countries);
+	$response = $response->withJson($users);
 	return $response;
 });
+
+$app->get("/items/{id}", function(Request $request, Response $response){
+	$userID = $request->getAttribute('id');
+	$items = getUserItems($userID);
+	
+	$response = $response->withJson($items);
+	return $response;
+});
+
+$app->get("/requests", function(Request $request, Response $response){
+	$requests = getRequests();
+	
+	$response = $response->withJson($requests);
+	return $response;
+});
+
+$app->get("/homepage", function(Request $request, Response $response){
+	$items = getAllItems();
+	
+	$response = $response->withJson($items);
+	return $response;
+});
+
+$app->get("/profile", function(Request $request, Response $response){
+	$items = getUserItems();
+	
+	$response = $response->withJson($items);
+	return $response;
+});
+
+
 
 $app->post("/users", function(Request $request, Response $response){
 	$post = $request->getParsedBody();
@@ -49,9 +80,9 @@ $app->post("/users", function(Request $request, Response $response){
 	$res = checkLogin($email, $password);
 	//print_r ($res);
 	if ($res){
-		$name = $_SESSION["name"];
-		//$response = $response->withStatus(201);
-		$response = $response->withJson(array( "user" => $name));
+		//$name = $_SESSION["name"];
+		$response = $response->withStatus(201);
+		//$response = $response->withJson(array( "user" => $name));
 	} else {
 		$response = $response->withStatus(400);
 	}

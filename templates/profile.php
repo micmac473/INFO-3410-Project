@@ -75,19 +75,21 @@ json_encode($userItems);
 <script src="js/angular-route/angular-route.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
 <script src="js/main.js"></script> -->
-<script type="text/template" id="User_table_heading">
+<div class="row">
+  <div class="col-md-8 col-md-offset-2 table-responsive">
+    <h4>Products</h4>
+    <p>A table highlighting the available products</p>
+    <div id="table_secp"></div>
+  </div>
+</div>
+  <script type="text/template" id="table_headingp">
   <table class="table table-bordered">
     <thead>
-    <thead>
     <tr>
-      <th>Item #</th>
-      <th>Day Uploaded</th>
-      <th>Item Description</th>
-      <th>Uploaded Picture</th>
-      <th>Controls</th>
+      <th>Picture</th><th>Uploaded</th><th>Description</th><th>Operations</th>
     </tr>
-  </thead>
-  <tbody>
+    </thead>
+    <tbody>
 </script>
 
 </body>

@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!doctype html>
 <html>
 <head>
@@ -83,7 +86,7 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user" aria-hidden="true"></i><span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="profile.php">My Profile</a></li>
-            <li><a href="login.phtml">Log Out</a></li>
+            <li><a href="login.php">Log Out</a></li>
             <li><a href="google.com">Help</a></li>
           </ul>
         </li>
@@ -94,8 +97,8 @@
         <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bell" aria-hidden="true"></i><span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Dynamically Populated Requets</a></li>
+          <ul class="dropdown-menu" id="requests">
+            <!-- <li><a href="#">Dynamically Populated Requets</a></li> -->
           </ul>
         </li>
       </ul>
@@ -106,7 +109,8 @@
     </nav>
         <div class="jumbotron">
       <div class="container">
-        <h1 style="color:#096790 ;text-shadow: 4px 4px orange;font-family: 'Bowlby One SC', cursive;">Hi [User Name]</h1>
+        <h1 style="color:#096790 ;text-shadow: 4px 4px orange;font-family: 'Bowlby One SC', cursive;">Hi 
+          <?php  echo $_SESSION["user"]?></h1>
       </div>
     </div>
 

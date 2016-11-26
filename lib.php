@@ -14,13 +14,17 @@ function getDBConnection(){
 function checkLogin($email, $password){
 	$password = sha1($password);
 	$sql = "SELECT * FROM `users` where email='$email'";
-	print($email);
+	//print($email);
 	$db = getDBConnection();
 	if($db != NULL){
 		$res = $db->query($sql);
 		if ($res && $row = $res->fetch_assoc()){
-			if($row['password'] == $password)
+			if($row['password'] == $password){
+				$_SESSION["user"] = $row['firstname'];
+				$_SESSION["id"] = $row['id'];
 				return true;
+			}
+				
 		}
 	}
 	return false;
@@ -142,8 +146,9 @@ function productViews($item){
 
 
 
-function getUserItems($userID){//should be session id here instead of useId
-	$sql ="SELECT `itemid`, `UploadDate`, `itemDescription`, `picture` FROM `items` where `userid` ='$userID';";
+function getUserItems(){//should be session id here instead of useId
+	$userID = $_SESSION["id"];
+	$sql ="SELECT `itemid`, `uploaddate`, `itemdescription`, `picture` FROM `items` where `userid` =$userID;";
 	$items =[];
 	//print($sql);
 		$db = getDBConnection();
@@ -154,8 +159,39 @@ function getUserItems($userID){//should be session id here instead of useId
 		}//while
 		$db->close();
 	}//if
-		
-		return $items;
+	return $items;
+}
+
+function getAllItems(){//should be session id here instead of useId
+	$userID = $_SESSION["id"];
+	$sql ="SELECT u.username as user, `uploaddate`, `itemdescription`, `picture` FROM `items` i, `users` u where i.userid = u.id AND `userid` <> $userID;";
+	$items =[];
+	//print($sql);
+		$db = getDBConnection();
+		if ($db != NULL){
+			$res = $db->query($sql);
+			while($res && $row = $res->fetch_assoc()){
+			$items[] = $row;
+		}//while
+		$db->close();
+	}//if
+	return $items;
+}
+
+function getRequests(){
+	$user = $_SESSION["id"];
+	$db = getDBConnection();
+	$requests = [];
+	if ($db != null){
+		$sql = "SELECT * FROM `users` u, `requests` r WHERE r.requester = u.id AND r.requestee = $user;";
+		$res = $db->query($sql);
+		while($res && $row = $res->fetch_assoc()){
+			$requests[] = $row;
+		}
+		$db->close();
+	}
+	//var_dump($requests);
+	return $requests;
 }
 
 ?>
