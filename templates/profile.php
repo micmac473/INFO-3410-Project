@@ -2,9 +2,9 @@
 include "../lib.php";
 include "base.php";
 
-$useriD = 1;
+/*$useriD = 1;
 $userItems =getUserItems($useriD);
-json_encode($userItems);
+json_encode($userItems); */
 
 ?>
 <div class ="container controls">
@@ -23,17 +23,13 @@ json_encode($userItems);
 <div style ="display:none;" id ="uploadItem">
 <h2 style ="text-align: center;margin-bottom:3%; "> Upload a New Item </h2>
 
-<form class="form-horizontal" action ="" method ="POST">
-
-
-
-
+<form class="form-horizontal" action ="index.php/additem" method ="POST" onsubmit="return addItem();">
 
 <!-- File Button --> 
 <div class="form-group">
   <label class="col-md-4 control-label" for="uppic">Choose an Image </label>
   <div class="col-md-4">
-    <input name="uppic" class="input-file" id="uppic" type="file">
+    <input name="image" class="input-file" id="image" type="file" required="">
   </div>
 </div>
 
@@ -41,7 +37,7 @@ json_encode($userItems);
 <div class="form-group">
   <label class="col-md-4 control-label" for="ItemDescription">Add a description</label>
   <div class="col-md-4">                     
-    <textarea name="ItemDescription" class="form-control" id="ItemDescription">Tell us about your junk</textarea>
+    <textarea name="itemdescription" class="form-control" id="itemdescription" placeholder="Tell us about your item" required=""></textarea>
   </div>
 </div>
 

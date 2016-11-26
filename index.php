@@ -81,10 +81,10 @@ $app->post("/users", function(Request $request, Response $response){
 	//print_r ($res);
 	if ($res){
 		//$name = $_SESSION["name"];
-		$response = $response->withStatus(201);
+		$response = $response->withJson($res);
 		//$response = $response->withJson(array( "user" => $name));
 	} else {
-		$response = $response->withStatus(400);
+		$response = $response->withJson($res);
 	}
 	return $response;
 });
@@ -112,5 +112,32 @@ $app->post("/register", function(Request $request, Response $response){
 	//return $this->renderer->render($response, "/login.html");
 });
 
+$app->post("/additem", function(Request $request, Response $response){
+	$post = $request->getParsedBody();
+	//var_dump($post);
+
+	/*$filetmp = $_FILES["image"]["tmp_name"];
+	$filename = $_FILES["image"]["name"];
+	$filetype = $_FILES["image"]["type"];
+	$filepath = "img/".$filename;
+	
+	move_uploaded_file($filetmp,$filepath);
+	print_r($filetmp); */
+
+
+	$imagePath = "../img/".$post['image'];
+	$itemDescription = $post['itemdescription'];
+	//print_r($post);
+	// print "Name: $name, Price:$price, Country: $countryId";
+	$res = saveItem($imagePath, $itemDescription);
+	//print_r ($res);
+	if ($res > 0){
+		$response = $response->withStatus(201);
+		$response = $response->withJson(array( "id" => $res));
+	} else {
+		$response = $response->withStatus(400);
+	}
+	return $response;
+});
 
 $app->run();
