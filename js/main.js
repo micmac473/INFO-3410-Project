@@ -176,7 +176,7 @@ function displayRequests(records){
 }
 
 function showForm(){
-    $('#uploadItem').attr('style','');
+    $('#uploadItem').attr('style','margin-bottom:4%');
 
 }
 function hideForm(){
