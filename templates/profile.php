@@ -24,6 +24,7 @@ json_encode($userItems);
 <div class ="row">
 <div class ="col-md-12">
 <div style ="display:none;" id ="uploadItem">
+<h2 style ="text-align: center;margin-bottom:3%; "> Upload a New Item </h2>
 
 <form class="form-horizontal" action ="" method ="POST">
 
