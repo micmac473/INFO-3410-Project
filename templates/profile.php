@@ -65,20 +65,37 @@ json_encode($userItems); */
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
 <script src="js/main.js"></script> -->
   <div class="row">
-    <div class="col-md-8 col-md-offset-2 table-responsive">
-      <h2 style="text-align: center; font-family: 'Acme', sans-serif; color:orange">  Here is all the junk you uploaded for trading </h2>
+    <div class="col-md-7 table-responsive">
+      <h2 style="text-align: center; font-family: 'Acme', sans-serif; color:orange">My Junk</h2>
     <!--<h4>Products</h4>
     <p>A table highlighting the available products</p> -->
       <div id="table_secp"></div>
     </div>
+
+    <div class ="col-md-5 table-responsive">
+      <h2 style="text-align: center; font-family: 'Acme', sans-serif; color:orange">Requests</h2>
+    <!--<h4>Products</h4>
+    <p>A table highlighting the available products</p> -->
+      <div id="table_secr"></div>
+    </div>
   </div>
 
-</div>    
+</div>  <!-- close container -->  
 <script type="text/template" id="table_headingp">
   <table class="table table-hover">
-    <thead class="thead-inverse">
+    <thead>
     <tr>
       <th></th><th>Description</th><th>Options</th><th>Date Uploaded</th>
+    </tr>
+    </thead>
+    <tbody>
+</script>
+
+<script type="text/template" id="table_headingr">
+  <table class="table table-hover">
+    <thead>
+    <tr>
+      <th>Requested By</th><th>Item</th><th>Suggested Item</th><th>Decision</th>
     </tr>
     </thead>
     <tbody>

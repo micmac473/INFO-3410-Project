@@ -101,6 +101,10 @@ body {
   background-color:black;
   text-align: center;
 }
+th {
+    background-color: grey;
+    color: white;
+} 
     </style>
 
 </head>

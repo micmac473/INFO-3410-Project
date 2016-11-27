@@ -47,6 +47,14 @@ $app->get("/items/{id}", function(Request $request, Response $response){
 	return $response;
 });
 
+$app->get("/items", function(Request $request, Response $response){
+	$items = getAllItems();
+	
+	$response = $response->withJson($items);
+	return $response;
+});
+
+
 $app->get("/requests", function(Request $request, Response $response){
 	$requests = getRequests();
 	
@@ -68,6 +76,18 @@ $app->get("/profile", function(Request $request, Response $response){
 	return $response;
 });
 
+$app->get("/request/{id}", function(Request $request, Response $response){
+	$val = $request->getAttribute('id');
+	// Get Record for Specific Country
+	$rec = saveRequest($val);
+	if ($rec > 0){
+		$response = $response->withStatus(201);
+		$response = $response->withJson(array( "id" => $rec));
+	} else {
+		$response = $response->withStatus(400);
+	}
+	return $response;
+});
 
 
 $app->post("/users", function(Request $request, Response $response){
@@ -81,10 +101,11 @@ $app->post("/users", function(Request $request, Response $response){
 	//print_r ($res);
 	if ($res){
 		//$name = $_SESSION["name"];
+		$response = $response->withStatus(201);
 		$response = $response->withJson($res);
-		//$response = $response->withJson(array( "user" => $name));
+		
 	} else {
-		$response = $response->withJson($res);
+		$response = $response->withJson(400);
 	}
 	return $response;
 });
@@ -104,7 +125,7 @@ $app->post("/register", function(Request $request, Response $response){
 	//print_r ($res);
 	if ($res){
 		$response = $response->withStatus(201);
-		//$response = $response->withJson(array( "user" => $res));
+		$response = $response->withJson(array( "id" => $res));
 	} else {
 		$response = $response->withStatus(400);
 	}

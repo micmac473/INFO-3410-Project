@@ -33,7 +33,8 @@ app.controller('mainController', ['$scope',
 }]);
 // takkes two parameters name of conteroller and behaviour of the conteroller
  
- 
+ //--------------------------------------------------------------------------------------------------------------------
+ // Log in functionality
 function login(){
     console.log("Hi");
     var email = $("#email").val();
@@ -67,7 +68,8 @@ function login(){
     //console.log("Hi");
     return false;
 }
-
+//--------------------------------------------------------------------------------------------------------------------
+// Registration functionality
 function register(){
     //console.log("Hi");
     var username = $("#username").val();
@@ -95,16 +97,61 @@ function register(){
     };
 
     $.post("../index.php/register", regUser, function(res){
-        alert(res);
-        var url="login.php";
-        window.open(url, "_self");
+        if(res){
+            console.log(res);
+            swal({ 
+                title: "Registration Complete!",
+                text: "Proceed to login",
+                type: "success" 
+            },
+                function(){
+                    window.location.href = 'login.php';
+            });
+            //window.location.href="homepage.php";
+            //return false;
+        }
+        else{
+            swal("Incorrect Login","Please try again","error")
+            //return false;
+        }
     },"json");
 
     return false;
-
-
 }
 
+//--------------------------------------------------------------------------------------------------------------------
+//Dsiplay All items available (except user items) on homepage
+function getAllItems(){//alter for slim 
+    $.get("../index.php/homepage", processAllItems, "json");
+}
+
+function processAllItems(records){
+    console.log(records);
+    listAllItems(records)
+}
+
+function listAllItems(records){
+    var key;
+    var sec_id = "#table_sech";
+    var htmlStr = $("#table_headingh").html(); //Includes all the table, thead and tbody declarations
+
+    records.forEach(function(el){
+        htmlStr += "<tr>";
+        htmlStr += "<td><img src=\"" + el['picture'] + "\" width=\"150\" height=\"128\"></td>";
+        htmlStr += "<td>"+ el['itemdescription'] +"</td>";
+        htmlStr += "<td>"+ el['user'] +"</td>";
+        htmlStr += "<td><button type='button' class='btn btn-primary' onclick=\"makeRequest("+el.itemid+")\"><i class='fa fa-cart-plus' aria-hidden='true'></i></button></td>";
+        //htmlStr += "<button type='button' class='btn btn-danger'><i class='fa fa-trash' aria-hidden='true'></i></button></td>";
+        htmlStr += "<td>" + el['uploaddate'] + "</td>";
+        htmlStr +=" </tr>" ;
+    });
+
+    htmlStr += "</tbody></table>";
+    $(sec_id).html(htmlStr);
+}
+//--------------------------------------------------------------------------------------------------------------------
+
+//Dsiplay All user items on profile
 function getUserItems(){//alter for slim 
     $.get("../index.php/profile", processUserItems, "json");
 }
@@ -133,29 +180,35 @@ function listUserItems(records){
     $(sec_id).html(htmlStr);
 } 
 
+//--------------------------------------------------------------------------------------------------------------------
 
-function getAllItems(){//alter for slim 
-    $.get("../index.php/homepage", processAllItems, "json");
+//Dsiplay requests for user items in the notification icon
+function getUserRequests(){
+    $.get("../index.php/requests", notifications, "json");  
 }
 
-function processAllItems(records){
+function notifications(records){
     console.log(records);
-    listAllItems(records)
+    records.forEach(function(el){
+        var htmlStr = "<li><a href=profile.php>"+el.username + " requested "+ el.item + " "+"</a></li>";
+        $("#requests").append(htmlStr);
+    });
+    displayRequests(records);
+
 }
 
-function listAllItems(records){
+function displayRequests(records){
     var key;
-    var sec_id = "#table_sech";
-    var htmlStr = $("#table_headingh").html(); //Includes all the table, thead and tbody declarations
+    var sec_id = "#table_secr";
+    var htmlStr = $("#table_headingr").html(); //Includes all the table, thead and tbody declarations
 
     records.forEach(function(el){
         htmlStr += "<tr>";
-        htmlStr += "<td><img src=\"" + el['picture'] + "\" width=\"150\" height=\"128\"></td>";
-        htmlStr += "<td>"+ el['itemdescription'] +"</td>";
-        htmlStr += "<td>"+ el['user'] +"</td>";
-        htmlStr += "<td><button type='button' class='btn btn-primary'><i class='fa fa-cart-plus' aria-hidden='true'></i></button></td>";
-        //htmlStr += "<button type='button' class='btn btn-danger'><i class='fa fa-trash' aria-hidden='true'></i></button></td>";
-        htmlStr += "<td>" + el['uploaddate'] + "</td>";
+        htmlStr += "<td>"+ el['username'] +"</td>";
+        htmlStr += "<td>"+ el['item'] +"</td>";
+        htmlStr += "<td>"+ el['item'] +"</td>";
+        htmlStr += "<td><button type='button' class='btn btn-primary'><i class='fa fa-pencil-square-o' aria-hidden='true'></i></button> ";
+        htmlStr += "<button type='button' class='btn btn-danger'><i class='fa fa-trash' aria-hidden='true'></i></button></td>";
         htmlStr +=" </tr>" ;
     });
 
@@ -163,20 +216,8 @@ function listAllItems(records){
     $(sec_id).html(htmlStr);
 }
 
-
-
-function getUserRequests(){
-    $.get("../index.php/requests", displayRequests, "json");  
-}
-
-function displayRequests(records){
-    console.log(records);
-    records.forEach(function(el){
-        var htmlStr = "<li><a href=profile.php>"+el.username + " requested "+ el.item + " "+"</a></li>";
-        $("#requests").append(htmlStr);
-    });
-}
-
+//--------------------------------------------------------------------------------------------------------------------
+// Show and hide add item form
 function showForm(){
     $('#uploadItem').show("slow");
 
@@ -186,7 +227,9 @@ function hideForm(){
 
 }
 
+//--------------------------------------------------------------------------------------------------------------------
 
+// Add item image and description to database
 function addItem(){
     var image = $("#image").val();
     var itemDescription = $("#itemdescription").val();
@@ -208,4 +251,18 @@ function addItem(){
     },"json");
     return false;
 }
+
+//--------------------------------------------------------------------------------------------------------------------
+
+// Inserts a records to the database when a user makes a request to that item
+function makeRequest(itemid){
+    $.get("../index.php/request/"+itemid, function(res){
+        if (res.id && res.id > 0)
+            swal("Record", "Record Saved", "success");
+        else 
+            swal("Record", "Unable to save record", "error");
+    }, "json");
+
+}
+
 console.log("JavaScript file was successfully loaded in the page");

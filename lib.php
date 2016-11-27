@@ -34,15 +34,16 @@ function checkLogin($email, $password){
 function saveUser($username, $firstname, $lastname, $email, $contact, $address, $password){
 	$password = sha1($password);
 	$sql = "INSERT INTO `users` (`username`, `firstname`, `lastname`, `email`, `contact`, `address`, `password`) VALUES ('$username', '$firstname', '$lastname', '$email', '$contact', '$address', '$password');";
-	try{
-		$db = getDBConnection();
-		if ($db != NULL){
-			$db->query($sql);
+	$id = -1;
+	$db = getDBConnection();
+	if ($db != NULL){
+		$res = $db->query($sql);
+		if ($res && $db->insert_id > 0){
 			$id = $db->insert_id;
-			if ($id >0)return TRUE;
 		}
-	}catch (Exception $e){}
-	return FALSE;
+		$db->close();
+	}
+	return $id;
 }
 
 
@@ -150,7 +151,7 @@ function productViews($item){
 
 function getUserItems(){//should be session id here instead of useId
 	$userID = $_SESSION["id"];
-	$sql ="SELECT `itemid`, `uploaddate`, `itemdescription`, `picture` FROM `items` where `userid` =$userID;";
+	$sql ="SELECT `itemid`, `uploaddate`, `itemdescription`, `picture` FROM `items` where `userid` =$userID ORDER BY `uploaddate` DESC;";
 	$items =[];
 	//print($sql);
 		$db = getDBConnection();
@@ -166,7 +167,7 @@ function getUserItems(){//should be session id here instead of useId
 
 function getAllItems(){//should be session id here instead of useId
 	$userID = $_SESSION["id"];
-	$sql ="SELECT u.username as user, `uploaddate`, `itemdescription`, `picture` FROM `items` i, `users` u where i.userid = u.id AND `userid` <> $userID;";
+	$sql ="SELECT i.itemid, u.username as user, `uploaddate`, `itemdescription`, `picture` FROM `items` i, `users` u WHERE i.userid = u.id AND `userid` <> $userID ORDER BY `uploaddate` DESC;";
 	$items =[];
 	//print($sql);
 		$db = getDBConnection();
@@ -195,5 +196,36 @@ function getRequests(){
 	//var_dump($requests);
 	return $requests;
 }
+
+function getItemOwner($itemid){
+	$db = getDBConnection();
+	$user = null;
+	if ($db != NULL){
+		$sql = "SELECT * FROM `users` u, `items` i WHERE i.userid = u.id AND i.itemid = '$itemid';";
+		$res = $db->query($sql);
+		if ($res){
+			$user = $res->fetch_assoc();
+		}
+		$db->close();
+	}
+	return $user;
+} 
+
+function saveRequest($itemid){
+	$owner = getItemOwner($itemid);
+	$requestee = $owner['id'];
+	$db = getDBConnection();
+	$requester = $_SESSION['id'];
+	$sql = "INSERT INTO `requests` (`requester`,`requestee`,`item`) VALUES($requester,$requestee,$itemid);";
+	$id = -1;
+	if ($db != NULL){
+		$res = $db->query($sql);
+			if ($res && $db->insert_id > 0){
+			$id = $db->insert_id;
+		}
+		$db->close();
+	}
+	return $id;
+} 
 
 ?>
