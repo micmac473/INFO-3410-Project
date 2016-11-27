@@ -8,11 +8,11 @@ include "base.php";
   
   <div class="row">
     <div class="col-md-8 col-md-offset-2 table-responsive">
-      <div id="table_sec"></div>
+      <div id="table_sech"></div>
     </div>
   </div>
 </div>
-<script type="text/template" id="table_heading">
+<script type="text/template" id="table_headingh">
   <table class="table table-hover table-condensed">
     <thead class="thead-inverse">
       <tr>

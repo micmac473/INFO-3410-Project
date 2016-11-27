@@ -145,8 +145,8 @@ function processAllItems(records){
 
 function listItems(records){
     var key;
-    var sec_id = "#table_sec";
-    var htmlStr = $("#table_heading").html(); //Includes all the table, thead and tbody declarations
+    var sec_id = "#table_secp";
+    var htmlStr = $("#table_headingp").html(); //Includes all the table, thead and tbody declarations
 
     records.forEach(function(el){
         htmlStr += "<tr>";
@@ -167,8 +167,8 @@ function listItems(records){
 
 function listAllItems(records){
     var key;
-    var sec_id = "#table_sec";
-    var htmlStr = $("#table_heading").html(); //Includes all the table, thead and tbody declarations
+    var sec_id = "#table_sech";
+    var htmlStr = $("#table_headingh").html(); //Includes all the table, thead and tbody declarations
 
     records.forEach(function(el){
         htmlStr += "<tr>";
