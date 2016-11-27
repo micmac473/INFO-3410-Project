@@ -105,77 +105,73 @@ body {
 
 </head>
 <body>
- <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#"><img alt ="logo" width ="30px" height ="30px" src =../img/logo.png></a>
-          <a class ="navbar-brand" href ="homepage.php">junkTrade</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
+  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#"><img alt ="logo" width ="30px" height ="30px" src =../img/logo.png></a>
+        <a class ="navbar-brand" href ="homepage.php">junkTrade</a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categories<span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Electronics</a></li>
-            <li><a href="#">Furniture</a></li>
-            <li><a href="#">Books & Magazines</a></li>
-            <li><a href="#">Clothes</a></li>
-          </ul>
-        </li>
-      </ul>
-          <form class="navbar-form navbar-left" role="form">
-            <div class="form-group">
-              <input type="text" placeholder="search for junk" class="form-control">
-            </div>
-            <!--change to icon-->
-            <button type="submit" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i></button>
-          
-          </form>
-
-        <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user" aria-hidden="true"></i><span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="profile.php">My Profile</a></li>
-            <li><a href="login.php">Log Out</a></li>
-            <li><a href="google.com">Help</a></li>
-          </ul>
-        </li>
-        <ul class = "nav navbar-nav navbar-right ">
-                <li><a href ="homepage.php"><i class="fa fa-home" aria-hidden="true"></i></a></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categories<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Electronics</a></li>
+              <li><a href="#">Furniture</a></li>
+              <li><a href="#">Books & Magazines</a></li>
+              <li><a href="#">Clothes</a></li>
             </ul>
-      </ul>
+          </li>
+        </ul>
+
+        <form class="navbar-form navbar-left" role="form">
+          <div class="form-group">
+            <input type="text" placeholder="Search for junk" class="form-control">
+          </div>
+            <!--change to icon-->
+          <button type="submit" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i></button>
+        </form>
+
         <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bell" aria-hidden="true"></i><span class="caret"></span></a>
-          <ul class="dropdown-menu" id="requests">
-            <!-- <li><a href="#">Dynamically Populated Requets</a></li> -->
-          </ul>
-        </li>
-      </ul>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bell" aria-hidden="true"></i><span class="caret"></span></a>
+            <ul class="dropdown-menu" id="requests">
+                <!-- <li><a href="#">Dynamically Populated Requets</a></li> -->
+            </ul>
+          </li>
 
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user" aria-hidden="true"></i><span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="profile.php">My Profile</a></li>
+              <li><a href="login.php">Log Out</a></li>
+              <li><a href="google.com">Help</a></li>
+            </ul>
+          </li>
+        
+          <li><a href ="homepage.php"><i class="fa fa-home" aria-hidden="true"></i></a></li>
+        </ul>
+      </div><!--/.navbar-collapse -->
+    </div>
+  </nav>
 
-        </div><!--/.navbar-collapse -->
-      </div>
-    </nav>
-        <div class="jumbotron city">
-      <div class="container">
-        <h1 style="color:#096790 ;text-shadow: 4px 4px orange;font-family: 'Bowlby One SC', cursive;">Hi 
+  <div class="jumbotron city">
+    <div class="container">
+      <h1 style="color:#096790 ;text-shadow: 4px 4px orange;font-family: 'Bowlby One SC', cursive;">Hi 
           <?php  echo $_SESSION["user"]?></h1>
-      </div>
     </div>
+  </div>
 
-
-    <!--footer -->
-    <div class="footer">
-      <p> &copy; JunkTrade 2016 </p>
-    </div>
+  <!--footer -->
+  <div class="footer">
+    <p> &copy; JunkTrade 2016 </p>
+  </div>
 
 
 

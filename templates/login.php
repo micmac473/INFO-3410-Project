@@ -34,47 +34,45 @@
 
 </head>
 <body>
-<div class ="container">
+  <div class ="container">
     <div class ="row">
       <div class="col-md-12">
-<form class="form-horizontal" onsubmit="return login();" method ="POST" action="index.php/users">
-<fieldset>
-        <!-- Form Name -->
-<legend>Login</legend>
+        <form class="form-horizontal" onsubmit="return login();" method ="POST" action="index.php/users">
+          <fieldset>
+            <!-- Form Name -->
+            <legend>Login</legend>
 
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="email">Email</label>  
-  <div class="col-md-4">
-  <input name="email" class="form-control input-md" id="email" required="" type="text" placeholder="johnDoe@example.com">
-    
-  </div>
-</div>
+            <!-- Text input-->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="email">Email</label>  
+              <div class="col-md-4">
+              <input name="email" class="form-control input-md" id="email" required="" type="text" placeholder="johnDoe@example.com">
+                
+              </div>
+            </div>
 
-<!-- Password input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="pass">Password</label>
-  <div class="col-md-4">
-    <input name="pass" class="form-control input-md" id="pass" required="" type="password" placeholder="password">
-    
-  </div>
-</div>
+            <!-- Password input-->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="pass">Password</label>
+              <div class="col-md-4">
+                <input name="pass" class="form-control input-md" id="pass" required="" type="password" placeholder="password">
+                
+              </div>
+            </div>
 
-<!-- Button -->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="login"></label>
-  <div class="col-md-4">
-    <button name="saveBnt" class="btn btn-success" id="saveBnt" type ="submit">Login</button>
-    <a href ="#" style ="color: blue; text-decoration: none;">Forgot password?</a>
-  </div>
-</div>
+            <!-- Button -->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="login"></label>
+              <div class="col-md-4">
+                <button name="saveBnt" class="btn btn-success" id="saveBnt" type ="submit">Login</button>
+                <a href ="#" style ="color: blue; text-decoration: none;">Forgot password?</a>
+              </div>
+            </div>
 
-
-</fieldset>
-</form>
-
+          </fieldset>
+        </form>
       </div>
     </div>
-</div>
+  </div>
 <body>
 </html>

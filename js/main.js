@@ -122,10 +122,10 @@ function listUserItems(records){
     records.forEach(function(el){
         htmlStr += "<tr>";
         htmlStr += "<td><img src=\"" + el['picture'] + "\" width=\"150\" height=\"128\"></td>";
-        htmlStr += "<td>" + el['uploaddate'] + "</td>";
         htmlStr += "<td>"+ el['itemdescription'] +"</td>";
-        htmlStr += "<td><button type='button' class='btn btn-warning'><i class='fa fa-pencil-square-o' aria-hidden='true'></i></button> ";
-        htmlStr += "<button type='button' class='btn btn-danger'><i class='fa fa-trash' aria-hidden='true'></i></button>";
+        htmlStr += "<td><button type='button' class='btn btn-primary'><i class='fa fa-pencil-square-o' aria-hidden='true'></i></button> ";
+        htmlStr += "<button type='button' class='btn btn-danger'><i class='fa fa-trash' aria-hidden='true'></i></button></td>";
+        htmlStr += "<td>" + el['uploaddate'] + "</td>";
         htmlStr +=" </tr>" ;
     });
 
@@ -151,11 +151,11 @@ function listItems(records){
     records.forEach(function(el){
         htmlStr += "<tr>";
         htmlStr += "<td><img src=\"" + el['picture'] + "\" width=\"150\" height=\"128\"></td>";
-        htmlStr += "<td>" + el['uploaddate'] + "</td>";
         htmlStr += "<td>"+ el['itemdescription'] +"</td>";
         htmlStr += "<td>"+ el['user'] +"</td>";
-        htmlStr += "<td><button type='button' class='btn btn-warning'><i class='fa fa-pencil-square-o' aria-hidden='true'></i></button> ";
-        htmlStr += "<button type='button' class='btn btn-danger'><i class='fa fa-trash' aria-hidden='true'></i></button>";
+        htmlStr += "<td><button type='button' class='btn btn-primary'><i class='fa fa-cart-plus' aria-hidden='true'></i></button></td>";
+        //htmlStr += "<button type='button' class='btn btn-danger'><i class='fa fa-trash' aria-hidden='true'></i></button></td>";
+        htmlStr += "<td>" + el['uploaddate'] + "</td>";
         htmlStr +=" </tr>" ;
     });
 
@@ -176,7 +176,7 @@ function displayRequests(records){
 }
 
 function showForm(){
-    $('#uploadItem').attr('style','margin-bottom:4%');
+    $('#uploadItem').show("slow");
 
 }
 function hideForm(){
