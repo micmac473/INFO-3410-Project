@@ -143,10 +143,10 @@ function processAllItems(records){
     listAllItems(records)
 }
 
-function listItems(records){
+function listAllItems(records){
     var key;
-    var sec_id = "#table_secp";
-    var htmlStr = $("#table_headingp").html(); //Includes all the table, thead and tbody declarations
+    var sec_id = "#table_sech";
+    var htmlStr = $("#table_headingh").html(); //Includes all the table, thead and tbody declarations
 
     records.forEach(function(el){
         htmlStr += "<tr>";
@@ -163,27 +163,7 @@ function listItems(records){
     $(sec_id).html(htmlStr);
 }
 
-//------------ Duplicated the ListItems function ...created List All Items, different buttons
 
-function listAllItems(records){
-    var key;
-    var sec_id = "#table_sech";
-    var htmlStr = $("#table_headingh").html(); //Includes all the table, thead and tbody declarations
-
-    records.forEach(function(el){
-        htmlStr += "<tr>";
-        htmlStr += "<td><img src=\"" + el['picture'] + "\" width=\"128\" height=\"128\"></td>";
-        htmlStr += "<td>" + el['uploaddate'] + "</td>";
-        htmlStr += "<td>"+ el['itemdescription'] +"</td>";
-        htmlStr += "<td>"+ el['user'] +"</td>";
-        htmlStr += "<td><button type='button' class='btn btn-info'><i class='fa fa-heart-o' aria-hidden='true'></i></button> ";
-        htmlStr += "<button type='button' class='btn btn-info'><i class='fa fa-user' aria-hidden='true'></i></button>";
-        htmlStr +=" </tr>" ;
-    });
-
-    htmlStr += "</tbody></table>";
-    $(sec_id).html(htmlStr);
-}
 
 function getUserRequests(){
     $.get("../index.php/requests", displayRequests, "json");  
