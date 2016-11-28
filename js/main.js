@@ -3,11 +3,13 @@ console.log("hello I'm connected to the world");
 
 //var base_url = "base.php/api";
 
+
 $(document).ready(function(){
     console.log("All Elements in the Page was successfully loaded, we can begin our application logic");
     getUserRequests();
     getAllItems();
     getUserItems();
+    //alert($('#requests > li').length);
 });  
 // this acts as the main function in Java
 
@@ -138,9 +140,10 @@ function listAllItems(records){
     records.forEach(function(el){
         htmlStr += "<tr>";
         htmlStr += "<td><img src=\"" + el['picture'] + "\" width=\"150\" height=\"128\"></td>";
+        htmlStr += "<td>"+ el['itemname'] +"</td>";
         htmlStr += "<td>"+ el['itemdescription'] +"</td>";
-        htmlStr += "<td>"+ el['user'] +"</td>";
-        htmlStr += "<td><button type='button' class='btn btn-primary' onclick=\"makeRequest("+el.itemid+")\"><i class='fa fa-cart-plus' aria-hidden='true'></i></button></td>";
+        htmlStr += "<td>"+ el['username'] +"</td>";
+        htmlStr += "<td><button type='button' class='btn btn-primary' onclick=\"makeRequest("+el.itemid+")\" id='requestbtn'><i class='fa fa-cart-plus' aria-hidden='true'></i></button></td>";
         //htmlStr += "<button type='button' class='btn btn-danger'><i class='fa fa-trash' aria-hidden='true'></i></button></td>";
         htmlStr += "<td>" + el['uploaddate'] + "</td>";
         htmlStr +=" </tr>" ;
@@ -169,13 +172,14 @@ function listUserItems(records){
     records.forEach(function(el){
         htmlStr += "<tr>";
         htmlStr += "<td><img src=\"" + el['picture'] + "\" width=\"150\" height=\"128\"></td>";
+        htmlStr += "<td>"+ el['itemname'] +"</td>";
         htmlStr += "<td>"+ el['itemdescription'] +"</td>";
         htmlStr += "<td><button type='button' class='btn btn-primary'><i class='fa fa-pencil-square-o' aria-hidden='true'></i></button> ";
         htmlStr += "<button type='button' class='btn btn-danger'><i class='fa fa-trash' aria-hidden='true'></i></button></td>";
         htmlStr += "<td>" + el['uploaddate'] + "</td>";
         htmlStr +=" </tr>" ;
     });
-
+    //count = $("#mylist li").size();
     htmlStr += "</tbody></table>";
     $(sec_id).html(htmlStr);
 } 
@@ -190,9 +194,11 @@ function getUserRequests(){
 function notifications(records){
     console.log(records);
     records.forEach(function(el){
-        var htmlStr = "<li><a href=profile.php>"+el.username + " requested "+ el.item + " "+"</a></li>";
+        var htmlStr = "<li><a href=profile.php>"+ el.username + " requested "+ el.itemname + "</a></li>";
         $("#requests").append(htmlStr);
     });
+    var count = $("#requests li").length;
+    $("#notify").append(count);
     displayRequests(records);
 
 }
@@ -205,9 +211,9 @@ function displayRequests(records){
     records.forEach(function(el){
         htmlStr += "<tr>";
         htmlStr += "<td>"+ el['username'] +"</td>";
+        htmlStr += "<td>"+ el['itemname'] +"</td>";
         htmlStr += "<td>"+ el['item'] +"</td>";
-        htmlStr += "<td>"+ el['item'] +"</td>";
-        htmlStr += "<td><button type='button' class='btn btn-primary'><i class='fa fa-pencil-square-o' aria-hidden='true'></i></button> ";
+        htmlStr += "<td><button type='button' class='btn btn-success'><i class='fa fa-check-square-o' aria-hidden='true'></i></button> ";
         htmlStr += "<button type='button' class='btn btn-danger'><i class='fa fa-trash' aria-hidden='true'></i></button></td>";
         htmlStr +=" </tr>" ;
     });
@@ -258,10 +264,12 @@ function addItem(){
 function makeRequest(itemid){
     $.get("../index.php/request/"+itemid, function(res){
         if (res.id && res.id > 0)
-            swal("Record", "Record Saved", "success");
+            swal("Request Made!", "", "success");
         else 
             swal("Record", "Unable to save record", "error");
     }, "json");
+    //$("#requestbtn").val("<button type='button' class='btn btn-danger'><i class='fa fa-trash' aria-hidden='true'></i></button>");
+    //$("#requestbtn").style.visibility("hidden");
 
 }
 

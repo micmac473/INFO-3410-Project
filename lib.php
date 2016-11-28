@@ -151,7 +151,7 @@ function productViews($item){
 
 function getUserItems(){//should be session id here instead of useId
 	$userID = $_SESSION["id"];
-	$sql ="SELECT `itemid`, `uploaddate`, `itemdescription`, `picture` FROM `items` where `userid` =$userID ORDER BY `uploaddate` DESC;";
+	$sql ="SELECT * FROM `items` where `userid` =$userID ORDER BY `uploaddate` DESC;";
 	$items =[];
 	//print($sql);
 		$db = getDBConnection();
@@ -167,7 +167,7 @@ function getUserItems(){//should be session id here instead of useId
 
 function getAllItems(){//should be session id here instead of useId
 	$userID = $_SESSION["id"];
-	$sql ="SELECT i.itemid, u.username as user, `uploaddate`, `itemdescription`, `picture` FROM `items` i, `users` u WHERE i.userid = u.id AND `userid` <> $userID ORDER BY `uploaddate` DESC;";
+	$sql ="SELECT * FROM `items` i, `users` u WHERE i.userid = u.id AND `userid` <> $userID ORDER BY `uploaddate` DESC;";
 	$items =[];
 	//print($sql);
 		$db = getDBConnection();
@@ -186,7 +186,7 @@ function getRequests(){
 	$db = getDBConnection();
 	$requests = [];
 	if ($db != null){
-		$sql = "SELECT * FROM `users` u, `requests` r WHERE r.requester = u.id AND r.requestee = $user;";
+		$sql = "SELECT * FROM `users` u, `requests` r, `items` i WHERE r.requester = u.id AND i.itemid = r.item AND r.requestee = $user;";
 		$res = $db->query($sql);
 		while($res && $row = $res->fetch_assoc()){
 			$requests[] = $row;

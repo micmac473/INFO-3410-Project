@@ -82,17 +82,17 @@ json_encode($userItems); */
 
 </div>  <!-- close container -->  
 <script type="text/template" id="table_headingp">
-  <table class="table table-hover">
+  <table class="table table-hover table-condensed">
     <thead>
     <tr>
-      <th></th><th>Description</th><th>Options</th><th>Date Uploaded</th>
+      <th></th><th>Name</th><th>Description</th><th>Options</th><th>Uploaded</th>
     </tr>
     </thead>
     <tbody>
 </script>
 
 <script type="text/template" id="table_headingr">
-  <table class="table table-hover">
+  <table class="table table-hover table-condensed">
     <thead>
     <tr>
       <th>Requested By</th><th>Item</th><th>Suggested Item</th><th>Decision</th>

@@ -15,7 +15,7 @@ if(!isset($_SESSION)){
     <meta name="description" content="">
     <meta name="author" content="">
     
-    <title>junkTrade Login</title>
+    <title>JunkTrade</title>
     
     <!-- Bootstrap core CSS -->
     <!-- <link href="../css/bootstrap.css" rel="stylesheet"> -->
@@ -105,6 +105,9 @@ th {
     background-color: grey;
     color: white;
 } 
+button:active{
+    background:red;
+}
     </style>
 
 </head>
@@ -139,27 +142,31 @@ th {
             <input type="text" placeholder="Search for junk" class="form-control">
           </div>
             <!--change to icon-->
-          <button type="submit" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i></button>
+          <button type="submit" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true" ></i></button>
         </form>
 
         <ul class="nav navbar-nav navbar-right">
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bell" aria-hidden="true"></i><span class="caret"></span></a>
-            <ul class="dropdown-menu" id="requests">
-                <!-- <li><a href="#">Dynamically Populated Requets</a></li> -->
-            </ul>
-          </li>
-
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user" aria-hidden="true"></i><span class="caret"></span></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user" aria-hidden="true" style="font-size:1.5em"></i><span class="caret"></span></a>
             <ul class="dropdown-menu">
               <li><a href="profile.php">My Profile</a></li>
               <li><a href="login.php">Log Out</a></li>
               <li><a href="google.com">Help</a></li>
             </ul>
           </li>
-        
-          <li><a href ="homepage.php"><i class="fa fa-home" aria-hidden="true"></i></a></li>
+          
+          <li><a href ="homepage.php"><i class="fa fa-home" aria-hidden="true" style="font-size:1.5em"></i></a></li>
+
+
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bell" aria-hidden="true" style="font-size:1.5em"></i><span class="label label-danger label-as-badge" id ="notify"></span><span class="caret"></span></a>
+            <ul class="dropdown-menu" id="requests">
+                <!-- <li><a href="#">Dynamically Populated Requets</a></li> -->
+                
+            </ul>
+
+          </li>
+          
         </ul>
       </div><!--/.navbar-collapse -->
     </div>
