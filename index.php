@@ -102,7 +102,7 @@ $app->post("/users", function(Request $request, Response $response){
 	if ($res){
 		//$name = $_SESSION["name"];
 		$response = $response->withStatus(201);
-		$response = $response->withJson(array("login"=> true));
+		$response = $response->withJson(array("loginstatus"=> true));
 		
 	} else {
 		$response = $response->withJson(400);

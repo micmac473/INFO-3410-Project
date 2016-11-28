@@ -50,7 +50,7 @@ function login(){
     console.log(user);
     $.post("../index.php/users", user, function(res){
         console.log(res);
-        if(res.login){
+        if(res.loginstatus){
             //console.log(res);
             swal({ 
                 title: "Welcome",
