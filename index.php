@@ -39,6 +39,13 @@ $app->get("/users", function(Request $request, Response $response){
 	return $response;
 });
 
+$app->get("/user", function(Request $request, Response $response){
+	$user = getCurrentUser();
+	
+	$response = $response->withJson($user);
+	return $response;
+});
+
 $app->get("/items/{id}", function(Request $request, Response $response){
 	$userID = $request->getAttribute('id');
 	$items = getUserItems($userID);
@@ -70,7 +77,7 @@ $app->get("/homepage", function(Request $request, Response $response){
 });
 
 $app->get("/profile", function(Request $request, Response $response){
-	$items = getUserItems();
+	$items = getAllUserItems();
 	
 	$response = $response->withJson($items);
 	return $response;

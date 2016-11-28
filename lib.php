@@ -136,6 +136,10 @@ function getAllUsers(){
 	return $users;
 }
 
+function getCurrentUser(){
+	return $_SESSION["id"];
+}
+
 function productViews($item){
 		$sql = "UPDATE `profile` SET `views` = views+1 WHERE `profile`.`tradables` = $item";
 	try{
@@ -149,9 +153,25 @@ function productViews($item){
 
 
 
-function getUserItems(){//should be session id here instead of useId
+function getAllUserItems(){//should be session id here instead of useId
 	$userID = $_SESSION["id"];
 	$sql ="SELECT * FROM `items` where `userid` =$userID ORDER BY `uploaddate` DESC;";
+	$items =[];
+	//print($sql);
+		$db = getDBConnection();
+		if ($db != NULL){
+			$res = $db->query($sql);
+			while($res && $row = $res->fetch_assoc()){
+			$items[] = $row;
+		}//while
+		$db->close();
+	}//if
+	return $items;
+}
+
+function getUserItems($userid){//should be session id here instead of useId
+	//$userID = $_SESSION["id"];
+	$sql ="SELECT * FROM `items` where `userid` = $userid ORDER BY `itemname` ASC;";
 	$items =[];
 	//print($sql);
 		$db = getDBConnection();

@@ -34,7 +34,7 @@ json_encode($userItems); */
 </div>
 
   <!-- Add Item -->
-  <div class ="row" style ="display:none;" id ="uploadItem">
+  <div class ="row" style ="display:none" id ="uploadItem">
     <div class ="col-md-5 col-md-offset-1">
       <form class="form-horizontal" action ="index.php/additem" method ="POST" onsubmit="return addItem();">
         <fieldset>
@@ -78,6 +78,50 @@ json_encode($userItems); */
     </div>
   </div>
 
+
+  <div class ="row" style ="display:none" id ="updateItem">
+    <div class ="col-md-5 col-md-offset-1">
+      <form class="form-horizontal" action ="index.php/updateitem" method ="POST" onsubmit="return updateItem();">
+        <fieldset>
+          <legend style="text-align:center">Edit Item</legend>
+            <!-- File Button --> 
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="uppic">Choose an Image </label>
+              <div class="col-md-4">
+                <input name="image" class="input-file" id="image" type="file" required="">
+              </div>
+            </div>
+
+            <!-- Input -->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="ItemDescription">Item Name</label>
+              <div class="col-md-4">                     
+                <input name="itemname" class="form-control" id="itemname" type="text" placeholder="Item Name" required="">
+              </div>
+            </div>
+
+            <!-- Textarea -->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="ItemDescription">Item Description</label>
+              <div class="col-md-4">                     
+                <textarea name="itemdescription" class="form-control" id="itemdescription" placeholder="Tell us about your item" required=""></textarea>
+              </div>
+            </div>
+
+            <!-- Button -->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="upload"></label>
+              <div class="col-md-4">
+                <button type ="submit" name="upload" class="btn btn-success" id="upload">Update</button>
+                  <button type="button"onclick ="hideUpdateForm();" class="btn btn-warning" ></a>Cancel
+                </button>
+              </div>
+            </div>
+
+          </fieldset>
+        </form>
+    </div>
+  </div>
   <!-- this is a table which will list the pictures of the items which the user has uploaded, only the headings will be here-->
 
     <!--there should be a footer here -->

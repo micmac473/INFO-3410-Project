@@ -16,7 +16,7 @@ include "base.php";
   <table class="table table-hover table-condensed">
     <thead class="thead-inverse">
       <tr>
-        <th>Image</th><th>Name</th><th>Description</th><th>Trader</th><th>Trade</th><th>Uploaded</th>
+        <th>Image</th><th>Name</th><th>Description</th><th>Trader</th><th>Trade</th><th>Uploaded</th><th></th>
       </tr>
     </thead>
     <tbody>

@@ -175,7 +175,7 @@ function listUserItems(records){
         htmlStr += "<td><img src=\"" + el['picture'] + "\" width=\"150\" height=\"128\"></td>";
         htmlStr += "<td>"+ el['itemname'] +"</td>";
         htmlStr += "<td>"+ el['itemdescription'] +"</td>";
-        htmlStr += "<td><button type='button' class='btn btn-primary'><i class='fa fa-pencil-square-o' aria-hidden='true'></i></button> ";
+        htmlStr += "<td><button type='button' class='btn btn-primary' onclick ='showUpdateForm();'><i class='fa fa-pencil-square-o' aria-hidden='true'></i></button> ";
         htmlStr += "<button type='button' class='btn btn-danger'><i class='fa fa-trash' aria-hidden='true'></i></button></td>";
         htmlStr += "<td>" + el['uploaddate'] + "</td>";
         htmlStr +=" </tr>" ;
@@ -244,8 +244,18 @@ function hideSearch(){
 
 }
 //--------------------------------------------------------------------------------------------------------------------
+// Show and hide add item form
+function showUpdateForm(){
+    $('#updateItem').show("slow");
 
-// Add item image and description to database
+}
+function hideUpdateForm(){
+    $('#updateItem').hide("slow");
+
+}
+//----------------------------------------------------------------------------------------------------------------------
+
+// Add item image, name and description to database
 function addItem(){
     var image = $("#image").val();
     var itemName = $("#itemname").val();
@@ -272,8 +282,22 @@ function addItem(){
 
 //--------------------------------------------------------------------------------------------------------------------
 
+// Update existing item data
+function updateItem(){
+    
+    return false;
+}
+
+//--------------------------------------------------------------------------------------------------------------------
 // Inserts a records to the database when a user makes a request to that item
 function makeRequest(itemid){
+    $.get("../index.php/user", function(res){
+        console.log(res);
+        $.get("../index.php/items/"+res, function(res){
+            //console.log(res);
+            displayItemForRequest(res);
+        });
+    });
     $.get("../index.php/request/"+itemid, function(res){
         if (res.id && res.id > 0)
             swal("Request Made!", "", "success");
@@ -285,4 +309,9 @@ function makeRequest(itemid){
 
 }
 
+function displayItemForRequest(records){
+    records.forEach(function(el){
+        console.log(el.itemname);
+    });
+}
 console.log("JavaScript file was successfully loaded in the page");
