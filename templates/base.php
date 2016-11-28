@@ -74,6 +74,7 @@ body {
   margin: 0;
   padding-bottom: 6rem;
   min-height: 100%;
+
   font-family: "Helvetica Neue", Arial, sans-serif;
 }
 
@@ -100,6 +101,7 @@ body {
   padding: 1rem;
   background-color:black;
   text-align: center;
+  color:white;
 }
 th {
     background-color: grey;

@@ -14,6 +14,7 @@ json_encode($userItems); */
       <button type="button" class="btn btn-info"><a href="views/addItem.html"></a>Find Item</button>
     </div>
   </div>
+  <!-- Perform a seafrch -->
 
   <!-- Add Item -->
   <div class ="row" style ="display:none;" id ="uploadItem">
