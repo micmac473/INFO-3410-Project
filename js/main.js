@@ -233,7 +233,16 @@ function hideForm(){
     $('#uploadItem').hide("slow");
 
 }
+//----------------------------------------------------------------------------------------------------------------------
+//show and hide search bar 
+function showSearch(){
+    $('#ProfileSearch').show("slow");
 
+}
+function hideSearch(){
+    $('#ProfileSearch').hide("slow");
+
+}
 //--------------------------------------------------------------------------------------------------------------------
 
 // Add item image and description to database

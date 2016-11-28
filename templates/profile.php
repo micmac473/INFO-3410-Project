@@ -11,10 +11,27 @@ json_encode($userItems); */
   <div class ="row">
     <div class ="col-md-8 col-md-offset-2">
       <button type="button" onclick ="showForm();" class="btn btn-info">Add Item</button>
-      <button type="button" class="btn btn-info"><a href="views/addItem.html"></a>Find Item</button>
+      <button type="button" onclick ="showSearch();" class="btn btn-info">Find Item</button>
     </div>
   </div>
   <!-- Perform a seafrch -->
+  <div class="container" id ="ProfileSearch" style ="display:none;">
+  <div class="row">
+        <div class="col-md-6">
+        <h2>Search Your Items</h2>
+            <div id="custom-search-input">
+                <div class="input-group col-md-12">
+                    <input type="text" class="form-control input-lg" placeholder="Seach.." />
+                    <span class="input-group-btn">
+                        <button onclick ="hideSearch();" class="btn btn-info btn-lg" type="button">
+                            <i class="glyphicon glyphicon-search"></i>
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+  </div>
+</div>
 
   <!-- Add Item -->
   <div class ="row" style ="display:none;" id ="uploadItem">
