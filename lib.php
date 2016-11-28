@@ -73,13 +73,13 @@ function saveTransactions($User1,$User2,$item1,$item2){
 	return FALSE;
 }
 
-function saveItem($picture,$itemDescription){
+function saveItem($picture,$itemname, $itemDescription){
 
 	/*$userid =$_SESSION['id'];
 	$sql = "INSERT INTO items(`userId`,`picture`,`itemDescription`) VALUES('userid','$picture','$itemDescription')"; */
 	$db = getDBConnection();
 	$userId = $_SESSION['id'];
-	$sql = "INSERT INTO items(`userid`,`picture`,`itemdescription`) VALUES('$userId','$picture','$itemDescription');";
+	$sql = "INSERT INTO items(`itemname`, `userid`,`picture`,`itemdescription`) VALUES('$itemname','$userId','$picture','$itemDescription');";
 	$id = -1;
 	if ($db != NULL){
 		$res = $db->query($sql);

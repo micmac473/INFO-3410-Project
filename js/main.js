@@ -238,6 +238,7 @@ function hideForm(){
 // Add item image and description to database
 function addItem(){
     var image = $("#image").val();
+    var itemName = $("#itemname").val();
     var itemDescription = $("#itemdescription").val();
     //alert(image);
     var slash = image.indexOf("\\",5);
@@ -245,6 +246,7 @@ function addItem(){
     //alert(image);
     var item = {
         "image" : image,
+        "itemname" : itemName,
         "itemdescription" : itemDescription
     };
 

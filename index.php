@@ -147,10 +147,11 @@ $app->post("/additem", function(Request $request, Response $response){
 
 
 	$imagePath = "../img/".$post['image'];
+	$itemName = $post['itemname'];
 	$itemDescription = $post['itemdescription'];
 	//print_r($post);
 	// print "Name: $name, Price:$price, Country: $countryId";
-	$res = saveItem($imagePath, $itemDescription);
+	$res = saveItem($imagePath, $itemName, $itemDescription);
 	//print_r ($res);
 	if ($res > 0){
 		$response = $response->withStatus(201);

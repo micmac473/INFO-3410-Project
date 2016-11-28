@@ -17,7 +17,7 @@ json_encode($userItems); */
 
   <!-- Add Item -->
   <div class ="row" style ="display:none;" id ="uploadItem">
-    <div class ="col-md-8 col-md-offset-2">
+    <div class ="col-md-5 col-md-offset-1">
       <form class="form-horizontal" action ="index.php/additem" method ="POST" onsubmit="return addItem();">
         <fieldset>
           <legend style="text-align:center">Upload a New Item</legend>
@@ -29,9 +29,17 @@ json_encode($userItems); */
               </div>
             </div>
 
+            <!-- Input -->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="ItemDescription">Item Name</label>
+              <div class="col-md-4">                     
+                <input name="itemname" class="form-control" id="itemname" type="text" placeholder="Item Name" required="">
+              </div>
+            </div>
+
             <!-- Textarea -->
             <div class="form-group">
-              <label class="col-md-4 control-label" for="ItemDescription">Add a description</label>
+              <label class="col-md-4 control-label" for="ItemDescription">Item Description</label>
               <div class="col-md-4">                     
                 <textarea name="itemdescription" class="form-control" id="itemdescription" placeholder="Tell us about your item" required=""></textarea>
               </div>
