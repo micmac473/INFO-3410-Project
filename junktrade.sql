@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 26, 2016 at 12:21 PM
+-- Generation Time: Nov 28, 2016 at 05:37 AM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 5.6.24
 
@@ -31,21 +31,27 @@ USE `junktrade`;
 DROP TABLE IF EXISTS `items`;
 CREATE TABLE `items` (
   `itemid` int(11) NOT NULL,
-  `userid` int(11) NOT NULL,
-  `uploaddate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `itemname` varchar(50) NOT NULL,
   `itemdescription` varchar(500) NOT NULL,
-  `picture` varchar(1000) NOT NULL
+  `picture` varchar(1000) NOT NULL,
+  `uploaddate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `userid` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `items`
 --
 
-INSERT INTO `items` (`itemid`, `userid`, `uploaddate`, `itemdescription`, `picture`) VALUES
-(1, 1, '2016-11-26 08:38:21', 'House', '../img/house.jpg'),
-(2, 2, '2016-11-26 08:38:21', 'Plane', '../img/easy.png'),
-(3, 2, '2016-11-26 08:38:42', 'Land', '../img/nomoney.png'),
-(4, 6, '2016-11-26 08:38:42', 'Fork', '../img/buddy.png');
+INSERT INTO `items` (`itemid`, `itemname`, `itemdescription`, `picture`, `uploaddate`, `userid`) VALUES
+(1, 'House', 'This is my house item', '../img/house.jpg', '2016-11-26 03:38:21', 1),
+(2, 'Peas', 'This is my easy peasy item', '../img/easy.png', '2016-11-26 03:38:21', 2),
+(3, 'Money', 'This is my money item', '../img/nomoney.png', '2016-11-26 03:38:42', 2),
+(4, 'Friends', 'This is my friends item', '../img/buddy.png', '2016-11-26 03:38:42', 6),
+(25, 'Dell XPS', 'Processor: i7 3.5 Ghz Quad Core\r\nRam: 12 GB\r\nGraphics: GeForce GTX 980', '../img/xps.png', '2016-11-26 15:54:19', 6),
+(26, 'Logo', 'This is my logo item', '../img/logo.png', '2016-11-26 15:55:07', 6),
+(27, 'HP Laptop', 'Processor: i5 2.5 Ghz Dual Core\r\nRam: 8 GB\r\nGraphics: Intel ', '../img/hp.jpg', '2016-11-26 15:57:48', 1),
+(29, 'SVG Flag', 'This the flag of St. Vincent and the Grenadines, West Indies', '../img/svgflag.png', '2016-11-27 15:21:11', 39),
+(30, '', 'Weed is my best friend', '../img/cloudserver.jpg', '2016-11-27 22:57:00', 40);
 
 -- --------------------------------------------------------
 
@@ -83,7 +89,7 @@ CREATE TABLE `requests` (
   `id` int(11) NOT NULL,
   `requester` int(11) NOT NULL,
   `requestee` int(11) NOT NULL,
-  `item` varchar(100) NOT NULL,
+  `item` int(10) NOT NULL,
   `timerequested` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -92,12 +98,13 @@ CREATE TABLE `requests` (
 --
 
 INSERT INTO `requests` (`id`, `requester`, `requestee`, `item`, `timerequested`) VALUES
-(1, 1, 5, 'Laptop', '2016-11-26 03:22:48'),
-(2, 1, 2, 'Beyond Massa', '2016-11-26 03:22:48'),
-(3, 6, 1, 'Calculator', '2016-11-26 03:23:13'),
-(4, 10, 1, 'Flashdrive', '2016-11-26 03:23:13'),
-(5, 1, 6, 'Phone', '2016-11-26 05:13:47'),
-(6, 9, 1, 'Spoon', '2016-11-26 05:54:07');
+(11, 39, 6, 26, '2016-11-27 20:05:31'),
+(12, 6, 39, 29, '2016-11-27 20:06:06'),
+(13, 39, 1, 27, '2016-11-27 20:08:12'),
+(15, 1, 6, 25, '2016-11-27 21:34:00'),
+(19, 6, 39, 29, '2016-11-27 22:30:01'),
+(20, 39, 40, 30, '2016-11-27 22:57:45'),
+(21, 40, 39, 29, '2016-11-27 23:01:42');
 
 -- --------------------------------------------------------
 
@@ -143,7 +150,10 @@ INSERT INTO `users` (`id`, `username`, `firstname`, `lastname`, `email`, `contac
 (8, 'pinky', 'Justin', 'Cadougan', 'justincadougan@email.com', '7894686', 'St.Vincent', 'f1412f80e25ec11bef07414c2cfa8c84ce3fdf23'),
 (9, 'kyledef', 'Kyle', 'DeFreitas', 'kyledefreitas@email.com', '455454', 'St.Vincent', '7103a38d7b345ad9dc1e25dd3b7dd606f84d2c0c'),
 (10, 'shiva', 'Shiva', 'Ramoudith', 'shiveramoudith@email.com', '47558', 'Trinidad', '848b186485107266a3807096d328690f86a22c05'),
-(34, 'franny', 'Francis', 'Darius', 'francis@email.com', '1234567899', 'Florida', '63ab89682d9a027b1f5c91f6b0ed347ef7dc9ac7');
+(34, 'franny', 'Francis', 'Darius', 'francis@email.com', '1234567899', 'Florida', '63ab89682d9a027b1f5c91f6b0ed347ef7dc9ac7'),
+(38, 'kieu', 'Duc', 'Kieu', 'kieu@email.com', '1111111111', 'Lady Young', '2c27c22226e3fc5c109ebb4cbc4c972e02bce8f8'),
+(39, 'kyledef', 'Kyle', 'De Freitas', 'kyle@email.com', '1234567890', 'St. Vincent', '6233de5df38c206a8bde5ae6f8be9c6949740c1f'),
+(40, 'rastaman', 'Kadem', 'McGillivary', 'rasta@email.com', '1111111111', 'Carriacou', 'f9c897117a284ec37d408472be98de935b93f83f');
 
 --
 -- Indexes for dumped tables
@@ -187,7 +197,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `items`
 --
 ALTER TABLE `items`
-  MODIFY `itemid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `itemid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 --
 -- AUTO_INCREMENT for table `ratings`
 --
@@ -197,7 +207,7 @@ ALTER TABLE `ratings`
 -- AUTO_INCREMENT for table `requests`
 --
 ALTER TABLE `requests`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 --
 -- AUTO_INCREMENT for table `transaction`
 --
@@ -207,7 +217,7 @@ ALTER TABLE `transaction`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
