@@ -194,7 +194,7 @@ function getUserRequests(){
 function notifications(records){
     console.log(records);
     records.forEach(function(el){
-        var htmlStr = "<li><a href=profile.php>"+ el.username + " requested "+ el.itemname + "</a></li>";
+        var htmlStr = "<li><a href=profile.php>"+ el.username + " is requesting "+ el.itemname + "</a></li>";
         $("#requests").append(htmlStr);
     });
     var count = $("#requests li").length;
@@ -229,7 +229,7 @@ function showForm(){
 
 }
 function hideForm(){
-    $('#uploadItem').attr('style','display:none');
+    $('#uploadItem').hide("slow");
 
 }
 

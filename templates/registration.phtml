@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     
-    <title>junkTrade Login</title>
+    <title>Sign Up</title>
     
     <!-- Bootstrap core CSS -->
     <link href="../css/bootstrap.css" rel="stylesheet">
@@ -42,16 +42,44 @@
 
     <body ng-app="validationApp" ng-controller="mainController">
 
-
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#"><img alt ="logo" width ="30px" height ="30px" src ="../img/logo.png"></a>
+          <a class ="navbar-brand" href ="../">junkTrade</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+      
+            <!--this is not rendering the login page as it shoul -->
+            <ul class = "nav navbar-nav navbar-right ">
+                <li><a href ="login.php">Login</a></li>
+            </ul>
+            <ul class = "nav navbar-nav navbar-right ">
+                <li><a href ="registration.phtml">Sign up</a></li>
+            </ul>
+           <!--<ul class="nav navbar-nav navbar-right ">
+                <li><button type="button" class="btn btn-primary btn-lg" onclick="window.location='templates/login.html'">login</button></li>
+            </ul> -->
+         
+        </div><!--/.navbar-collapse -->
+      </div>
+    </nav>
 <div class ="container">
+  <h2 style="text-align: center; font-family: 'Acme', sans-serif; color:orange">Available Tradeable Items</h2>
     <div class ="row">
-      <div class="col-md-12">
+      <div class="col-md-8 col-md-offset-2">
       
 <form name="userForm" class="form-horizontal" method = "POST" action = "index.php/register" onsubmit="return register();" ng-submit="submitForm(userForm.$valid)" novalidate>
 <fieldset>
 
 <!-- Form Name -->
-<legend>Registration Form</legend>
+<legend style="text-align: center">Join JunkTrade</legend>
 
 <!-- Text input-->
 <div class="form-group">
@@ -127,7 +155,6 @@
   <label class="col-md-4 control-label" for="retypedpassword">Re-enter Password <span style="color:red">*</span> </label>
   <div class="col-md-4">
     <input id="retypedpassword" name="retypedpassword" type="password" placeholder="" class="form-control input-md" ng-model-options="{ updateOn: 'blur' }" ng-model="user.retypedpassword" required data-password-verify="user.password" required="">
-    <p ng-show="userForm.retypedpassword.$error.required">Field required!</p>
   <p ng-show="userForm.retypedpassword.$error.passwordVerify" class="help-block">Passwords do not match </p>
     
   </div>
@@ -137,7 +164,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="Submit"></label>
   <div class="col-md-4">
-    <button id="saveBnt" name="saveBnt" class="btn btn-info" type ="submit" ng-disabled="userForm.$invalid">Submit</button>
+    <button id="saveBnt" name="saveBnt" class="btn btn-primary btn-block" type ="submit" ng-disabled="userForm.$invalid">Sign up for FREE</button>
   </div>
 </div>
 

@@ -34,13 +34,42 @@
 
 </head>
 <body>
+  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#"><img alt ="logo" width ="30px" height ="30px" src ="../img/logo.png"></a>
+          <a class ="navbar-brand" href ="../">junkTrade</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+      
+            <!--this is not rendering the login page as it shoul -->
+            <ul class = "nav navbar-nav navbar-right ">
+                <li><a href ="login.php">Login</a></li>
+            </ul>
+            <ul class = "nav navbar-nav navbar-right ">
+                <li><a href ="registration.phtml">Sign up</a></li>
+            </ul>
+           <!--<ul class="nav navbar-nav navbar-right ">
+                <li><button type="button" class="btn btn-primary btn-lg" onclick="window.location='templates/login.html'">login</button></li>
+            </ul> -->
+         
+        </div><!--/.navbar-collapse -->
+      </div>
+    </nav>
   <div class ="container">
+    <h2 style="text-align: center; font-family: 'Acme', sans-serif; color:orange">Available Tradeable Items</h2>
     <div class ="row">
-      <div class="col-md-12">
+      <div class="col-md-8 col-md-offset-2">
         <form class="form-horizontal" onsubmit="return login();" method ="POST" action="index.php/users">
           <fieldset>
             <!-- Form Name -->
-            <legend>Login</legend>
+            <legend style="text-align: center">Sign in to JunkTrade</legend>
 
             <!-- Text input-->
             <div class="form-group">
@@ -64,7 +93,7 @@
             <div class="form-group">
               <label class="col-md-4 control-label" for="login"></label>
               <div class="col-md-4">
-                <button name="saveBnt" class="btn btn-success" id="saveBnt" type ="submit">Login</button>
+                <button name="saveBnt" class="btn btn-primary btn-block " id="saveBnt" type ="submit">Sign in</button>
                 <a href ="#" style ="color: blue; text-decoration: none;">Forgot password?</a>
               </div>
             </div>
