@@ -49,8 +49,9 @@ function login(){
 
     console.log(user);
     $.post("../index.php/users", user, function(res){
-        if(res){
-            console.log(res);
+        console.log(res);
+        if(res.login){
+            //console.log(res);
             swal({ 
                 title: "Welcome",
                 text: "You have logged in successfully",
