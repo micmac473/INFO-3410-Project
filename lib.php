@@ -13,7 +13,7 @@ function getDBConnection(){
 
 function checkLogin($email, $password){
 	$password = sha1($password);
-	$sql = "SELECT * FROM `users` where email='$email'";
+	$sql = "SELECT * FROM `users` where email='$email' OR username='$email'";
 	//print($email);
 	$db = getDBConnection();
 	if($db != NULL){
