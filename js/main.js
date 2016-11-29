@@ -144,8 +144,8 @@ function listAllItems(records){
         htmlStr += "<td>"+ el['itemname'] +"</td>";
         htmlStr += "<td>"+ el['itemdescription'] +"</td>";
         htmlStr += "<td>"+ el['username'] +"</td>";
-        htmlStr += "<td><button type='button' class='btn btn-primary' data-toggle='modal' data-target='#requestModal' id='requestbtn'><i class='fa fa-cart-plus' aria-hidden='true'></i></button></td>";
-        //htmlStr += "<td><button type='button' class='btn btn-primary' onclick=\"makeRequest("+el.itemid+")\" id='requestbtn'><i class='fa fa-cart-plus' aria-hidden='true'></i></button></td>";
+        //htmlStr += "<td><button type='button' class='btn btn-primary' data-toggle='modal' data-target='#requestModal' id='requestbtn'><i class='fa fa-cart-plus' aria-hidden='true'></i></button></td>";
+        htmlStr += "<td><button type='button' class='btn btn-primary' onclick=\"makeRequest("+el.itemid+")\" id='requestbtn'><i class='fa fa-cart-plus' aria-hidden='true'></i></button></td>";
         //htmlStr += "<button type='button' class='btn btn-danger'><i class='fa fa-trash' aria-hidden='true'></i></button></td>";
         htmlStr += "<td>" + el['uploaddate'] + "</td>";
         htmlStr +=" </tr>" ;
@@ -296,7 +296,7 @@ function makeRequest(itemid){
         console.log(res);
         $.get("../index.php/items/"+res, function(res){
             //console.log(res);
-            displayItemForRequest(res);
+            //displayItemsForRequest(res);
         });
     });
     $.get("../index.php/request/"+itemid, function(res){
@@ -310,9 +310,41 @@ function makeRequest(itemid){
 
 }
 
-function displayItemForRequest(records){
-    records.forEach(function(el){
-        console.log(el.itemname);
+function displayItemsForRequest(itemid){
+    /*if ($("#items").length > 0){ // the country select is available so we can display all countries
+        records.forEach(function(item){
+            var htmlStr = "<option value='"+item.itemid+"'>"+item.itemname+"</option>";
+            $("#items").append(htmlStr);
+        })
+    } */
+    $.get("../index.php/user", function(res){
+        var user = res;
+        console.log(user);
+        $.get("../index.php/items/"+user, function(res){
+            displayInModal(res, itemid, user);
+
+        })
     });
+    
 }
+
+function displayInModal(records, itemid, user){
+    if ($("#items").length > 0){ // the country select is available so we can display all countries
+        var htmlStr
+        records.forEach(function(item){
+            htmlStr += "<option value='"+item.itemid+"'>"+item.itemname+"</option>";
+        })
+        $("#items").html(htmlStr);
+    } 
+    $("#requestModal").modal();  
+}
+
+function sendId(){
+    var itemId = $("#items").val();
+    console.log(itemId);
+
+    $('#requestModal').modal('hide');
+    return false;
+}
+
 console.log("JavaScript file was successfully loaded in the page");
