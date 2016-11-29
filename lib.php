@@ -141,7 +141,7 @@ function getCurrentUser(){
 }
 
 function productViews($item){
-		$sql = "UPDATE `profile` SET `views` = views+1 WHERE `profile`.`tradables` = $item";
+		$sql = "UPDATE `items` SET `views` = views+1 WHERE `profile`.`itemname` = $item";
 	try{
 		$db = getDBConnection();
 		if ($db != NULL){
