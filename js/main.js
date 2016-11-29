@@ -144,7 +144,8 @@ function listAllItems(records){
         htmlStr += "<td>"+ el['itemname'] +"</td>";
         htmlStr += "<td>"+ el['itemdescription'] +"</td>";
         htmlStr += "<td>"+ el['username'] +"</td>";
-        htmlStr += "<td><button type='button' class='btn btn-primary' onclick=\"makeRequest("+el.itemid+")\" id='requestbtn'><i class='fa fa-cart-plus' aria-hidden='true'></i></button></td>";
+        htmlStr += "<td><button type='button' class='btn btn-primary' data-toggle='modal' data-target='#requestModal' id='requestbtn'><i class='fa fa-cart-plus' aria-hidden='true'></i></button></td>";
+        //htmlStr += "<td><button type='button' class='btn btn-primary' onclick=\"makeRequest("+el.itemid+")\" id='requestbtn'><i class='fa fa-cart-plus' aria-hidden='true'></i></button></td>";
         //htmlStr += "<button type='button' class='btn btn-danger'><i class='fa fa-trash' aria-hidden='true'></i></button></td>";
         htmlStr += "<td>" + el['uploaddate'] + "</td>";
         htmlStr +=" </tr>" ;

@@ -110,6 +110,13 @@ th {
 button:active{
     background:red;
 }
+#requestModal {
+top:35%;
+left:50%;
+outline: none;
+position:absolute;
+}
+
     </style>
 
 </head>
