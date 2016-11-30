@@ -40,15 +40,15 @@ app.controller('mainController', ['$scope',
 function login(){
     console.log("Hi");
     var email = $("#email").val();
-    var pass = $("#pass").val();
+    var password = $("#password").val();
     //console.log(email + " " + pass);
     var user = {
         "email" : email,
-        "password": pass
+        "password": password
     }
 
     console.log(user);
-    $.post("../index.php/users", user, function(res){
+    $.post("../index.php/login", user, function(res){
         console.log(res);
         if(res.loginstatus){
             //console.log(res);
@@ -67,8 +67,8 @@ function login(){
             swal("Incorrect Login","Please try again","error")
             //return false;
         }
-    });
-    //console.log("Hi");
+    },"json");
+    console.log("Logged In");
     return false;
 }
 //--------------------------------------------------------------------------------------------------------------------
@@ -354,7 +354,7 @@ function displayInModal(records, itemid){
 
 function sendRequest(){
     var requestee = $("#requestee").val();
-    var resquestedItem = $("#requesteditem").val();
+    var requestedItem = $("#requesteditem").val();
     var myItem = $("#myitems").val();
     var request = {
         "requestee" : requestee,
@@ -364,6 +364,7 @@ function sendRequest(){
 
     console.log(request);
     $.post("../index.php/request", request, function(res){
+        console.log(res);
         if (res.id && res.id > 0)
             swal("Request Made!", "", "success");
         else 

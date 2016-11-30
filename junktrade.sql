@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 28, 2016 at 05:37 AM
--- Server version: 10.1.16-MariaDB
--- PHP Version: 5.6.24
+-- Generation Time: Nov 30, 2016 at 06:50 PM
+-- Server version: 10.1.13-MariaDB
+-- PHP Version: 7.0.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -51,7 +51,9 @@ INSERT INTO `items` (`itemid`, `itemname`, `itemdescription`, `picture`, `upload
 (26, 'Logo', 'This is my logo item', '../img/logo.png', '2016-11-26 15:55:07', 6),
 (27, 'HP Laptop', 'Processor: i5 2.5 Ghz Dual Core\r\nRam: 8 GB\r\nGraphics: Intel ', '../img/hp.jpg', '2016-11-26 15:57:48', 1),
 (29, 'SVG Flag', 'This the flag of St. Vincent and the Grenadines, West Indies', '../img/svgflag.png', '2016-11-27 15:21:11', 39),
-(30, '', 'Weed is my best friend', '../img/cloudserver.jpg', '2016-11-27 22:57:00', 40);
+(30, 'Cloud Server', 'Heroku cloud server', '../img/cloudserver.jpg', '2016-11-27 22:57:00', 40),
+(34, 'Hydrangeas', 'Hydrangeas', '../img/Hydrangeas.jpg', '2016-11-30 13:42:30', 1),
+(36, 'Jellyfish', 'Jellyfish', '../img/Jellyfish.jpg', '2016-11-30 13:45:11', 1);
 
 -- --------------------------------------------------------
 
@@ -88,6 +90,7 @@ DROP TABLE IF EXISTS `requests`;
 CREATE TABLE `requests` (
   `id` int(11) NOT NULL,
   `requester` int(11) NOT NULL,
+  `item2` int(11) NOT NULL,
   `requestee` int(11) NOT NULL,
   `item` int(10) NOT NULL,
   `timerequested` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
@@ -97,14 +100,14 @@ CREATE TABLE `requests` (
 -- Dumping data for table `requests`
 --
 
-INSERT INTO `requests` (`id`, `requester`, `requestee`, `item`, `timerequested`) VALUES
-(11, 39, 6, 26, '2016-11-27 20:05:31'),
-(12, 6, 39, 29, '2016-11-27 20:06:06'),
-(13, 39, 1, 27, '2016-11-27 20:08:12'),
-(15, 1, 6, 25, '2016-11-27 21:34:00'),
-(19, 6, 39, 29, '2016-11-27 22:30:01'),
-(20, 39, 40, 30, '2016-11-27 22:57:45'),
-(21, 40, 39, 29, '2016-11-27 23:01:42');
+INSERT INTO `requests` (`id`, `requester`, `item2`, `requestee`, `item`, `timerequested`) VALUES
+(11, 39, 0, 6, 26, '2016-11-27 20:05:31'),
+(12, 6, 0, 39, 29, '2016-11-27 20:06:06'),
+(13, 39, 0, 1, 27, '2016-11-27 20:08:12'),
+(15, 1, 0, 6, 25, '2016-11-27 21:34:00'),
+(19, 6, 0, 39, 29, '2016-11-27 22:30:01'),
+(20, 39, 0, 40, 30, '2016-11-27 22:57:45'),
+(21, 40, 0, 39, 29, '2016-11-27 23:01:42');
 
 -- --------------------------------------------------------
 
@@ -197,7 +200,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `items`
 --
 ALTER TABLE `items`
-  MODIFY `itemid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `itemid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 --
 -- AUTO_INCREMENT for table `ratings`
 --
@@ -207,7 +210,7 @@ ALTER TABLE `ratings`
 -- AUTO_INCREMENT for table `requests`
 --
 ALTER TABLE `requests`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 --
 -- AUTO_INCREMENT for table `transaction`
 --
@@ -217,7 +220,7 @@ ALTER TABLE `transaction`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
