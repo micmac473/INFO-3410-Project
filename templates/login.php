@@ -1,4 +1,18 @@
-<?php session_unset() ?>
+<?php 
+include "../lib.php";
+session_unset(); 
+if(isset($_POST['email']) && isset($_POST['password'])){
+  $email = $_POST['email'];
+  $password = $_POST['password'];
+  //p($post);
+  // print "Name: $name, Price:$price, Country: $countryId";
+  $res = checkLogin($email, $password);
+  if($res){
+    header('Location: homepage.php');  
+  }
+}
+
+?>
 <!doctype html>
 <head>
     <meta charset="utf-8">
@@ -66,7 +80,8 @@
     <h2 style="text-align: center; font-family: 'Acme', sans-serif; color:orange">Available Tradeable Items</h2>
     <div class ="row">
       <div class="col-md-8 col-md-offset-2">
-        <form class="form-horizontal" onsubmit="return login();" method ="POST" action="index.php/users">
+        <!-- <form class="form-horizontal" onsubmit="return login();" method ="POST" action="index.php/users"> -->
+          <form class="form-horizontal" method ="POST" action="login.php">
           <fieldset>
             <!-- Form Name -->
             <legend style="text-align: center">Sign in to JunkTrade</legend>
@@ -84,7 +99,7 @@
             <div class="form-group">
               <label class="col-md-4 control-label" for="pass">Password</label>
               <div class="col-md-4">
-                <input name="pass" class="form-control input-md" id="pass" required="" type="password" placeholder="password">
+                <input name="password" class="form-control input-md" id="password" required="" type="password" placeholder="password">
                 
               </div>
             </div>

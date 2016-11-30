@@ -28,6 +28,7 @@ $app->get('/', function (Request $request, Response $response) {
 $app->get('/templates/login.phtml', function (Request $request, Response $response) {
 	return $this->renderer->render($response, "/base.phtml");//this should be index.phtml as opped to base
 });
+
 $app->get('/templates/registration.phtml', function (Request $request, Response $response) {
 	return $this->renderer->render($response, "/registration.phtml");//this should be index.phtml as opped to base
 });
@@ -91,6 +92,20 @@ $app->get("/profile", function(Request $request, Response $response){
 	return $response;
 });
 
+$app->get("/login", function(Request $request, Response $response){
+	$items = checkLogin("micmcm","micmcm");
+	
+	$response = $response->withJson($items);
+	return $response;
+});
+
+$app->get("/request", function(Request $request, Response $response){
+	$items = saveRequest(2,1,1);
+	
+	$response = $response->withJson($items);
+	return $response;
+});
+
 $app->get("/request/{id}", function(Request $request, Response $response){
 	$val = $request->getAttribute('id');
 	// Get Record for Specific Country
@@ -118,7 +133,7 @@ $app->get("/deleteitem/{id}", function(Request $request, Response $response){
 });
 
 
-$app->post("/users", function(Request $request, Response $response){
+$app->post("/login", function(Request $request, Response $response){
 	$post = $request->getParsedBody();
 	//var_dump($post);
 	$email = $post['email'];
@@ -173,19 +188,12 @@ $app->post("/additem", function(Request $request, Response $response){
 	move_uploaded_file($filetmp,$filepath);
 	print_r($filetmp); */
 
-	$filetmp = $files['image']['tmp_name'];
-  	$filename = $files['image']['name'];
-  	$filetype = $files['image']['type'];
-  	$filepath = "../img/".$filename;
-  
-  	move_uploaded_file($filetmp,$filepath);
-
-	//$imagePath = "../img/".$post['image'];
+	$imagePath = "../img/".$post['image'];
 	$itemName = $post['itemname'];
 	$itemDescription = $post['itemdescription'];
 	//print_r($post);
 	// print "Name: $name, Price:$price, Country: $countryId";
-	$res = saveItem($filepath, $itemName, $itemDescription);
+	$res = saveItem($imagePath, $itemName, $itemDescription);
 	//print_r ($res);
 	if ($res > 0){
 		$response = $response->withStatus(201);
@@ -202,7 +210,7 @@ $app->post("/request", function(Request $request, Response $response){
 	$requestee = $post['requestee'];
 	$requestedItem = $post['requesteditem'];
 
-	$res = saveRequest($myItem, $requestee, $requesteditem);
+	$res = saveRequest($myItem, $requestee, $requestedItem);
 	
 	if ($res > 0){
 		$response = $response->withStatus(201);

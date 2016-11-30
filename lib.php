@@ -14,10 +14,10 @@ function getDBConnection(){
 
 function checkLogin($email, $password){
 	$password = sha1($password);
-	$sql = "SELECT * FROM `users` where email='$email' OR username='$email'";
+	$sql = "SELECT * FROM `users` where `email`='$email' OR `username`='$email'";
 	//print($email);
 	$db = getDBConnection();
-	print_r($db);
+	//print_r($db);
 	if($db != NULL){
 		$res = $db->query($sql);
 		if ($res && $row = $res->fetch_assoc()){
@@ -237,7 +237,7 @@ function saveRequest($myItem, $requestee, $requestedItem){
 	//$owner = getItemOwner($itemid);
 	$db = getDBConnection();
 	$requester = $_SESSION['id'];
-	$sql = "INSERT INTO `requests` (`requester`,`item`,`requestee`,`item2`) VALUES($requester,$myItem, 1,$requestedItem);";
+	$sql = "INSERT INTO `requests` (`requester`,`item2`,`requestee`,`item`) VALUES($requester,$myItem, 1,$requestedItem);";
 	$id = -1;
 	if ($db != NULL){
 		$res = $db->query($sql);
