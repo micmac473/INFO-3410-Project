@@ -124,20 +124,12 @@ if(isset($_POST['email']) && isset($_POST['password'])){
   </div>
   <!--FAcebook login -->
 
-  <div class ="container">
-  <div class = "row">
-    <div class="col-md-8 col-md-offset-2">
-                      <a class="btn btn-block btn-social btn-facebook">
-    <span class="fa fa-facebook"></span> Sign in with Facebook</a>
-    </div>
-
-  </div>
 </div>
 
 <?php
 //Facebook 
 
-require_once __DIR__ . '\facebook\src\Facebook\autoload.php';
+require_once __DIR__ . '/src/Facebook/autoload.php';
 $fb = new Facebook\Facebook([
   'app_id' => '552065338336275',
   'app_secret' => 'fed80c20693c796130702fc8f4be751f',
@@ -201,11 +193,17 @@ if (isset($accessToken)) {
     // Now you can redirect to another page and use the access token from $_SESSION['facebook_access_token']
 } else {
   // replace your website URL same as added in the developers.facebook.com/apps e.g. if you used http instead of https and you used non-www version or www version of your website then you must add the same here
-  $loginUrl = $helper->getLoginUrl('http://localhost/JunkTrade/templates/homepage.php', $permissions);
-  echo '<a href="' . $loginUrl . '">Log in with Facebook!</a>';
+  $loginUrl = $helper->getLoginUrl('http://localhost:8080/JunkTrade/templates/homepage.php', $permissions);
+  echo ' <div class ="container">
+  <div class = "row">
+    <div class="col-md-8 col-md-offset-2">
+<a href="' . $loginUrl . '" class="btn btn-block btn-social btn-facebook">
+    <span class="fa fa-facebook"></span> Sign in with Facebook</a>
+    </div>
+
+  </div>';
 }
-
-
+ 
 ?>
 <body>
 </html>
