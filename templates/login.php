@@ -1,7 +1,6 @@
 
-<?php session_unset() 
+<?php session_unset();
 
-<?php 
 include "../lib.php";
 session_unset(); 
 if(isset($_POST['email']) && isset($_POST['password'])){
