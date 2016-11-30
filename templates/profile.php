@@ -36,7 +36,7 @@ json_encode($userItems); */
   <!-- Add Item -->
   <div class ="row" style ="display:none" id ="uploadItem">
     <div class ="col-md-5 col-md-offset-1">
-      <form class="form-horizontal" action ="index.php/additem" method ="POST" onsubmit="return addItem();">
+      <form class="form-horizontal" action ="index.php/additem" enctype="multipart/form-data" method ="POST" onsubmit="return addItem();">
         <fieldset>
           <legend style="text-align:center">Upload a New Item</legend>
             <!-- File Button --> 
