@@ -368,7 +368,7 @@ function sendRequest(){
         if (res.id && res.id > 0)
             swal("Request Made!", "", "success");
         else 
-            swal("Record", "Unable to save record", "error");
+            swal("Unable to make request", "Please try again", "error");
     },"json");
     $('#requestModal').modal('hide');
     return false;

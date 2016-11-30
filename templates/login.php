@@ -84,7 +84,7 @@ if(isset($_POST['email']) && isset($_POST['password'])){
     <div class ="row">
       <div class="col-md-8 col-md-offset-2">
         <!-- <form class="form-horizontal" onsubmit="return login();" method ="POST" action="index.php/users"> -->
-          <form class="form-horizontal" method ="POST" action="login.php">
+          <form class="form-horizontal" method ="POST" action="index.php/login" onsubmit="return login();">
           <fieldset>
             <!-- Form Name -->
             <legend style="text-align: center">Sign in to JunkTrade</legend>

@@ -226,7 +226,7 @@ function saveRequest($myItem, $requestee, $requestedItem){
 	//$owner = getItemOwner($itemid);
 	$db = getDBConnection();
 	$requester = $_SESSION['id'];
-	$sql = "INSERT INTO `requests` (`requester`,`item2`,`requestee`,`item`) VALUES($requester,$myItem, 1,$requestedItem);";
+	$sql = "INSERT INTO `requests` (`requester`,`item2`,`requestee`,`item`) VALUES($requester,$myItem, 40,30);";
 	$id = -1;
 	if ($db != NULL){
 		$res = $db->query($sql);

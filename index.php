@@ -138,7 +138,7 @@ $app->post("/login", function(Request $request, Response $response){
 	//var_dump($post);
 	$email = $post['email'];
 	$password = $post['password'];
-	print_r($post);
+	//print_r($post);
 	// print "Name: $name, Price:$price, Country: $countryId";
 	$res = checkLogin($email, $password);
 	//print_r ($res);
@@ -206,7 +206,7 @@ $app->post("/additem", function(Request $request, Response $response){
 
 $app->post("/request", function(Request $request, Response $response){
 	$post = $request->getParsedBody();
-	$myItem = $post['myitems'];
+	$myItem = $post['myitem'];
 	$requestee = $post['requestee'];
 	$requestedItem = $post['requesteditem'];
 
