@@ -111,8 +111,8 @@ button:active{
     background:red;
 }
 #requestModal {
-top:35%;
-left:50%;
+top:20%;
+left:30%;
 outline: none;
 position:absolute;
 }
@@ -184,7 +184,7 @@ position:absolute;
   <div class="jumbotron city">
     <div class="container">
       <h1 style="color:#096790 ;text-shadow: 4px 4px orange;font-family: 'Bowlby One SC', cursive;">Hi 
-          <?php  echo $_SESSION["user"]?></h1>
+          <?php  echo $_SESSION["user"];?></h1>
     </div>
   </div>
 

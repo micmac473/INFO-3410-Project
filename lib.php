@@ -3,8 +3,9 @@ session_start();
 
 function getDBConnection(){
 	try{ 
+		//$db = new mysqli("138.197.20.97","peertrading","k$3eYUdUz_Th","peertrading");
 		$db = new mysqli("localhost","root","","junktrade");
-		if ($db == null || $db->connect_errno > 0)return null;
+		if ($db == null && $db->connect_errno > 0)return null;
 		return $db;
 	}catch(Exception $e){ } 
 	return null;
@@ -16,6 +17,7 @@ function checkLogin($email, $password){
 	$sql = "SELECT * FROM `users` where email='$email' OR username='$email'";
 	//print($email);
 	$db = getDBConnection();
+	print_r($db);
 	if($db != NULL){
 		$res = $db->query($sql);
 		if ($res && $row = $res->fetch_assoc()){
@@ -231,12 +233,11 @@ function getItemOwner($itemid){
 	return $user;
 } 
 
-function saveRequest($itemid){
-	$owner = getItemOwner($itemid);
-	$requestee = $owner['id'];
+function saveRequest($myItem, $requestee, $requestedItem){
+	//$owner = getItemOwner($itemid);
 	$db = getDBConnection();
 	$requester = $_SESSION['id'];
-	$sql = "INSERT INTO `requests` (`requester`,`requestee`,`item`) VALUES($requester,$requestee,$itemid);";
+	$sql = "INSERT INTO `requests` (`requester`,`item`,`requestee`,`item2`) VALUES($requester,$myItem, 1,$requestedItem);";
 	$id = -1;
 	if ($db != NULL){
 		$res = $db->query($sql);
@@ -246,6 +247,17 @@ function saveRequest($itemid){
 		$db->close();
 	}
 	return $id;
+} 
+
+function deleteItem($itemid){
+	$db = getDBConnection();
+	$sql = "DELETE FROM `items` WHERE `itemid` = $itemid;";
+	$res = null;
+	if ($db != NULL){
+		$res = $db->query($sql);
+		$db->close();
+	}
+	return $res;
 } 
 
 ?>

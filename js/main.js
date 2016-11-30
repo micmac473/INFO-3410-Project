@@ -67,7 +67,7 @@ function login(){
             swal("Incorrect Login","Please try again","error")
             //return false;
         }
-    },"json");
+    });
     //console.log("Hi");
     return false;
 }
@@ -145,7 +145,7 @@ function listAllItems(records){
         htmlStr += "<td>"+ el['itemdescription'] +"</td>";
         htmlStr += "<td>"+ el['username'] +"</td>";
         //htmlStr += "<td><button type='button' class='btn btn-primary' data-toggle='modal' data-target='#requestModal' id='requestbtn'><i class='fa fa-cart-plus' aria-hidden='true'></i></button></td>";
-        htmlStr += "<td><button type='button' class='btn btn-primary' onclick=\"makeRequest("+el.itemid+")\" id='requestbtn'><i class='fa fa-cart-plus' aria-hidden='true'></i></button></td>";
+        htmlStr += "<td><button type='button' class='btn btn-primary' onclick=\"displayItemsForRequest("+el.itemid+")\" id='requestbtn'><i class='fa fa-cart-plus' aria-hidden='true'></i></button></td>";
         //htmlStr += "<button type='button' class='btn btn-danger'><i class='fa fa-trash' aria-hidden='true'></i></button></td>";
         htmlStr += "<td>" + el['uploaddate'] + "</td>";
         htmlStr +=" </tr>" ;
@@ -177,7 +177,7 @@ function listUserItems(records){
         htmlStr += "<td>"+ el['itemname'] +"</td>";
         htmlStr += "<td>"+ el['itemdescription'] +"</td>";
         htmlStr += "<td><button type='button' class='btn btn-primary' onclick ='showUpdateForm();'><i class='fa fa-pencil-square-o' aria-hidden='true'></i></button> ";
-        htmlStr += "<button type='button' class='btn btn-danger'><i class='fa fa-trash' aria-hidden='true'></i></button></td>";
+        htmlStr += "<button type='button' class='btn btn-danger' onclick=\"deleteItem("+el.itemid+")\"><i class='fa fa-trash' aria-hidden='true'></i></button></td>";
         htmlStr += "<td>" + el['uploaddate'] + "</td>";
         htmlStr +=" </tr>" ;
     });
@@ -297,8 +297,8 @@ function makeRequest(itemid){
         $.get("../index.php/items/"+res, function(res){
             //console.log(res);
             //displayItemsForRequest(res);
-        });
-    });
+        }, "json");
+    }, "json");
     $.get("../index.php/request/"+itemid, function(res){
         if (res.id && res.id > 0)
             swal("Request Made!", "", "success");
@@ -307,7 +307,6 @@ function makeRequest(itemid){
     }, "json");
     //$("#requestbtn").val("<button type='button' class='btn btn-danger'><i class='fa fa-trash' aria-hidden='true'></i></button>");
     //$("#requestbtn").style.visibility("hidden");
-
 }
 
 function displayItemsForRequest(itemid){
@@ -319,32 +318,79 @@ function displayItemsForRequest(itemid){
     } */
     $.get("../index.php/user", function(res){
         var user = res;
-        console.log(user);
+        //console.log(user);
         $.get("../index.php/items/"+user, function(res){
-            displayInModal(res, itemid, user);
+            displayInModal(res, itemid);
 
-        })
+        }, "json")
+    }, "json");
+    
+}
+
+function displayInModal(records, itemid){
+    if ($("#myitems").length > 0){ // the country select is available so we can display all countries
+        var htmlStr;
+        records.forEach(function(item){
+            htmlStr += "<option value='"+item.itemid+"'>"+item.itemname+"</option>";
+        });
+        
+        $("#myitems").html(htmlStr);
+    } 
+    $.get("../index.php/owner/"+itemid, function(res){
+        //console.log(res);
+        $("#requestee").val(res.username);
+        $("#requesteditem").val(res.itemname);
+    }, "json") 
+
+    $("#requestModal").modal(); 
+}
+
+function sendRequest(){
+    var requestee = $("#requestee").val();
+    var resquestedItem = $("#requesteditem").val();
+    var myItem = $("#myitems").val();
+    var request = {
+        "requestee" : requestee,
+        "requesteditem" : requestedItem,
+        "myitem" : myItem
+    };
+
+    console.log(request);
+    $.post("../index.php/request", request, function(res){
+        if (res.id && res.id > 0)
+            swal("Request Made!", "", "success");
+        else 
+            swal("Record", "Unable to save record", "error");
+    },"json");
+    $('#requestModal').modal('hide');
+    return false;
+}
+//--------------------------------------------------------------------------------------------------------------------
+// Deletes a user item from the list
+function deleteItem(itemid){
+    swal({
+        title: "Are you sure?",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "No, cancel!",
+        closeOnConfirm: false,
+        closeOnCancel: false
+    },
+    function(isConfirm){
+        
+        if (isConfirm) {
+            $.get("../index.php/deleteitem/"+itemid, function(res){
+                swal("Deleted!", "Your item has been deleted.", "success");
+            }, "json");
+            getUserItems();
+        } else {
+            swal("Cancelled", "Your item is safe", "error");
+        }
     });
     
 }
 
-function displayInModal(records, itemid, user){
-    if ($("#items").length > 0){ // the country select is available so we can display all countries
-        var htmlStr
-        records.forEach(function(item){
-            htmlStr += "<option value='"+item.itemid+"'>"+item.itemname+"</option>";
-        })
-        $("#items").html(htmlStr);
-    } 
-    $("#requestModal").modal();  
-}
-
-function sendId(){
-    var itemId = $("#items").val();
-    console.log(itemId);
-
-    $('#requestModal').modal('hide');
-    return false;
-}
-
+//--------------------------------------------------------------------------------------------------------------------
 console.log("JavaScript file was successfully loaded in the page");

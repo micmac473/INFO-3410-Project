@@ -54,6 +54,14 @@ $app->get("/items/{id}", function(Request $request, Response $response){
 	return $response;
 });
 
+$app->get("/owner/{id}", function(Request $request, Response $response){
+	$userID = $request->getAttribute('id');
+	$owner = getItemOwner($userID);
+	
+	$response = $response->withJson($owner);
+	return $response;
+});
+
 $app->get("/items", function(Request $request, Response $response){
 	$items = getAllItems();
 	
@@ -96,13 +104,26 @@ $app->get("/request/{id}", function(Request $request, Response $response){
 	return $response;
 });
 
+$app->get("/deleteitem/{id}", function(Request $request, Response $response){
+	$val = $request->getAttribute('id');
+	// Get Record for Specific Country
+	$rec = deleteItem($val);
+	if ($rec){
+		$response = $response->withStatus(201);
+		$response = $response->withJson(array( "deleted" => $rec));
+	} else {
+		$response = $response->withStatus(400);
+	}
+	return $response;
+});
+
 
 $app->post("/users", function(Request $request, Response $response){
 	$post = $request->getParsedBody();
 	//var_dump($post);
 	$email = $post['email'];
 	$password = $post['password'];
-	//print_r($post);
+	print_r($post);
 	// print "Name: $name, Price:$price, Country: $countryId";
 	$res = checkLogin($email, $password);
 	//print_r ($res);
@@ -152,19 +173,43 @@ $app->post("/additem", function(Request $request, Response $response){
 	move_uploaded_file($filetmp,$filepath);
 	print_r($filetmp); */
 
+	$filetmp = $files['image']['tmp_name'];
+  	$filename = $files['image']['name'];
+  	$filetype = $files['image']['type'];
+  	$filepath = "../img/".$filename;
+  
+  	move_uploaded_file($filetmp,$filepath);
 
-	$imagePath = "../img/".$post['image'];
+	//$imagePath = "../img/".$post['image'];
 	$itemName = $post['itemname'];
 	$itemDescription = $post['itemdescription'];
 	//print_r($post);
 	// print "Name: $name, Price:$price, Country: $countryId";
-	$res = saveItem($imagePath, $itemName, $itemDescription);
+	$res = saveItem($filepath, $itemName, $itemDescription);
 	//print_r ($res);
 	if ($res > 0){
 		$response = $response->withStatus(201);
 		$response = $response->withJson(array( "id" => $res));
 	} else {
 		$response = $response->withStatus(400);
+	}
+	return $response;
+});
+
+$app->post("/request", function(Request $request, Response $response){
+	$post = $request->getParsedBody();
+	$myItem = $post['myitems'];
+	$requestee = $post['requestee'];
+	$requestedItem = $post['requesteditem'];
+
+	$res = saveRequest($myItem, $requestee, $requesteditem);
+	
+	if ($res > 0){
+		$response = $response->withStatus(201);
+		$response = $response->withJson(array("id" => $res));
+		
+	} else {
+		$response = $response->withJson(400);
 	}
 	return $response;
 });

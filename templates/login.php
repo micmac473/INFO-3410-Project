@@ -73,7 +73,7 @@
 
             <!-- Text input-->
             <div class="form-group">
-              <label class="col-md-4 control-label" for="email">Email</label>  
+              <label class="col-md-4 control-label" for="email">Username/Email</label>  
               <div class="col-md-4">
               <input name="email" class="form-control input-md" id="email" required="" type="text" placeholder="johnDoe@example.com">
                 

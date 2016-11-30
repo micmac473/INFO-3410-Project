@@ -7,7 +7,7 @@ include "base.php";
   </div>
   
   <div class="row">
-    <div class="col-md-8 col-md-offset-2 table-responsive">
+    <div class="col-md-10 col-md-offset-1 table-responsive">
       <div id="table_sech"></div>
     </div>
   </div>
@@ -27,22 +27,37 @@ include "base.php";
     <div class="modal-dialog modal-sm">
       <div class="modal-content">
         <div class="modal-body">
-          <form class="form-vertical" method="POST" onsubmit="return sendId();">
+          <form class="form-horizontal" onsubmit="return sendRequest();">
             <fieldset>
+
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="name">Item Owner</label>
+              <div class="col-md-8">
+                <input id="requestee" name="requestee" type="text" disabled placeholder="Item Owner" class="form-control input-md" required="">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="name">Item</label>
+              <div class="col-md-8">
+                <input id="requesteditem" name="requesteditem" type="text" disabled placeholder="Requested Item" class="form-control input-md" required="">
+              </div>
+            </div>
+
             <!-- Select Basic -->
             <div class="form-group">
-              <label class="col-md-8 control-label" for="selectbasic">Select Your Item</label>
+              <label class="col-md-4 control-label" for="selectbasic">Select Your Item</label>
               <div class="col-md-8">
-                <select id="items" name="itemid" class="form-control">
+                <select id="myitems" name="myitems" class="form-control">
                   <option value="0">Select Item</option>
                 </select>
               </div>
             </div>
 
             <div class="form-group">
-              <div class="col-md-4">
-                <button id="sendrequest" name="sendrequest" class="btn btn-success" type="submit">Send Request</button>
-                <button id="cancelrequest" name="cancelrequest" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+              <div class="col-md-8 col-md-offset-2">
+                <button  class="btn btn-success" type="submit">Send</button>
+                <button  class="btn btn-danger" data-dismiss="modal">Cancel</button>
               </div>
             </div>
 

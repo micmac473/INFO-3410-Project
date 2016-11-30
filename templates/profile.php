@@ -2,9 +2,23 @@
 include "../lib.php";
 include "base.php";
 
-/*$useriD = 1;
-$userItems =getUserItems($useriD);
-json_encode($userItems); */
+if(isset($_POST['upload'])){
+  $filetmp = $_FILES["image"]["tmp_name"];
+  $filename = $_FILES["image"]["name"];
+  $filetype = $_FILES["image"]["type"];
+  $filepath = "../img/".$filename;
+  
+  move_uploaded_file($filetmp,$filepath);
+
+  //$imagePath = "../img/".$post['image'];
+  $itemName = $_POST['itemname'];
+  $itemDescription = $_POST['itemdescription'];
+  unset($_POST);
+  //print_r($post);
+  // print "Name: $name, Price:$price, Country: $countryId";
+  $res = saveItem($filepath, $itemName, $itemDescription);
+
+}
 
 ?>
 <div class ="container-fluid">
@@ -36,7 +50,8 @@ json_encode($userItems); */
   <!-- Add Item -->
   <div class ="row" style ="display:none" id ="uploadItem">
     <div class ="col-md-5 col-md-offset-1">
-      <form class="form-horizontal" action ="index.php/additem" enctype="multipart/form-data" method ="POST" onsubmit="return addItem();">
+      <form class="form-horizontal" action ="profile.php" enctype="multipart/form-data" method ="POST">
+      <!-- <form class="form-horizontal" action ="index.php/additem" enctype="multipart/form-data" method ="POST" onsubmit="return addItem();"> -->
         <fieldset>
           <legend style="text-align:center">Upload a New Item</legend>
             <!-- File Button --> 
@@ -88,7 +103,7 @@ json_encode($userItems); */
             <div class="form-group">
               <label class="col-md-4 control-label" for="uppic">Choose an Image </label>
               <div class="col-md-4">
-                <input name="image" class="input-file" id="image" type="file" required="">
+                <input name="imageU" class="input-file" id="imageU" type="file" required="">
               </div>
             </div>
 
@@ -96,7 +111,7 @@ json_encode($userItems); */
             <div class="form-group">
               <label class="col-md-4 control-label" for="ItemDescription">Item Name</label>
               <div class="col-md-4">                     
-                <input name="itemname" class="form-control" id="itemname" type="text" placeholder="Item Name" required="">
+                <input name="itemnameU" class="form-control" id="itemnameU" type="text" placeholder="Item Name" required="">
               </div>
             </div>
 
@@ -104,7 +119,7 @@ json_encode($userItems); */
             <div class="form-group">
               <label class="col-md-4 control-label" for="ItemDescription">Item Description</label>
               <div class="col-md-4">                     
-                <textarea name="itemdescription" class="form-control" id="itemdescription" placeholder="Tell us about your item" required=""></textarea>
+                <textarea name="itemdescriptionU" class="form-control" id="itemdescriptionU" placeholder="Tell us about your item" required=""></textarea>
               </div>
             </div>
 
@@ -112,7 +127,7 @@ json_encode($userItems); */
             <div class="form-group">
               <label class="col-md-4 control-label" for="upload"></label>
               <div class="col-md-4">
-                <button type ="submit" name="upload" class="btn btn-success" id="upload">Update</button>
+                <button type ="submit" name="uploadU" class="btn btn-success" id="uploadU">Update</button>
                   <button type="button"onclick ="hideUpdateForm();" class="btn btn-warning" ></a>Cancel
                 </button>
               </div>
