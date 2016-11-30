@@ -142,17 +142,6 @@ function getCurrentUser(){
 	return $_SESSION["id"];
 }
 
-function productViews($item){
-		$sql = "UPDATE `items` SET `views` = views+1 WHERE `profile`.`itemname` = $item";
-	try{
-		$db = getDBConnection();
-		if ($db != NULL){
-			$db->query($sql);
-		}
-	}catch (Exception $e){}
-	return FALSE;
-}
-
 
 
 function getAllUserItems(){//should be session id here instead of useId
