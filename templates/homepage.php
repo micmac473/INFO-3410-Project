@@ -56,8 +56,41 @@ include "base.php";
 
             <div class="form-group">
               <div class="col-md-8 col-md-offset-2">
-                <button  class="btn btn-success" type="submit">Send</button>
+                <button  name = "views" class="btn btn-success" type="submit">Send</button>
                 <button  class="btn btn-danger" data-dismiss="modal">Cancel</button>
+<?php
+function getDBConnection(){
+  try{ 
+    //$db = new mysqli("138.197.20.97","peertrading","k$3eYUdUz_Th","peertrading");
+    $db = new mysqli("localhost","root","","junktrade");
+    if ($db == null && $db->connect_errno > 0)return null;
+    return $db;
+  }catch(Exception $e){ } 
+  return null;
+}
+
+
+  $itemid = 29;
+
+if($_GET){
+
+    if(isset($_GET['views'])){
+        productViews($itemid);
+    }
+}
+
+function productViews($item){
+    $sql = "UPDATE `items` SET `views` = views+1 WHERE `items`.`itemid` = $item";
+  try{
+    $db = getDBConnection();
+    if ($db != NULL){
+      $db->query($sql);
+    }
+  }catch (Exception $e){}
+  return FALSE;
+}
+
+?>
               </div>
             </div>
 
