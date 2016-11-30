@@ -9,7 +9,7 @@
 
 			// check to make sure the form is completely valid
 			if ($scope.userForm.$valid) {
-				alert('our form is amazing');
+				alert('Thank you for signing up');
 			}
 
 		};
