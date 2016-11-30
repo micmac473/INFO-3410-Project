@@ -25,7 +25,7 @@ if(isset($_POST['btn_upload']))
 	$filetmp = $_FILES["file_img"]["tmp_name"];
 	$filename = $_FILES["file_img"]["name"];
 	$filetype = $_FILES["file_img"]["type"];
-	$filepath = "photo/".$filename;
+	$filepath = "img/".$filename;
 	
 	move_uploaded_file($filetmp,$filepath);
 	

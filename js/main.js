@@ -277,8 +277,15 @@ function addItem(){
         else swal("Upload Error", "Unable to save item", "error");
         hideForm();
         getUserItems();
+        clearFields();
     },"json");
     return false;
+}
+
+function clearFields(){
+    $("#image").val(""); 
+    $("#itemname").val("");
+    $("#itemdescription").val("");
 }
 
 //--------------------------------------------------------------------------------------------------------------------
@@ -392,5 +399,7 @@ function deleteItem(itemid){
     
 }
 
+
 //--------------------------------------------------------------------------------------------------------------------
 console.log("JavaScript file was successfully loaded in the page");
+
