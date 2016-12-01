@@ -17,7 +17,26 @@ if(isset($_POST['upload'])){
   //print_r($post);
   // print "Name: $name, Price:$price, Country: $countryId";
   $res = saveItem($filepath, $itemName, $itemDescription);
+}
 
+if (isset($_POST['uploadU'])) {
+$id = $_POST["id"];
+$name = $_POST['itemnameU'];
+$description = $_POST['itemdescriptionU'];
+
+$db = getDBConnection();
+
+$sql = "UPDATE items SET itemname= '{$name}', itemdescription='{$description}' WHERE itemid=$id ";
+$db->query($sql);
+unset($_POST);
+
+ /*if ($db->query($sql) === TRUE) {
+       echo "Record updated successfully";
+   } else {
+       echo "Error updating record: " . $db->error;
+   }
+   */
+   $db->close();
 }
 
 ?>
@@ -94,16 +113,24 @@ if(isset($_POST['upload'])){
   </div>
 
 
-  <div class ="row" style ="display:none" id ="updateItem">
+  <div class ="row" style ="display:none" id ="updateItemform">
     <div class ="col-md-5 col-md-offset-1">
-      <form class="form-horizontal" action ="index.php/updateitem" method ="POST" onsubmit="return updateItem();">
+      <form class="form-horizontal" action ="" method ="POST">
         <fieldset>
           <legend style="text-align:center">Edit Item</legend>
-            <!-- File Button --> 
+            <!-- File Button
             <div class="form-group">
               <label class="col-md-4 control-label" for="uppic">Choose an Image </label>
               <div class="col-md-4">
                 <input name="imageU" class="input-file" id="imageU" type="file" required="">
+              </div>
+            </div> -->
+          
+          			<!-- Input -->
+			      <div class="form-group">
+              <label class="col-md-4 control-label" for="ItemDescription">Item ID</label>
+              <div class="col-md-4">                     
+                <input name="id" class="form-control" id="id" type="number" placeholder="id" required="">
               </div>
             </div>
 
@@ -170,7 +197,7 @@ if(isset($_POST['upload'])){
   <table class="table table-hover table-condensed">
     <thead>
     <tr>
-      <th></th><th>Name</th><th>Description</th><th>Options</th><th>Uploaded</th>
+      <th> </th><th>ItemID</th><th>Name</th><th>Description</th><th>Options</th><th>Uploaded</th>
     </tr>
     </thead>
     <tbody>

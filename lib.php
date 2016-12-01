@@ -192,6 +192,20 @@ function getAllItems(){//should be session id here instead of useId
 	return $items;
 }
 
+function getUserItem($val){
+	$db = getDBConnection();
+	$rec = null;
+	if ($db != null){
+		$sql = "SELECT * FROM items WHERE itemid = $val;";
+		$res = $db->query($sql);
+		if ($res){
+			$rec = $res->fetch_assoc();
+		}
+		$db->close();
+	}
+	return $rec;
+}
+
 function getRequests(){
 	$user = $_SESSION["id"];
 	$db = getDBConnection();
@@ -325,6 +339,7 @@ function deleteItem($itemid){
 	}
 	return $res;
 } 
+
 
 function acceptRequest($requestId){
 	$db = getDBConnection();
