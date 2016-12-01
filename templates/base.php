@@ -189,6 +189,7 @@ button:active{
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user" aria-hidden="true" style="font-size:1.5em"></i><span class="caret"></span></a>
             <ul class="dropdown-menu">
               <li><a href="profile.php">My Profile</a></li>
+              <li><a href="trade.php">Trade</a></li>
               <li><a href="login.php">Log Out</a></li>
               <li><a href="google.com">Help</a></li>
             </ul>
