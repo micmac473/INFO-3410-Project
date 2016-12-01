@@ -30,8 +30,8 @@ $db = getDBConnection();
 
 $sql = "UPDATE items SET itemname= '{$name}', itemdescription='{$description}', picture='{$itempic}' WHERE itemid=$id;";
 
-
-
+ $db->query($sql);
+unset($_POST);
  /*if ($db->query($sql) === TRUE) {
        echo "Record updated successfully";
    } else {
@@ -88,7 +88,7 @@ $sql = "UPDATE items SET itemname= '{$name}', itemdescription='{$description}', 
             <div class="form-group">
               <label class="col-md-4 control-label" for="ItemDescription">Item Name</label>
               <div class="col-md-4">                     
-                <input name="itemname" class="form-control" id="itemname" type="text" placeholder="Item Name" required="">
+                <input name="itemname" class="form-control" id="itemname" type="text" placeholder="Item Name" required="" >
               </div>
             </div>
 
@@ -130,10 +130,10 @@ $sql = "UPDATE items SET itemname= '{$name}', itemdescription='{$description}', 
             </div>
             
           	<!-- Input -->
-            <div class="form-group">
-              <label class="col-md-4 control-label" for="ItemDescription">ItemID</label>
+            <div class="form-group"  >
+              <!-- <label class="col-md-4 control-label" for="ItemDescription">ItemID</label> -->
               <div class="col-md-4">                     
-                <input name="id" class="form-control" id="id" type="number" placeholder="ID" required="">
+                <input name="id" class="form-control" id="id"  type="hidden" placeholder="ID" required="" >
               </div>
             </div>
           

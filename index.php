@@ -91,6 +91,13 @@ $app->get("/requests", function(Request $request, Response $response){
 	return $response;
 });
 
+$app->get("/decisions", function(Request $request, Response $response){
+	$decisions = getDecisions();
+	
+	$response = $response->withJson($decisions);
+	return $response;
+});
+
 $app->get("/requestee", function(Request $request, Response $response){
 	$requests = getRequesteeId("jamtart");
 	
