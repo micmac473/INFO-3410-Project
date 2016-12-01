@@ -174,6 +174,7 @@ function listUserItems(records){
     records.forEach(function(el){
         htmlStr += "<tr>";
         htmlStr += "<td><img src=\"" + el['picture'] + "\" width=\"150\" height=\"128\"></td>";
+        htmlStr += "<td>"+ el['itemid'] + "</td>";
         htmlStr += "<td>"+ el['itemname'] +"</td>";
         htmlStr += "<td>"+ el['itemdescription'] +"</td>";
         htmlStr += "<td><button type='button' class='btn btn-primary' onclick ='showUpdateForm();'><i class='fa fa-pencil-square-o' aria-hidden='true'></i></button> ";
@@ -253,11 +254,11 @@ function hideSearch(){
 //--------------------------------------------------------------------------------------------------------------------
 // Show and hide add item form
 function showUpdateForm(){
-    $('#updateItem').show("slow");
+    $('#updateItemform').show("slow");
 
 }
 function hideUpdateForm(){
-    $('#updateItem').hide("slow");
+    $('#updateItemform').hide("slow");
 
 }
 //----------------------------------------------------------------------------------------------------------------------
