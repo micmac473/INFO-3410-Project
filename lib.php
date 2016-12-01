@@ -366,13 +366,14 @@ function denyRequest($requestId){
 function productViews($itemid){
   echo "hello";
     $sql = "UPDATE `items` SET `views` = views+1 WHERE `items`.`itemid` = $itemid";
+    $res = null;
   try{
     $db = getDBConnection();
     if ($db != NULL){
       $db->query($sql);
     }
   }catch (Exception $e){}
-  return FALSE;
+  return res;
 }
 
 ?>
