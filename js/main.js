@@ -174,9 +174,10 @@ function listUserItems(records){
     records.forEach(function(el){
         htmlStr += "<tr>";
         htmlStr += "<td><img src=\"" + el['picture'] + "\" width=\"150\" height=\"128\"></td>";
+        htmlStr += "<td>"+ el['itemid'] + "</td>";
         htmlStr += "<td>"+ el['itemname'] +"</td>";
         htmlStr += "<td>"+ el['itemdescription'] +"</td>";
-        htmlStr += "<td><button type='button' class='btn btn-primary' onclick ='showUpdateForm();'><i class='fa fa-pencil-square-o' aria-hidden='true'></i></button> ";
+        htmlStr += "<td><button type='button' class='btn btn-primary' onclick =\"showUpdateForm("+el.itemid+")\"><i class='fa fa-pencil-square-o' aria-hidden='true'></i></button> ";
         htmlStr += "<button type='button' class='btn btn-danger' onclick=\"deleteItem("+el.itemid+")\"><i class='fa fa-trash' aria-hidden='true'></i></button></td>";
         htmlStr += "<td>" + el['uploaddate'] + "</td>";
         htmlStr +=" </tr>" ;
@@ -252,12 +253,16 @@ function hideSearch(){
 }
 //--------------------------------------------------------------------------------------------------------------------
 // Show and hide add item form
-function showUpdateForm(){
-    $('#updateItem').show("slow");
-
+function showUpdateForm(itemid){
+   $('#updateItemform').show("slow");
+   $.get("../index.php/edititem/"+itemid, function(item){
+        $("#id").val(item.itemid);
+        $("#itemnameU").val(item.itemname);
+        $("#itemdescriptionU").val(item.itemdescription);
+    }, "json");
 }
 function hideUpdateForm(){
-    $('#updateItem').hide("slow");
+    $('#updateItemform').hide("slow");
 
 }
 //----------------------------------------------------------------------------------------------------------------------
