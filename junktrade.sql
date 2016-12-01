@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 01, 2016 at 03:03 AM
--- Server version: 10.1.16-MariaDB
--- PHP Version: 5.6.24
+-- Generation Time: Dec 01, 2016 at 06:40 PM
+-- Server version: 10.1.13-MariaDB
+-- PHP Version: 7.0.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -35,27 +35,28 @@ CREATE TABLE `items` (
   `itemdescription` varchar(500) NOT NULL,
   `picture` varchar(1000) NOT NULL,
   `uploaddate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `userid` int(11) NOT NULL
+  `userid` int(11) NOT NULL,
+  `views` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `items`
 --
 
-INSERT INTO `items` (`itemid`, `itemname`, `itemdescription`, `picture`, `uploaddate`, `userid`) VALUES
-(1, 'House', 'This is my house item', '../img/house.jpg', '2016-11-26 03:38:21', 1),
-(2, 'Peas', 'This is my easy peasy item', '../img/easy.png', '2016-11-26 03:38:21', 2),
-(3, 'Money', 'This is my money item', '../img/nomoney.png', '2016-11-26 03:38:42', 2),
-(4, 'Friends', 'This is my friends item', '../img/buddy.png', '2016-11-26 03:38:42', 6),
-(25, 'Dell XPS', 'Processor: i7 3.5 Ghz Quad Core\r\nRam: 12 GB\r\nGraphics: GeForce GTX 980', '../img/xps.png', '2016-11-26 15:54:19', 6),
-(26, 'Logo', 'This is my logo item', '../img/logo.png', '2016-11-26 15:55:07', 6),
-(27, 'HP Laptop', 'Processor: i5 2.5 Ghz Dual Core\r\nRam: 8 GB\r\nGraphics: Intel ', '../img/hp.jpg', '2016-11-26 15:57:48', 1),
-(29, 'SVG Flag', 'This the flag of St. Vincent and the Grenadines, West Indies', '../img/svgflag.png', '2016-11-27 15:21:11', 39),
-(30, 'Cloud Server', 'Heroku cloud server', '../img/cloudserver.jpg', '2016-11-27 22:57:00', 40),
-(34, 'Hydrangeas', 'Hydrangeas', '../img/Hydrangeas.jpg', '2016-11-30 13:42:30', 1),
-(36, 'Jellyfish', 'Jellyfish', '../img/Jellyfish.jpg', '2016-11-30 13:45:11', 1),
-(38, 'Nike', 'Color: Red and black\r\nSize: 12\r\nCondition: New\r\nComes with box', '../img/airjordans.jpe', '2016-11-30 19:11:47', 40),
-(39, 'Gucci Watch', 'This is real Gucci', '../img/gucciwatch.jpe', '2016-11-30 19:54:55', 40);
+INSERT INTO `items` (`itemid`, `itemname`, `itemdescription`, `picture`, `uploaddate`, `userid`, `views`) VALUES
+(1, 'House', 'This is my house item', '../img/house.jpg', '2016-11-26 03:38:21', 1, 0),
+(2, 'Peas', 'This is my easy peasy item', '../img/easy.png', '2016-11-26 03:38:21', 2, 0),
+(3, 'Money', 'This is my money item', '../img/nomoney.png', '2016-11-26 03:38:42', 2, 0),
+(4, 'Friends', 'This is my friends item', '../img/buddy.png', '2016-11-26 03:38:42', 6, 0),
+(25, 'Dell XPS', 'Processor: i7 3.5 Ghz Quad Core\r\nRam: 12 GB\r\nGraphics: GeForce GTX 980', '../img/xps.png', '2016-11-26 15:54:19', 6, 0),
+(26, 'Logo', 'This is my logo item', '../img/logo.png', '2016-11-26 15:55:07', 6, 0),
+(27, 'HP Laptop', 'Processor: i5 2.5 Ghz Dual Core\r\nRam: 8 GB\r\nGraphics: Intel ', '../img/hp.jpg', '2016-11-26 15:57:48', 1, 0),
+(29, 'SVG Flag', 'This the flag of St. Vincent and the Grenadines, West Indies', '../img/svgflag.png', '2016-11-27 15:21:11', 39, 0),
+(30, 'Cloud Server', 'Heroku cloud server', '../img/cloudserver.jpg', '2016-11-27 22:57:00', 40, 0),
+(34, 'Hydrangeas', 'Hydrangeas', '../img/Hydrangeas.jpg', '2016-11-30 13:42:30', 1, 0),
+(36, 'Jellyfish', 'Jellyfish', '../img/Jellyfish.jpg', '2016-11-30 13:45:11', 1, 0),
+(38, 'Nike', 'Color: Red and black\r\nSize: 12\r\nCondition: New\r\nComes with box', '../img/airjordans.jpe', '2016-11-30 19:11:47', 40, 0),
+(39, 'Gucci Watch', 'This is real Gucci', '../img/gucciwatch.jpe', '2016-11-30 19:54:55', 40, 1);
 
 -- --------------------------------------------------------
 
