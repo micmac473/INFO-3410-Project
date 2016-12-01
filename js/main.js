@@ -257,6 +257,8 @@ function hideSearch(){
 function showUpdateForm(itemid){
    $('#updateItemform').show("slow");
    $.get("../index.php/edititem/"+itemid, function(item){
+       $("#imageU").val(item.picture);
+        $("#id").val(item.itemid);
         $("#itemnameU").val(item.itemname);
         $("#itemdescriptionU").val(item.itemdescription);
     }, "json");
