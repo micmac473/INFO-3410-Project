@@ -258,7 +258,7 @@ function showUpdateForm(){
 
 }
 function hideUpdateForm(){
-    $('#updateItem').hide("slow");
+    $('#updateItemform').hide("slow");
 
 }
 //----------------------------------------------------------------------------------------------------------------------
