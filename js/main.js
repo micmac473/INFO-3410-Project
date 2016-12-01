@@ -86,10 +86,10 @@ function register(){
     var password = $("#password").val();
     var retypedpassword = $("#retypedpassword").val();
 
-    if(password != retypedpassword){
+    /*if(password != retypedpassword){
         alert("Password do not match");
         return false;
-    }
+    } */
 
     var regUser = {
         "username" : username,
@@ -485,7 +485,7 @@ function acceptRequest(requestId){
         //text: "You will not be able to undo this operation!",
         type: "info",
         showCancelButton: true,
-        confirmButtonColor: "#33cc33",
+        confirmButtonColor: "#5cd65c",
         confirmButtonText: "Accept",
         cancelButtonText: "Cancel",
         closeOnConfirm: false,

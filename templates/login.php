@@ -80,18 +80,18 @@ if(isset($_POST['email']) && isset($_POST['password'])){
       </div>
     </nav>
   <div class ="container">
-    <h2 style="text-align: center; font-family: 'Acme', sans-serif; color:orange">Available Tradeable Items</h2>
+    <h2 style="text-align: center; font-family: 'Acme', sans-serif; color:orange">JunkTrade</h2>
     <div class ="row">
       <div class="col-md-8 col-md-offset-2">
         <!-- <form class="form-horizontal" onsubmit="return login();" method ="POST" action="index.php/users"> -->
-          <form class="form-horizontal" method ="POST" action="index.php/login" onsubmit="return login();">
+          <form class="form-horizontal" method ="POST" action="index.php/login" onsubmit="return login();" style="background-color:#f2f2f2">
           <fieldset>
             <!-- Form Name -->
             <legend style="text-align: center">Sign in to JunkTrade</legend>
 
             <!-- Text input-->
             <div class="form-group">
-              <label class="col-md-4 control-label" for="email">Username/Email</label>  
+              <label class="col-md-4 control-label" for="email">Username or Email</label>  
               <div class="col-md-4">
               <input name="email" class="form-control input-md" id="email" required="" type="text" placeholder="johnDoe@example.com">
                 

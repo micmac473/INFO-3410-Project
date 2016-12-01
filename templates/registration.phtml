@@ -71,11 +71,11 @@
       </div>
     </nav>
 <div class ="container">
-  <h2 style="text-align: center; font-family: 'Acme', sans-serif; color:orange">Available Tradeable Items</h2>
+  <h2 style="text-align: center; font-family: 'Acme', sans-serif; color:orange">Join JunkTrade</h2>
     <div class ="row">
       <div class="col-md-8 col-md-offset-2">
       
-<form name="userForm" class="form-horizontal" method = "POST" action = "index.php/register" onsubmit="return register();" ng-submit="submitForm(userForm.$valid)" novalidate>
+<form name="userForm" class="form-horizontal" method = "POST" action = "index.php/register" onsubmit="return register();" ng-submit="submitForm(userForm.$valid)" novalidate style="background-color:#f2f2f2">
 <fieldset>
 
 <!-- Form Name -->
@@ -115,7 +115,7 @@
   <label class="col-md-4 control-label" for="email">Email <span style="color:red">*</span> </label>  
   <div class="col-md-4">
   <input id="email" name="email" placeholder="johndoe@email.com" class="form-control input-md" ng-model-options="{ updateOn: 'blur' }" ng-model="user.email" type="email" placeholder="johnDoe@example.com" class="form-control input-md" required="">
-  <p ng-show="userForm.email.$error.email" class="help-block" >This is not a valid email.</p>    
+  <p ng-show="userForm.email.$error.email" class="help-block" >Invalid Email Address</p>    
   </div>
 </div>
 
@@ -123,7 +123,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="contact">Contact <span style="color:red">*</span> </label>  
   <div class="col-md-4">
-  <input id="contact" name="contact" type="text" placeholder="0123456789" class="form-control input-md" ng-model-options="{ updateOn: 'blur' }" ng-model="user.contact" type="text" placeholder="" class="form-control input-md" ng-minlength="10" ng-maxlength="10" required="">
+  <input id="contact" name="contact" type="number" placeholder="0123456789" class="form-control input-md" ng-model-options="{ updateOn: 'blur' }" ng-model="user.contact" type="text" placeholder="" class="form-control input-md" ng-minlength="10" ng-maxlength="10" required="">
   <p ng-show="userForm.contact.$error.minlength" class="help-block">Must be 10 digits((areacode)-contact#).</p>
   <p ng-show="userForm.contact.$error.maxlength" class="help-block">Must be 10 digits((areacode)-contact#).</p>
     
