@@ -20,14 +20,17 @@ if(isset($_POST['upload'])){
 }
 
 if (isset($_POST['uploadU'])) {
+$id = $_POST['id'];
 $name = $_POST['itemnameU'];
 $description = $_POST['itemdescriptionU'];
+$itempic = "../img/" . $_POST['imageU'];
+
 
 $db = getDBConnection();
 
-$sql = "UPDATE items SET itemname= '{$name}', itemdescription='{$description}' WHERE itemname='{$name}' ";
-$db->query($sql);
-unset($_POST);
+$sql = "UPDATE items SET itemname= '{$name}', itemdescription='{$description}', picture='{$itempic}' WHERE itemid=$id;";
+
+
 
  /*if ($db->query($sql) === TRUE) {
        echo "Record updated successfully";
@@ -36,6 +39,7 @@ unset($_POST);
    }
    */
    $db->close();
+
 }
 
 ?>
@@ -124,7 +128,15 @@ unset($_POST);
                 <input name="imageU" class="input-file" id="imageU" type="file">
               </div>
             </div>
-
+            
+          	<!-- Input -->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="ItemDescription">ItemID</label>
+              <div class="col-md-4">                     
+                <input name="id" class="form-control" id="id" type="number" placeholder="ID" required="">
+              </div>
+            </div>
+          
             <!-- Input -->
             <div class="form-group">
               <label class="col-md-4 control-label" for="ItemDescription">Item Name</label>
