@@ -222,11 +222,59 @@ function getItemOwner($itemid){
 	return $user;
 } 
 
+function getRequesteeId($requestee){
+	$db = getDBConnection();
+	$rec = null;
+	if ($db != NULL){
+		$sql = "SELECT `id` FROM `users` WHERE username = '$requestee';";
+		$res = $db->query($sql);
+		if ($res){
+			$rec = $res->fetch_assoc();
+		}
+		$db->close();
+	}
+	return $rec;
+}
+
+function getItemId($item){
+	$db = getDBConnection();
+	$rec = null;
+	if ($db != NULL){
+		$sql = "SELECT `itemid` FROM `items` WHERE itemname = '$item';";
+		$res = $db->query($sql);
+		if ($res){
+			$rec= $res->fetch_assoc();
+		}
+		$db->close();
+	}
+	return $rec;
+}
+
+function getItemImage($item){
+	$db = getDBConnection();
+	$rec = null;
+	if ($db != NULL){
+		$sql = "SELECT `picture` FROM `items` WHERE itemid = '$item';";
+		$res = $db->query($sql);
+		if ($res){
+			$rec= $res->fetch_assoc();
+		}
+		$db->close();
+	}
+	return $rec;
+}
+
+
 function saveRequest($myItem, $requestee, $requestedItem){
 	//$owner = getItemOwner($itemid);
+	$requesteeId = getRequesteeId($requestee);
+	$requestedItemId = getItemId($requestedItem);
+	$rId = $requesteeId['id'];
+	$iId = $requestedItemId['itemid'];
+	//echo ($requesteeId['id']);
 	$db = getDBConnection();
 	$requester = $_SESSION['id'];
-	$sql = "INSERT INTO `requests` (`requester`,`item2`,`requestee`,`item`) VALUES($requester,$myItem, 40,30);";
+	$sql = "INSERT INTO `requests` (`requester`,`item2`,`requestee`,`item`) VALUES($requester,$myItem, $rId,$iId);";
 	$id = -1;
 	if ($db != NULL){
 		$res = $db->query($sql);

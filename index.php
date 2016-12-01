@@ -78,6 +78,21 @@ $app->get("/requests", function(Request $request, Response $response){
 	return $response;
 });
 
+$app->get("/requestee", function(Request $request, Response $response){
+	$requests = getRequesteeId("jamtart");
+	
+	$response = $response->withJson($requests);
+	return $response;
+});
+
+$app->get("/itemimage/{id}", function(Request $request, Response $response){
+	$val = $request->getAttribute('id');
+	$requests = getItemImage($val);
+	
+	$response = $response->withJson($requests);
+	return $response;
+});
+
 $app->get("/homepage", function(Request $request, Response $response){
 	$items = getAllItems();
 	
@@ -100,7 +115,7 @@ $app->get("/login", function(Request $request, Response $response){
 });
 
 $app->get("/request", function(Request $request, Response $response){
-	$items = saveRequest(2,1,1);
+	$items = saveRequest(2,"rastaman","Cloud Server");
 	
 	$response = $response->withJson($items);
 	return $response;

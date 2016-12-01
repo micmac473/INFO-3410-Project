@@ -209,12 +209,18 @@ function displayRequests(records){
     var key;
     var sec_id = "#table_secr";
     var htmlStr = $("#table_headingr").html(); //Includes all the table, thead and tbody declarations
-
+    var pic;
     records.forEach(function(el){
         htmlStr += "<tr>";
         htmlStr += "<td>"+ el['username'] +"</td>";
         htmlStr += "<td>"+ el['itemname'] +"</td>";
-        htmlStr += "<td>"+ el['item'] +"</td>";
+
+        $.get("../index.php/itemimage/"+el['item'], function(res){
+            //alert(res.picture);
+            htmlStr += "<td><img src=\"" + res.picture + "\" width=\"150\" height=\"128\"></td>";
+        }, "json");
+
+        htmlStr += "<td><img src=\"" + pic + "\" width=\"150\" height=\"128\"></td>";        
         htmlStr += "<td><button type='button' class='btn btn-success'><i class='fa fa-check-square-o' aria-hidden='true'></i></button> ";
         htmlStr += "<button type='button' class='btn btn-danger'><i class='fa fa-trash' aria-hidden='true'></i></button></td>";
         htmlStr +=" </tr>" ;
@@ -312,17 +318,9 @@ function makeRequest(itemid){
         else 
             swal("Record", "Unable to save record", "error");
     }, "json");
-    //$("#requestbtn").val("<button type='button' class='btn btn-danger'><i class='fa fa-trash' aria-hidden='true'></i></button>");
-    //$("#requestbtn").style.visibility("hidden");
 }
 
 function displayItemsForRequest(itemid){
-    /*if ($("#items").length > 0){ // the country select is available so we can display all countries
-        records.forEach(function(item){
-            var htmlStr = "<option value='"+item.itemid+"'>"+item.itemname+"</option>";
-            $("#items").append(htmlStr);
-        })
-    } */
     $.get("../index.php/user", function(res){
         var user = res;
         //console.log(user);

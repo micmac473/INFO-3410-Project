@@ -180,7 +180,7 @@ if(isset($_POST['upload'])){
   <table class="table table-hover table-condensed">
     <thead>
     <tr>
-      <th>From</th><th>Item</th><th>Trade for</th><th>Decision</th>
+      <th>From</th><th>Your Item</th><th>Their Item</th><th>Decision</th>
     </tr>
     </thead>
     <tbody>
