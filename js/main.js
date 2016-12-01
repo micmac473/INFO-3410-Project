@@ -252,7 +252,7 @@ function hideSearch(){
 
 }
 //--------------------------------------------------------------------------------------------------------------------
-// Show and hide add item form
+// Show and hide edit item form
 function showUpdateForm(itemid){
    $('#updateItemform').show("slow");
    $.get("../index.php/edititem/"+itemid, function(item){
