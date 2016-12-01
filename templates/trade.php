@@ -9,13 +9,13 @@ include "base.php";
       <h2 style="text-align: center; font-family: 'Acme', sans-serif; color:orange">My Requests</h2>
     <!--<h4>Products</h4>
     <p>A table highlighting the available products</p> -->
-      <div id="table_secp"></div>
+      <div id="table_sect"></div>
     </div>
 
   </div>
 
 </div>  <!-- close container -->  
-<script type="text/template" id="table_headingp">
+<script type="text/template" id="table_headingt">
   <table class="table table-hover table-condensed">
     <thead>
     <tr>
@@ -27,4 +27,5 @@ include "base.php";
     </thead>
     <tbody>
 </script>
-
+</body>
+</html>

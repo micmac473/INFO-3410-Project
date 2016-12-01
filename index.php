@@ -143,6 +143,13 @@ $app->get("/profile", function(Request $request, Response $response){
 	return $response;
 });
 
+$app->get("/trade", function(Request $request, Response $response){
+	$items = getAllUserTrade();
+	
+	$response = $response->withJson($items);
+	return $response;
+});
+
 $app->get("/login", function(Request $request, Response $response){
 	$items = checkLogin("micmcm","micmcm");
 	

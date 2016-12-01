@@ -10,6 +10,7 @@ $(document).ready(function(){
     getUserRequests();
     getDecisions();
     getUserItems();
+    getTrade();
     
     //alert($('#requests > li').length);
 });  
@@ -245,10 +246,10 @@ function decisions(records){
     var htmlStr;
     records.forEach(function(el){
         if(el.decision == true){
-            htmlStr = "<li><a href=#>"+ el.itemname + " request was ACCEPTED" + "</a></li>";
+            htmlStr = "<li><a href=trade.php>"+ el.itemname + " request was ACCEPTED" + "</a></li>";
         }
         else{
-            htmlStr = "<li><a href=#>"+ el.itemname + " request was DENIED" + "</a></li>";
+            htmlStr = "<li><a href=trade.php>"+ el.itemname + " request was DENIED" + "</a></li>";
         }
         
         $("#decisions").append(htmlStr);
@@ -284,6 +285,45 @@ function displayDecisions(records){
     htmlStr += "</tbody></table>";
     $(sec_id).html(htmlStr);
 }
+
+//--------------------------------------------------------------------------------------------------------------------
+
+//Dsiplay decisions for requests made by user
+//Dsiplay All user items on profile
+function getTrade(){//alter for slim 
+    $.get("../index.php/trade", processUserTrade, "json");
+}
+
+function processUserTrade(records){
+    console.log(records);
+    listUserTrade(records)
+}
+
+function listUserTrade(records){
+    var key;
+    var sec_id = "#table_sect";
+    var htmlStr = $("#table_headingt").html(); //Includes all the table, thead and tbody declarations
+
+    records.forEach(function(el){
+        htmlStr += "<tr>";
+        htmlStr += "<td>"+ el['username'] +"</td>";
+        htmlStr += "<td>"+ el['itemname'] +"</td>";
+        htmlStr += "<td>" + el['timerequested'] + "</td>";
+        if(el['decision'] == null){
+            htmlStr += "<td> Pending </td>";
+        }
+        else if(el['decision'] == true){
+            htmlStr += "<td> Accepted </td>";
+        }
+        else{
+            htmlStr += "<td> Denied </td>";
+        }
+        htmlStr +=" </tr>" ;
+    });
+    //count = $("#mylist li").size();
+    htmlStr += "</tbody></table>";
+    $(sec_id).html(htmlStr);
+} 
 
 //--------------------------------------------------------------------------------------------------------------------
 // Show and hide add item form

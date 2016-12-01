@@ -160,6 +160,22 @@ function getAllUserItems(){//should be session id here instead of useId
 	return $items;
 }
 
+function getAllUserTrade(){//should be session id here instead of useId
+	$userID = $_SESSION["id"];
+	$sql ="SELECT * FROM `requests` r, `items` i, `users` u where r.item = i.itemid AND r.requestee = u.id AND  r.requester = $userID ORDER BY r.timerequested DESC;";
+	$items =[];
+	//print($sql);
+		$db = getDBConnection();
+		if ($db != NULL){
+			$res = $db->query($sql);
+			while($res && $row = $res->fetch_assoc()){
+			$items[] = $row;
+		}//while
+		$db->close();
+	}//if
+	return $items;
+}
+
 function getUserItems($userid){//should be session id here instead of useId
 	//$userID = $_SESSION["id"];
 	$sql ="SELECT * FROM `items` where `userid` = $userid ORDER BY `itemname` ASC;";
