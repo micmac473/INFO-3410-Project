@@ -161,6 +161,19 @@ $app->get("/deleteitem/{id}", function(Request $request, Response $response){
 });
 
 
+$app->get("/viewitem/{id}", function(Request $request, Response $response){
+	$val = $request->getAttribute('id');
+	// Get Record for Specific Country
+	$rec = productViews($val);
+	if ($rec){
+		$response = $response->withStatus(201);
+		$response = $response->withJson(array( "viewed" => $rec));
+	} else {
+		$response = $response->withStatus(400);
+	}
+	return $response;
+});
+
 $app->post("/login", function(Request $request, Response $response){
 	$post = $request->getParsedBody();
 	//var_dump($post);

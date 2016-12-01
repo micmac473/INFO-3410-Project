@@ -311,4 +311,16 @@ function deleteItem($itemid){
 	return $res;
 } 
 
+function productViews($itemid){
+  echo "hello";
+    $sql = "UPDATE `items` SET `views` = views+1 WHERE `items`.`itemid` = $itemid";
+  try{
+    $db = getDBConnection();
+    if ($db != NULL){
+      $db->query($sql);
+    }
+  }catch (Exception $e){}
+  return FALSE;
+}
+
 ?>

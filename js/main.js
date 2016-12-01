@@ -145,8 +145,8 @@ function listAllItems(records){
         htmlStr += "<td>"+ el['itemdescription'] +"</td>";
         htmlStr += "<td>"+ el['username'] +"</td>";
         //htmlStr += "<td><button type='button' class='btn btn-primary' data-toggle='modal' data-target='#requestModal' id='requestbtn'><i class='fa fa-cart-plus' aria-hidden='true'></i></button></td>";
-        htmlStr += "<td><button type='button' class='btn btn-primary' onclick=\"displayItemsForRequest("+el.itemid+")\" id='requestbtn'><i class='fa fa-cart-plus' aria-hidden='true'></i></button></td>";
-        //htmlStr += "<button type='button' class='btn btn-danger'><i class='fa fa-trash' aria-hidden='true'></i></button></td>";
+        htmlStr += "<td><button type='button' class='btn btn-primary' onclick=\"displayItemsForRequest("+el.itemid+")\" id='requestbtn'><i class='fa fa-cart-plus' aria-hidden='true'></i></button>";
+        htmlStr += "<button type='button' class='btn btn-info' onclick=\"views("+el.itemid+")\"><i class='fa fa-eye' aria-hidden='true'></i></button></td>";
         htmlStr += "<td>" + el['uploaddate'] + "</td>";
         htmlStr +=" </tr>" ;
     });
@@ -402,8 +402,15 @@ function deleteItem(itemid){
     });
     
 }
+//-------------------------------------------------------------------------------------------------------------------
+function views(itemid){
+
+    $.get("../index.php/viewitem/"+itemid, function(res){
+                swal("Viewed!", "You view the item.", "success");
+            }, "json");
 
 
+}
 //--------------------------------------------------------------------------------------------------------------------
 console.log("JavaScript file was successfully loaded in the page");
 
