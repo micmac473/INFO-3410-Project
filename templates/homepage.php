@@ -2,6 +2,9 @@
 include "base.php";
 ?>
 
+    <!--Div that will hold the pie chart-->
+    <div id="chart_div"></div>
+    
 <div class="container">
   <div class="text-center">
     <h2 style="text-align: center; font-family: 'Acme', sans-serif; color:orange">Available Tradeable Items</h2>
