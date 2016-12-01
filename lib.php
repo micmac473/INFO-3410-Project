@@ -3,8 +3,8 @@ session_start();
 
 function getDBConnection(){
 	try{ 
-		//$db = new mysqli("138.197.20.97","peertrading","k$3eYUdUz_Th","peertrading");
-		$db = new mysqli("localhost","root","","junktrade");
+		$db = new mysqli("localhost","peertrading","k$3eYUdUz_Th","peertrading");
+		// $db = new mysqli("localhost","root","","junktrade");
 		if ($db == null && $db->connect_errno > 0)return null;
 		return $db;
 	}catch(Exception $e){ } 
