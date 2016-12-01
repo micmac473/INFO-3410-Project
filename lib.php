@@ -3,8 +3,8 @@ session_start();
 
 function getDBConnection(){
 	try{ 
-		$db = new mysqli("localhost","peertrading","k$3eYUdUz_Th","peertrading");
-		// $db = new mysqli("localhost","root","","junktrade");
+		//$db = new mysqli("localhost","peertrading","k$3eYUdUz_Th","peertrading");
+		$db = new mysqli("localhost","root","","junktrade");
 		if ($db == null && $db->connect_errno > 0)return null;
 		return $db;
 	}catch(Exception $e){ } 
@@ -77,15 +77,15 @@ function saveTransactions($User1,$User2,$item1,$item2){
 
 function saveItem($picture,$itemname, $itemDescription){
 
-	/*$userid =$_SESSION['id'];
-	$sql = "INSERT INTO items(`userId`,`picture`,`itemDescription`) VALUES('userid','$picture','$itemDescription')"; */
+	$userid =$_SESSION['id'];
+	//$sql = "INSERT INTO items(`userId`,`picture`,`itemDescription`) VALUES('userid','$picture','$itemDescription')"; */
 	$db = getDBConnection();
 	$userId = $_SESSION['id'];
 	$sql = "INSERT INTO items(`itemname`, `userid`,`picture`,`itemdescription`) VALUES('$itemname','$userId','$picture','$itemDescription');";
 	$id = -1;
 	if ($db != NULL){
 		$res = $db->query($sql);
-			if ($res && $db->insert_id > 0){
+		if ($res && $db->insert_id > 0){
 			$id = $db->insert_id;
 		}
 		$db->close();

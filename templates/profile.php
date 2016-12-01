@@ -15,11 +15,11 @@ if(isset($_POST['upload'])){
   try{
     $itemName = $_POST['itemname'];
     $itemDescription = $_POST['itemdescription'];
-    unset($_POST);
-    print_r($post);
+    //unset($_POST);
+    //print_r($_POST);
     // print "Name: $name, Price:$price, Country: $countryId";
     $res = saveItem($filepath, $itemName, $itemDescription);
-    var_dump($res);
+    //var_dump($res);
   }catch(Exception $e){
     print( $e->getMessage());
   }

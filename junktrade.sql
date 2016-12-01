@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 01, 2016 at 06:40 PM
+-- Generation Time: Dec 01, 2016 at 08:12 PM
 -- Server version: 10.1.13-MariaDB
 -- PHP Version: 7.0.8
 
@@ -36,7 +36,7 @@ CREATE TABLE `items` (
   `picture` varchar(1000) NOT NULL,
   `uploaddate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `userid` int(11) NOT NULL,
-  `views` int(11) NOT NULL
+  `views` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -56,7 +56,9 @@ INSERT INTO `items` (`itemid`, `itemname`, `itemdescription`, `picture`, `upload
 (34, 'Hydrangeas', 'Hydrangeas', '../img/Hydrangeas.jpg', '2016-11-30 13:42:30', 1, 0),
 (36, 'Jellyfish', 'Jellyfish', '../img/Jellyfish.jpg', '2016-11-30 13:45:11', 1, 0),
 (38, 'Nike', 'Color: Red and black\r\nSize: 12\r\nCondition: New\r\nComes with box', '../img/airjordans.jpe', '2016-11-30 19:11:47', 40, 0),
-(39, 'Gucci Watch', 'This is real Gucci', '../img/gucciwatch.jpe', '2016-11-30 19:54:55', 40, 1);
+(39, 'Gucci Watch', 'This is real Gucci', '../img/gucciwatch.jpe', '2016-11-30 19:54:55', 40, 1),
+(40, 'Phone', 'Phone', '../img/cq5dam.web.280.280.jpeg', '2016-12-01 15:00:51', 1, 0),
+(42, 'dzf', 'rfd', '../img/Koala.jpg', '2016-12-01 15:10:04', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -122,7 +124,8 @@ INSERT INTO `requests` (`id`, `requester`, `item2`, `requestee`, `item`, `decisi
 (33, 1, 27, 6, 26, 0, '2016-11-30 20:42:55'),
 (34, 1, 1, 6, 26, NULL, '2016-11-30 20:44:16'),
 (35, 6, 26, 1, 36, NULL, '2016-11-30 20:47:58'),
-(36, 6, 25, 2, 3, NULL, '2016-11-30 20:48:55');
+(36, 6, 25, 2, 3, NULL, '2016-11-30 20:48:55'),
+(37, 6, 4, 1, 42, 0, '2016-12-01 15:10:50');
 
 -- --------------------------------------------------------
 
@@ -215,7 +218,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `items`
 --
 ALTER TABLE `items`
-  MODIFY `itemid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `itemid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 --
 -- AUTO_INCREMENT for table `ratings`
 --
@@ -225,7 +228,7 @@ ALTER TABLE `ratings`
 -- AUTO_INCREMENT for table `requests`
 --
 ALTER TABLE `requests`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 --
 -- AUTO_INCREMENT for table `transaction`
 --
