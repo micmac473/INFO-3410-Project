@@ -30,8 +30,8 @@ $db = getDBConnection();
 
 $sql = "UPDATE items SET itemname= '{$name}', itemdescription='{$description}', picture='{$itempic}' WHERE itemid=$id;";
 
-
-
+ $db->query($sql);
+unset($_POST);
  /*if ($db->query($sql) === TRUE) {
        echo "Record updated successfully";
    } else {
