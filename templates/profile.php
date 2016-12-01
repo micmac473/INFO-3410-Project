@@ -3,6 +3,7 @@ include "../lib.php";
 include "base.php";
 
 if(isset($_POST['upload'])){
+
   $filetmp = $_FILES["image"]["tmp_name"];
   $filename = $_FILES["image"]["name"];
   $filetype = $_FILES["image"]["type"];
@@ -11,12 +12,18 @@ if(isset($_POST['upload'])){
   move_uploaded_file($filetmp,$filepath);
 
   //$imagePath = "../img/".$post['image'];
-  $itemName = $_POST['itemname'];
-  $itemDescription = $_POST['itemdescription'];
-  unset($_POST);
-  //print_r($post);
-  // print "Name: $name, Price:$price, Country: $countryId";
-  $res = saveItem($filepath, $itemName, $itemDescription);
+  try{
+    $itemName = $_POST['itemname'];
+    $itemDescription = $_POST['itemdescription'];
+    unset($_POST);
+    print_r($post);
+    // print "Name: $name, Price:$price, Country: $countryId";
+    $res = saveItem($filepath, $itemName, $itemDescription);
+    var_dump($res);
+  }catch(Exception $e){
+    print( $e->getMessage());
+  }
+
 }
 
 if (isset($_POST['uploadU'])) {
