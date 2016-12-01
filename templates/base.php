@@ -161,8 +161,16 @@ button:active{
 
 
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bell" aria-hidden="true" style="font-size:1.5em"></i><span class="label label-danger label-as-badge" style="vertical-align:top" id ="notify"></span><span class="caret" style="vertical-align:"></span></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bell" aria-hidden="true" style="font-size:1.5em"></i><span class="label label-danger label-as-badge" style="vertical-align:top" id ="requestsNotify"></span><span class="caret" style="vertical-align:"></span></a>
             <ul class="dropdown-menu" id="requests">
+                <!-- <li><a href="#">Dynamically Populated Requets</a></li> -->
+                
+            </ul>
+
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-gavel" aria-hidden="true" style="font-size:1.5em"></i><span class="label label-danger label-as-badge" style="vertical-align:top" id ="decisionsNotify"></span><span class="caret" style="vertical-align:"></span></a>
+            <ul class="dropdown-menu" id="decisions">
                 <!-- <li><a href="#">Dynamically Populated Requets</a></li> -->
                 
             </ul>

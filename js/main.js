@@ -6,9 +6,11 @@ console.log("hello I'm connected to the world");
 
 $(document).ready(function(){
     console.log("All Elements in the Page was successfully loaded, we can begin our application logic");
-    getUserRequests();
     getAllItems();
+    getUserRequests();
+    getDecisions();
     getUserItems();
+    
     //alert($('#requests > li').length);
 });  
 // this acts as the main function in Java
@@ -200,13 +202,64 @@ function notifications(records){
         var htmlStr = "<li><a href=profile.php>"+ el.username + " is requesting "+ el.itemname + "</a></li>";
         $("#requests").append(htmlStr);
     });
-    var count = $("#requests li").length;
-    $("#notify").append(count);
+    var countR = $("#requests li").length;
+    $("#requestsNotify").append(countR);
     displayRequests(records);
 
 }
 
 function displayRequests(records){
+    var key;
+    var sec_id = "#table_secr";
+    var htmlStr = $("#table_headingr").html(); //Includes all the table, thead and tbody declarations
+    var pic;
+    records.forEach(function(el){
+        htmlStr += "<tr>";
+        htmlStr += "<td style='display:none;'>"+ el['id'] +"</td>";
+        htmlStr += "<td>"+ el['username'] +"</td>";
+        htmlStr += "<td>"+ el['itemname'] +"</td>";
+
+        $.get("../index.php/itemimage/"+el['item'], function(res){
+            //alert(res.picture);
+            htmlStr += "<td><img src=\"" + res.picture + "\" width=\"150\" height=\"128\"></td>";
+        }, "json");
+
+        htmlStr += "<td><img src=\"" + pic + "\" width=\"150\" height=\"128\"></td>";        
+        htmlStr += "<td><button type='button' class='btn btn-success' onclick=\"acceptRequest("+el.id+")\"><i class='fa fa-check-square-o' aria-hidden='true'></i></button> ";
+        htmlStr += "<button type='button' class='btn btn-danger' onclick=\"denyRequest("+el.id+")\"><i class='fa fa-ban' aria-hidden='true'></i></button></td>";
+        htmlStr +=" </tr>" ;
+    });
+
+    htmlStr += "</tbody></table>";
+    $(sec_id).html(htmlStr);
+}
+//--------------------------------------------------------------------------------------------------------------------
+
+//Dsiplay decisions for requests made by user
+function getDecisions(){
+    $.get("../index.php/decisions", decisions, "json");  
+}
+
+function decisions(records){
+    console.log(records);
+    var htmlStr;
+    records.forEach(function(el){
+        if(el.decision == true){
+            htmlStr = "<li><a href=#>"+ el.itemname + " request was ACCEPTED" + "</a></li>";
+        }
+        else{
+            htmlStr = "<li><a href=#>"+ el.itemname + " request was DENIED" + "</a></li>";
+        }
+        
+        $("#decisions").append(htmlStr);
+    });
+    var countD = $("#decisions li").length;
+    $("#decisionsNotify").append(countD);
+    //displayRequests(records);
+
+}
+
+function displayDecisions(records){
     var key;
     var sec_id = "#table_secr";
     var htmlStr = $("#table_headingr").html(); //Includes all the table, thead and tbody declarations
@@ -430,9 +483,9 @@ function acceptRequest(requestId){
     swal({
         title: "Accept Request?",
         //text: "You will not be able to undo this operation!",
-        type: "warning",
+        type: "info",
         showCancelButton: true,
-        confirmButtonColor: "#DD6B55",
+        confirmButtonColor: "#33cc33",
         confirmButtonText: "Accept",
         cancelButtonText: "Cancel",
         closeOnConfirm: false,
@@ -443,8 +496,9 @@ function acceptRequest(requestId){
         if (isConfirm) {
             $.get("../index.php/acceptrequest/"+requestId, function(res){
                 swal("Accepted!", "The user will be notified", "success");
+                getUserRequests();
             }, "json");
-            getUserRequests();
+            
         } else {
             swal("Cancelled", "The item is still pending", "error");
         }
@@ -475,5 +529,5 @@ function denyRequest(requestId){
         }
     });
 }
-console.log("JavaScript file was successfully loaded in the page");
 
+console.log("JavaScript file was successfully loaded in the page");

@@ -211,7 +211,23 @@ function getRequests(){
 	$db = getDBConnection();
 	$requests = [];
 	if ($db != null){
-		$sql = "SELECT * FROM `users` u, `requests` r, `items` i WHERE r.requester = u.id AND i.itemid = r.item AND r.requestee = $user AND `decision` IS NULL;";
+		$sql = "SELECT * FROM `users` u, `requests` r, `items` i WHERE r.requester = u.id AND i.itemid = r.item AND r.requestee = $user AND `decision` IS NULL ORDER BY r.timerequested DESC;";
+		$res = $db->query($sql);
+		while($res && $row = $res->fetch_assoc()){
+			$requests[] = $row;
+		}
+		$db->close();
+	}
+	//var_dump($requests);
+	return $requests;
+}
+
+function getDecisions(){
+	$user = $_SESSION["id"];
+	$db = getDBConnection();
+	$requests = [];
+	if ($db != null){
+		$sql = "SELECT * FROM `users` u, `requests` r, `items` i WHERE r.requester = u.id AND i.itemid = r.item AND r.requester = $user AND `decision` IS NOT NULL ORDER BY i.itemname ASC;";
 		$res = $db->query($sql);
 		while($res && $row = $res->fetch_assoc()){
 			$requests[] = $row;
