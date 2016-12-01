@@ -145,8 +145,8 @@ function listAllItems(records){
         htmlStr += "<td>"+ el['itemdescription'] +"</td>";
         htmlStr += "<td>"+ el['username'] +"</td>";
         //htmlStr += "<td><button type='button' class='btn btn-primary' data-toggle='modal' data-target='#requestModal' id='requestbtn'><i class='fa fa-cart-plus' aria-hidden='true'></i></button></td>";
-        htmlStr += "<td><button type='button' class='btn btn-primary' onclick=\"displayItemsForRequest("+el.itemid+")\" id='requestbtn'><i class='fa fa-cart-plus' aria-hidden='true'></i></button></td>";
-        //htmlStr += "<button type='button' class='btn btn-danger'><i class='fa fa-trash' aria-hidden='true'></i></button></td>";
+        htmlStr += "<td><button type='button' class='btn btn-primary' onclick=\"displayItemsForRequest("+el.itemid+")\" id='requestbtn'><i class='fa fa-cart-plus' aria-hidden='true'></i></button>";
+        htmlStr += "<button type='button' class='btn btn-info' onclick=\"views("+el.itemid+")\"><i class='fa fa-eye' aria-hidden='true'></i></button></td>";
         htmlStr += "<td>" + el['uploaddate'] + "</td>";
         htmlStr +=" </tr>" ;
     });
@@ -175,7 +175,6 @@ function listUserItems(records){
         htmlStr += "<tr>";
         htmlStr += "<td style='display:none;'>"+ el['itemid'] +"</td>";
         htmlStr += "<td><img src=\"" + el['picture'] + "\" width=\"150\" height=\"128\"></td>";
-        htmlStr += "<td>"+ el['itemid'] + "</td>";
         htmlStr += "<td>"+ el['itemname'] +"</td>";
         htmlStr += "<td>"+ el['itemdescription'] +"</td>";
         htmlStr += "<td><button type='button' class='btn btn-primary' onclick =\"showUpdateForm("+el.itemid+")\"><i class='fa fa-pencil-square-o' aria-hidden='true'></i></button> ";
@@ -258,7 +257,6 @@ function hideSearch(){
 function showUpdateForm(itemid){
    $('#updateItemform').show("slow");
    $.get("../index.php/edititem/"+itemid, function(item){
-        $("#id").val(item.itemid);
         $("#itemnameU").val(item.itemname);
         $("#itemdescriptionU").val(item.itemdescription);
     }, "json");
@@ -415,8 +413,15 @@ function deleteItem(itemid){
     });
     
 }
+//-------------------------------------------------------------------------------------------------------------------
+function views(itemid){
+
+    $.get("../index.php/viewitem/"+itemid, function(res){
+                swal("Viewed!", "You view the item.", "success");
+            }, "json");
 
 
+}
 //--------------------------------------------------------------------------------------------------------------------
 
 function acceptRequest(requestId){
