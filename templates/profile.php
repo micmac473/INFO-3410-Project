@@ -197,7 +197,7 @@ unset($_POST);
   <table class="table table-hover table-condensed">
     <thead>
     <tr>
-      <th></th><th>Name</th><th>Description</th><th>Options</th><th>Uploaded</th>
+      <th> </th><th>ItemID</th><th>Name</th><th>Description</th><th>Options</th><th>Uploaded</th>
     </tr>
     </thead>
     <tbody>
