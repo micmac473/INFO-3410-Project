@@ -173,6 +173,7 @@ function listUserItems(records){
 
     records.forEach(function(el){
         htmlStr += "<tr>";
+        htmlStr += "<td style='display:none;'>"+ el['itemid'] +"</td>";
         htmlStr += "<td><img src=\"" + el['picture'] + "\" width=\"150\" height=\"128\"></td>";
         htmlStr += "<td>"+ el['itemname'] +"</td>";
         htmlStr += "<td>"+ el['itemdescription'] +"</td>";
@@ -212,6 +213,7 @@ function displayRequests(records){
     var pic;
     records.forEach(function(el){
         htmlStr += "<tr>";
+        htmlStr += "<td style='display:none;'>"+ el['id'] +"</td>";
         htmlStr += "<td>"+ el['username'] +"</td>";
         htmlStr += "<td>"+ el['itemname'] +"</td>";
 
@@ -221,8 +223,8 @@ function displayRequests(records){
         }, "json");
 
         htmlStr += "<td><img src=\"" + pic + "\" width=\"150\" height=\"128\"></td>";        
-        htmlStr += "<td><button type='button' class='btn btn-success'><i class='fa fa-check-square-o' aria-hidden='true'></i></button> ";
-        htmlStr += "<button type='button' class='btn btn-danger'><i class='fa fa-trash' aria-hidden='true'></i></button></td>";
+        htmlStr += "<td><button type='button' class='btn btn-success' onclick=\"acceptRequest("+el.id+")\"><i class='fa fa-check-square-o' aria-hidden='true'></i></button> ";
+        htmlStr += "<button type='button' class='btn btn-warning' onclick=\"denyRequest("+el.id+")\"><i class='fa fa-ban' aria-hidden='true'></i></button></td>";
         htmlStr +=" </tr>" ;
     });
 
@@ -347,7 +349,7 @@ function displayInModal(records, itemid){
         $("#requesteditem").val(res.itemname);
     }, "json") 
 
-    $("#requestModal").modal(); 
+    $("#requestModal").modal();
 }
 
 function sendRequest(){
@@ -375,7 +377,8 @@ function sendRequest(){
 // Deletes a user item from the list
 function deleteItem(itemid){
     swal({
-        title: "Are you sure?",
+        title: "Delete Item?",
+        text: "You will not be able to undo this operation!",
         type: "warning",
         showCancelButton: true,
         confirmButtonColor: "#DD6B55",
@@ -387,10 +390,20 @@ function deleteItem(itemid){
     function(isConfirm){
         
         if (isConfirm) {
-            $.get("../index.php/deleteitem/"+itemid, function(res){
-                swal("Deleted!", "Your item has been deleted.", "success");
+            $.get("../index.php/itemstatus/"+itemid, function(res){
+                if(res == true){
+                    $.get("../index.php/requeststatus/"+itemid, function(res){
+
+                    },"json");
+                    swal("Cannot delete", "Requests pending", "error")
+                }
+                else{
+                    $.get("../index.php/deleteitem/"+itemid, function(res){
+                        swal("Deleted!", "Your item has been deleted.", "success");
+                        getUserItems(); 
+                    }, "json"); 
+                }  
             }, "json");
-            getUserItems();
         } else {
             swal("Cancelled", "Your item is safe", "error");
         }
@@ -400,5 +413,55 @@ function deleteItem(itemid){
 
 
 //--------------------------------------------------------------------------------------------------------------------
+
+function acceptRequest(requestId){
+    swal({
+        title: "Accept Request?",
+        //text: "You will not be able to undo this operation!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Accept",
+        cancelButtonText: "Cancel",
+        closeOnConfirm: false,
+        closeOnCancel: false
+    },
+    function(isConfirm){
+        
+        if (isConfirm) {
+            $.get("../index.php/acceptrequest/"+requestId, function(res){
+                swal("Accepted!", "The user will be notified", "success");
+            }, "json");
+            getUserRequests();
+        } else {
+            swal("Cancelled", "The item is still pending", "error");
+        }
+    });
+}
+
+function denyRequest(requestId){
+    swal({
+        title: "Deny Request?",
+        //text: "You will not be able to undo this operation!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Deny",
+        cancelButtonText: "Cancel",
+        closeOnConfirm: false,
+        closeOnCancel: false
+    },
+    function(isConfirm){
+        
+        if (isConfirm) {
+            $.get("../index.php/denyrequest/"+requestId, function(res){
+                swal("Denied!", "The user will be notified", "success");
+            }, "json");
+            getUserRequests();
+        } else {
+            swal("Cancelled", "The item is still pending", "error");
+        }
+    });
+}
 console.log("JavaScript file was successfully loaded in the page");
 

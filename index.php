@@ -93,6 +93,22 @@ $app->get("/itemimage/{id}", function(Request $request, Response $response){
 	return $response;
 });
 
+$app->get("/acceptrequest/{id}", function(Request $request, Response $response){
+	$val = $request->getAttribute('id');
+	$requests = acceptRequest($val);
+	
+	$response = $response->withJson($requests);
+	return $response;
+});
+
+$app->get("/denyrequest/{id}", function(Request $request, Response $response){
+	$val = $request->getAttribute('id');
+	$requests = denyRequest($val);
+	
+	$response = $response->withJson($requests);
+	return $response;
+});
+
 $app->get("/homepage", function(Request $request, Response $response){
 	$items = getAllItems();
 	
@@ -134,6 +150,32 @@ $app->get("/request/{id}", function(Request $request, Response $response){
 	return $response;
 });
 
+$app->get("/itemstatus/{id}", function(Request $request, Response $response){
+	$val = $request->getAttribute('id');
+	// Get Record for Specific Country
+	$rec = getItemStatus($val);
+	if ($rec){
+		$response = $response->withStatus(201);
+		$response = $response->withJson(true);
+	} else {
+		$response = $response->withJson(false);
+	}
+	return $response;
+});
+
+$app->get("/requeststatus/{id}", function(Request $request, Response $response){
+	$val = $request->getAttribute('id');
+	// Get Record for Specific Country
+	$rec = getRequestStatus($val);
+	if ($rec){
+		$response = $response->withStatus(201);
+		$response = $response->withJson(true);
+	} else {
+		$response = $response->withJson(false);
+	}
+	return $response;
+});
+
 $app->get("/deleteitem/{id}", function(Request $request, Response $response){
 	$val = $request->getAttribute('id');
 	// Get Record for Specific Country
@@ -142,7 +184,7 @@ $app->get("/deleteitem/{id}", function(Request $request, Response $response){
 		$response = $response->withStatus(201);
 		$response = $response->withJson(array( "deleted" => $rec));
 	} else {
-		$response = $response->withStatus(400);
+		$response = $response->withJson(false);
 	}
 	return $response;
 });

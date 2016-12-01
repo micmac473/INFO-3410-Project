@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 30, 2016 at 06:50 PM
--- Server version: 10.1.13-MariaDB
--- PHP Version: 7.0.8
+-- Generation Time: Dec 01, 2016 at 03:03 AM
+-- Server version: 10.1.16-MariaDB
+-- PHP Version: 5.6.24
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -53,7 +53,9 @@ INSERT INTO `items` (`itemid`, `itemname`, `itemdescription`, `picture`, `upload
 (29, 'SVG Flag', 'This the flag of St. Vincent and the Grenadines, West Indies', '../img/svgflag.png', '2016-11-27 15:21:11', 39),
 (30, 'Cloud Server', 'Heroku cloud server', '../img/cloudserver.jpg', '2016-11-27 22:57:00', 40),
 (34, 'Hydrangeas', 'Hydrangeas', '../img/Hydrangeas.jpg', '2016-11-30 13:42:30', 1),
-(36, 'Jellyfish', 'Jellyfish', '../img/Jellyfish.jpg', '2016-11-30 13:45:11', 1);
+(36, 'Jellyfish', 'Jellyfish', '../img/Jellyfish.jpg', '2016-11-30 13:45:11', 1),
+(38, 'Nike', 'Color: Red and black\r\nSize: 12\r\nCondition: New\r\nComes with box', '../img/airjordans.jpe', '2016-11-30 19:11:47', 40),
+(39, 'Gucci Watch', 'This is real Gucci', '../img/gucciwatch.jpe', '2016-11-30 19:54:55', 40);
 
 -- --------------------------------------------------------
 
@@ -93,6 +95,7 @@ CREATE TABLE `requests` (
   `item2` int(11) NOT NULL,
   `requestee` int(11) NOT NULL,
   `item` int(10) NOT NULL,
+  `decision` tinyint(1) DEFAULT NULL,
   `timerequested` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -100,14 +103,25 @@ CREATE TABLE `requests` (
 -- Dumping data for table `requests`
 --
 
-INSERT INTO `requests` (`id`, `requester`, `item2`, `requestee`, `item`, `timerequested`) VALUES
-(11, 39, 0, 6, 26, '2016-11-27 20:05:31'),
-(12, 6, 0, 39, 29, '2016-11-27 20:06:06'),
-(13, 39, 0, 1, 27, '2016-11-27 20:08:12'),
-(15, 1, 0, 6, 25, '2016-11-27 21:34:00'),
-(19, 6, 0, 39, 29, '2016-11-27 22:30:01'),
-(20, 39, 0, 40, 30, '2016-11-27 22:57:45'),
-(21, 40, 0, 39, 29, '2016-11-27 23:01:42');
+INSERT INTO `requests` (`id`, `requester`, `item2`, `requestee`, `item`, `decision`, `timerequested`) VALUES
+(11, 39, 0, 6, 26, NULL, '2016-11-27 20:05:31'),
+(12, 6, 0, 39, 29, NULL, '2016-11-27 20:06:06'),
+(13, 39, 0, 1, 27, NULL, '2016-11-27 20:08:12'),
+(15, 1, 0, 6, 25, NULL, '2016-11-27 21:34:00'),
+(19, 6, 0, 39, 29, NULL, '2016-11-27 22:30:01'),
+(20, 39, 0, 40, 30, NULL, '2016-11-27 22:57:45'),
+(21, 40, 0, 39, 29, NULL, '2016-11-27 23:01:42'),
+(26, 40, 2, 1, 1, NULL, '2016-11-30 18:56:48'),
+(27, 40, 2, 40, 30, NULL, '2016-11-30 19:07:56'),
+(28, 40, 30, 1, 34, NULL, '2016-11-30 19:08:16'),
+(29, 1, 36, 40, 38, NULL, '2016-11-30 19:11:59'),
+(30, 1, 27, 40, 39, NULL, '2016-11-30 19:55:11'),
+(31, 6, 25, 1, 27, NULL, '2016-11-30 20:05:31'),
+(32, 6, 4, 9, 29, NULL, '2016-11-30 20:09:49'),
+(33, 1, 27, 6, 26, 0, '2016-11-30 20:42:55'),
+(34, 1, 1, 6, 26, NULL, '2016-11-30 20:44:16'),
+(35, 6, 26, 1, 36, NULL, '2016-11-30 20:47:58'),
+(36, 6, 25, 2, 3, NULL, '2016-11-30 20:48:55');
 
 -- --------------------------------------------------------
 
@@ -200,7 +214,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `items`
 --
 ALTER TABLE `items`
-  MODIFY `itemid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `itemid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 --
 -- AUTO_INCREMENT for table `ratings`
 --
@@ -210,7 +224,7 @@ ALTER TABLE `ratings`
 -- AUTO_INCREMENT for table `requests`
 --
 ALTER TABLE `requests`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 --
 -- AUTO_INCREMENT for table `transaction`
 --

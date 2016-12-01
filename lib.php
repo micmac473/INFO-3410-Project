@@ -197,7 +197,7 @@ function getRequests(){
 	$db = getDBConnection();
 	$requests = [];
 	if ($db != null){
-		$sql = "SELECT * FROM `users` u, `requests` r, `items` i WHERE r.requester = u.id AND i.itemid = r.item AND r.requestee = $user;";
+		$sql = "SELECT * FROM `users` u, `requests` r, `items` i WHERE r.requester = u.id AND i.itemid = r.item AND r.requestee = $user AND `decision` IS NULL;";
 		$res = $db->query($sql);
 		while($res && $row = $res->fetch_assoc()){
 			$requests[] = $row;
@@ -286,9 +286,38 @@ function saveRequest($myItem, $requestee, $requestedItem){
 	return $id;
 } 
 
+function getItemStatus($item){
+	$db = getDBConnection();
+	$rec = [];
+	if ($db != NULL){
+		$sql = "SELECT * FROM `items` i, `requests` r WHERE item = $item;";
+		$res = $db->query($sql);
+		while($res && $row = $res->fetch_assoc()){
+			$rec[] = $row;
+		}
+		$db->close();
+	}
+	return $rec;
+}
+
+//In progress
+function getRequestStatus($item){
+	$db = getDBConnection();
+	$rec = [];
+	if ($db != NULL){
+		$sql = "SELECT * FROM `requests` WHERE `item` = $item AND `decision` = false;";
+		$res = $db->query($sql);
+		while($res && $row = $res->fetch_assoc()){
+			$rec[] = $row;
+		}
+		$db->close();
+	}
+	return $rec;
+}
+
 function deleteItem($itemid){
 	$db = getDBConnection();
-	$sql = "DELETE FROM `items` WHERE `itemid` = $itemid;";
+	$sql = "DELETE FROM `items` WHERE itemid = $itemid";
 	$res = null;
 	if ($db != NULL){
 		$res = $db->query($sql);
@@ -297,4 +326,25 @@ function deleteItem($itemid){
 	return $res;
 } 
 
+function acceptRequest($requestId){
+	$db = getDBConnection();
+	$sql = "UPDATE `requests` SET `decision` = true WHERE `id` = $requestId;";
+	$res = null;
+	if ($db != NULL){
+		$res = $db->query($sql);
+		$db->close();
+	}
+	return $res;
+}
+
+function denyRequest($requestId){
+	$db = getDBConnection();
+	$sql = "UPDATE `requests` SET `decision` = false WHERE `id` = $requestId;";
+	$res = null;
+	if ($db != NULL){
+		$res = $db->query($sql);
+		$db->close();
+	}
+	return $res;
+}
 ?>

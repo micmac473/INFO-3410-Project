@@ -205,5 +205,9 @@ if (isset($accessToken)) {
 }
  
 ?>
+<!--footer -->
+  <div class="footer">
+    <p> &copy; JunkTrade 2016 </p>
+  </div>
 <body>
 </html>
