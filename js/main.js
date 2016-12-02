@@ -527,6 +527,8 @@ function viewRequest(requestId){
             $("#requestModalP").modal();
         }, "json");
 }
+
+//--------------------------------------------------------------------------------------------------------------------
 function acceptRequest(requestId){
     swal({
         title: "Accept Request?",
@@ -553,6 +555,7 @@ function acceptRequest(requestId){
     });
 }
 
+//--------------------------------------------------------------------------------------------------------------------
 function denyRequest(requestId){
     swal({
         title: "Deny Request?",
@@ -577,6 +580,8 @@ function denyRequest(requestId){
         }
     });
 }
+
+//--------------------------------------------------------------------------------------------------------------------
 function getData(){//alter for slim 
     $.get("../index.php/data", processData, "json");
 }
@@ -585,6 +590,7 @@ function processData(records){
     console.log(records);
     showData(records);
 }
+
 
 function showRequestData(records){
       // Load the Visualization API and the corechart package.
@@ -618,14 +624,14 @@ function showRequestData(records){
         data.addColumn('number', 'count');
         data.addRows([
           ['Accepted', accept],
-          ['denied', deny],
-          ['pending', pending]
+          ['Denied', deny],
+          ['Pending', pending]
         ]);
 
         // Set chart options
-        var options = {'title':'Requests Counter',
+        var options = {'title':'Requests Status',
                        'width':600,
-                       'height':300};
+                       'height':400};
 
         // Instantiate and draw our chart, passing in some options.
         var chart = new google.visualization.PieChart(document.getElementById('trades_chart_div'));

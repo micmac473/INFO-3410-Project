@@ -74,6 +74,7 @@ body {
   margin: 0;
   padding-bottom: 6rem;
   min-height: 100%;
+  background-color: #f6f6f6;
 
   font-family: "Helvetica Neue", Arial, sans-serif;
 }
@@ -107,6 +108,9 @@ th {
     background-color: grey;
     color: white;
 } 
+table{
+  background-color: #FFFFFF;
+}
 button:active{
     background:red;
 }

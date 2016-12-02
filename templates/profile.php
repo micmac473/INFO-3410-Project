@@ -27,15 +27,22 @@ if(isset($_POST['upload'])){
 }
 
 if (isset($_POST['uploadU'])) {
+$filetmp = $_FILES["imageU"]["tmp_name"];
+  $filename = $_FILES["imageU"]["name"];
+  $filetype = $_FILES["imageU"]["type"];
+  $filepath = "../img/".$filename;
+  
+  move_uploaded_file($filetmp,$filepath);
+try{
 $id = $_POST['id'];
 $name = $_POST['itemnameU'];
 $description = $_POST['itemdescriptionU'];
-$itempic = "../img/" . $_POST['imageU'];
+//$itempic = "../img/" . $_POST['imageU'];
 
 
 $db = getDBConnection();
 
-$sql = "UPDATE items SET itemname= '{$name}', itemdescription='{$description}', picture='{$itempic}' WHERE itemid=$id;";
+$sql = "UPDATE items SET itemname= '{$name}', itemdescription='{$description}', picture='{$filepath}' WHERE itemid=$id;";
 
  $db->query($sql);
 unset($_POST);
@@ -46,6 +53,9 @@ unset($_POST);
    }
    */
    $db->close();
+ }catch(Exception $e){
+  print( $e->getMessage());
+ }
 
 }
 
@@ -126,14 +136,14 @@ unset($_POST);
 
   <div class ="row" style ="display:none" id ="updateItemform">
     <div class ="col-md-5 col-md-offset-1">
-      <form class="form-horizontal" action ="" method ="POST">
+      <form class="form-horizontal" action ="profile.php" method ="POST" enctype="multipart/form-data">
         <fieldset>
           <legend style="text-align:center">Edit Item</legend>
             <!-- File Button-->
             <div class="form-group">
               <label class="col-md-4 control-label" for="uppic">Choose an Image </label>
               <div class="col-md-4">
-                <input name="imageU" class="input-file" id="imageU" type="file">
+                <input name="imageU" class="input-file" id="imageU" type="file" required="">
               </div>
             </div>
             
