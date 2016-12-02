@@ -3,16 +3,17 @@ include "base.php";
 ?>
 
     <!--Div that will hold the pie chart-->
-    <div id="chart_div"></div>
+
     
-<div class="container">
-  <div class="text-center">
-    <h2 style="text-align: center; font-family: 'Acme', sans-serif; color:orange">Available Tradeable Items</h2>
-  </div>
-  
+<div class="container-fluid">
   <div class="row">
-    <div class="col-md-10 col-md-offset-1 table-responsive">
+    <div class="col-md-9 table-responsive">
+      <h2 style="text-align: center; font-family: 'Acme', sans-serif; color:orange">Available Tradeable Items</h2>
       <div id="table_sech"></div>
+    </div>
+    <div class="col-md-3">
+      <h2 style="text-align: center; font-family: 'Acme', sans-serif; color:orange">Item Views</h2>
+      <div id="chart_div" style="position:fixed; top: 43.5%; right:0%;"></div>
     </div>
   </div>
 </div>
@@ -20,7 +21,7 @@ include "base.php";
   <table class="table table-hover table-condensed">
     <thead class="thead-inverse">
       <tr>
-        <th>Image</th><th>Name</th><th>Description</th><th>Trader</th><th>Trade</th><th>Uploaded</th>
+        <th>Image</th><th>Name</th><th>Views</th><th>Description</th><th>Trader</th><th>Trade</th><th>Uploaded</th>
       </tr>
     </thead>
     <tbody>
@@ -32,7 +33,7 @@ include "base.php";
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title" style="text-align: center">Request Details</h4>
+          <h4 class="modal-title" style="text-align: center">Request Transaction</h4>
         </div>
         <div class="modal-body">
           <form class="form-horizontal" onsubmit="return sendRequest();">
@@ -54,7 +55,7 @@ include "base.php";
 
             <!-- Select Basic -->
             <div class="form-group">
-              <label class="col-md-4 control-label" for="selectbasic">Select Your Item</label>
+              <label class="col-md-4 control-label" for="selectbasic">Your Item</label>
               <div class="col-md-8">
                 <select id="myitems" name="myitems" class="form-control" required="">
                   
@@ -63,9 +64,9 @@ include "base.php";
             </div>
 
             <div class="form-group">
-              <div class="col-md-8 col-md-offset-2">
-                <button  class="btn btn-success" type="submit">Send</button>
-                <button  class="btn btn-danger" data-dismiss="modal">Cancel</button>
+              <div class="col-md-12">
+                <button  class="btn btn-success" type="submit">Send Request</button>
+                <button  class="btn btn-danger" data-dismiss="modal">Cancel Request</button>
 
               </div>
             </div>
@@ -76,6 +77,18 @@ include "base.php";
       </div>
     </div>
   </div>
+
+  <!-- Image Modal -->
+  <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">              
+      <div class="modal-body">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <img src="" class="imagepreview" style="width: 100%;" >
+      </div>
+    </div>
+  </div>
+</div>
 
       
  

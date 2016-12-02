@@ -13,10 +13,12 @@ include "base.php";
     </div>
 
   </div>
-
+  <div class="row">
+    <div id="trades_chart_div" class="col-md-8 col-md-offset-2"></div>
+  <div>
 </div>  <!-- close container -->  
 
-<div id="trades_chart_div"></div>
+
 
 <script type="text/template" id="table_headingt">
   <table class="table table-hover table-condensed">

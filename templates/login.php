@@ -48,7 +48,18 @@ if(isset($_POST['email']) && isset($_POST['password'])){
     <script src="../bower_components/jquery/dist/jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
     <script src="../js/main.js"></script>
-
+<style>
+body {
+  position: relative;
+  margin: 0;
+  padding-bottom: 6rem;
+  min-height: 100%;
+  background-color: #f6f6f6;
+}
+form {
+  background-color: #FFFFFF;
+}
+</style>
 </head>
 <body>
   <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -84,7 +95,7 @@ if(isset($_POST['email']) && isset($_POST['password'])){
     <div class ="row">
       <div class="col-md-8 col-md-offset-2">
         <!-- <form class="form-horizontal" onsubmit="return login();" method ="POST" action="index.php/users"> -->
-          <form class="form-horizontal" method ="POST" action="index.php/login" onsubmit="return login();" style="background-color:#f2f2f2">
+          <form class="form-horizontal" method ="POST" action="index.php/login" onsubmit="return login();">
           <fieldset>
             <!-- Form Name -->
             <legend style="text-align: center">Sign in to JunkTrade</legend>

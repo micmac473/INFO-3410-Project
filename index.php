@@ -236,12 +236,8 @@ $app->get("/viewitem/{id}", function(Request $request, Response $response){
 	$val = $request->getAttribute('id');
 	// Get Record for Specific Country
 	$rec = productViews($val);
-	if ($rec){
-		$response = $response->withStatus(201);
-		$response = $response->withJson(array( "viewed" => $rec));
-	} else {
-		$response = $response->withStatus(400);
-	}
+
+	$response = $response->withJson($rec);
 	return $response;
 });
 

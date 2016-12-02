@@ -89,7 +89,7 @@ unset($_POST);
 
   <!-- Add Item -->
   <div class ="row" style ="display:none" id ="uploadItem">
-    <div class ="col-md-5 col-md-offset-1">
+    <div class ="col-md-6">
       <form class="form-horizontal" action ="profile.php" enctype="multipart/form-data" method ="POST">
       <!-- <form class="form-horizontal" action ="index.php/additem" enctype="multipart/form-data" method ="POST" onsubmit="return addItem();"> -->
         <fieldset>
@@ -97,23 +97,23 @@ unset($_POST);
             <!-- File Button --> 
             <div class="form-group">
               <label class="col-md-4 control-label" for="uppic">Choose an Image </label>
-              <div class="col-md-4">
-                <input name="image" class="input-file" id="image" type="file" required="">
+              <div class="col-md-6">
+                <input name="image" class="input-file" id="image" type="file" accept="image/*" required="">
               </div>
             </div>
 
             <!-- Input -->
             <div class="form-group">
               <label class="col-md-4 control-label" for="ItemDescription">Item Name</label>
-              <div class="col-md-4">                     
-                <input name="itemname" class="form-control" id="itemname" type="text" placeholder="Item Name" required="" >
+              <div class="col-md-6">                     
+                <input name="itemname" class="form-control" id="itemname" type="text" placeholder="Item Name" required="" maxlength="20" >
               </div>
             </div>
 
             <!-- Textarea -->
             <div class="form-group">
               <label class="col-md-4 control-label" for="ItemDescription">Item Description</label>
-              <div class="col-md-4">                     
+              <div class="col-md-6">                     
                 <textarea name="itemdescription" class="form-control" id="itemdescription" placeholder="Tell us about your item" required=""></textarea>
               </div>
             </div>
@@ -135,22 +135,22 @@ unset($_POST);
 
 
   <div class ="row" style ="display:none" id ="updateItemform">
-    <div class ="col-md-5 col-md-offset-1">
+    <div class ="col-md-6">
       <form class="form-horizontal" action ="profile.php" method ="POST" enctype="multipart/form-data">
         <fieldset>
           <legend style="text-align:center">Edit Item</legend>
             <!-- File Button-->
             <div class="form-group">
               <label class="col-md-4 control-label" for="uppic">Choose an Image </label>
-              <div class="col-md-4">
-                <input name="imageU" class="input-file" id="imageU" type="file" required="">
+              <div class="col-md-6">
+                <input name="imageU" class="input-file" id="imageU" type="file" accept="image/*" required="">
               </div>
             </div>
             
           	<!-- Input -->
             <div class="form-group"  >
               <!-- <label class="col-md-4 control-label" for="ItemDescription">ItemID</label> -->
-              <div class="col-md-4">                     
+              <div class="col-md-6">                     
                 <input name="id" class="form-control" id="id"  type="hidden" placeholder="ID" required="" >
               </div>
             </div>
@@ -158,15 +158,15 @@ unset($_POST);
             <!-- Input -->
             <div class="form-group">
               <label class="col-md-4 control-label" for="ItemDescription">Item Name</label>
-              <div class="col-md-4">                     
-                <input name="itemnameU" class="form-control" id="itemnameU" type="text" placeholder="Item Name" required="">
+              <div class="col-md-6">                     
+                <input name="itemnameU" class="form-control" id="itemnameU" type="text" placeholder="Item Name" maxlength="20" required="">
               </div>
             </div>
 
             <!-- Textarea -->
             <div class="form-group">
               <label class="col-md-4 control-label" for="ItemDescription">Item Description</label>
-              <div class="col-md-4">                     
+              <div class="col-md-6">                     
                 <textarea name="itemdescriptionU" class="form-control" id="itemdescriptionU" placeholder="Tell us about your item" required=""></textarea>
               </div>
             </div>
@@ -206,7 +206,7 @@ unset($_POST);
     </div>
 
     <div class ="col-md-5 table-responsive">
-      <h2 style="text-align: center; font-family: 'Acme', sans-serif; color:orange">Requests</h2>
+      <h2 style="text-align: center; font-family: 'Acme', sans-serif; color:orange">Incoming Requests</h2>
     <!--<h4>Products</h4>
     <p>A table highlighting the available products</p> -->
       <div id="table_secr"></div>
@@ -238,36 +238,32 @@ unset($_POST);
   <div class="modal fade" id="requestModalP" role="dialog">
     <div class="modal-dialog modal-sm">
       <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title" style="text-align: center">Request Details</h4>
-        </div>
         <div class="modal-body">
-          <form class="form-horizontal" onsubmit="return sendRequest();">
+          <form class="form">
             <fieldset>
 
             <div class="form-group">
-              <label class="col-md-4 control-label" for="name">Requester</label>
-              <div class="col-md-8">
+              <label class="col-md-12 control-label" for="name">Requester</label>
+              <div class="col-md-12">
                 <input id="requester" name="requester" type="text" disabled placeholder="Item Owner" class="form-control input-md" required="">
               </div>
             </div>
 
             <div class="form-group">
-              <label class="col-md-4 control-label" for="name">Item</label>
-              <div class="col-md-8">
+              <label class="col-md-12 control-label" for="name">Item</label>
+              <div class="col-md-12">
                 <input id="requesteritem" name="requesteritem" type="text" disabled placeholder="Requested Item" class="form-control input-md" required="">
               </div>
             </div>
-            <div>
-              <img src="" id="imagepreview" style="width: 270px; height: 180px;">
+            <div class="form-group">
+              <label class="col-md-12 control-label" for="name"></label>
+              <div class="col-md-12">
+                <img src="" id="imagepreview" style="width: 240px; height: 180px;">
+              </div>
             </div>
             </fieldset>
           </form>
 
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </div>
     </div>

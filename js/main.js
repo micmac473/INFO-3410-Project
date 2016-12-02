@@ -6,12 +6,13 @@ console.log("hello I'm connected to the world");
 
 $(document).ready(function(){
     console.log("All Elements in the Page was successfully loaded, we can begin our application logic");
+    getTrade();
+    getData();
     getAllItems();
     getUserRequests();
     getDecisions();
     getUserItems();
-    getTrade();
-    getData();
+    
     
     //alert($('#requests > li').length);
 });  
@@ -144,8 +145,10 @@ function listAllItems(records){
 
     records.forEach(function(el){
         htmlStr += "<tr>";
-        htmlStr += "<td><img style='cursor: pointer' onclick=\"views("+el.itemid+"); window.open(this.src)\" src=\"" + el['picture'] + "\" width=\"150\" height=\"128\"></td>";
+        //htmlStr += "<td><img style='cursor: pointer' onclick=\"views("+el.itemid+"); window.open(this.src)\" src=\"" + el['picture'] + "\" width=\"150\" height=\"128\"></td>";
+        htmlStr += "<td><img style='cursor: pointer' onclick=\"views("+el.itemid+")\" src=\"" + el['picture'] + "\" width=\"150\" height=\"128\"></td>";
         htmlStr += "<td>"+ el['itemname'] +"</td>";
+        htmlStr += "<td>"+ el['views'] +"</td>";
         htmlStr += "<td>"+ el['itemdescription'] +"</td>";
         htmlStr += "<td>"+ el['username'] +"</td>";
         //htmlStr += "<td><button type='button' class='btn btn-primary' data-toggle='modal' data-target='#requestModal' id='requestbtn'><i class='fa fa-cart-plus' aria-hidden='true'></i></button></td>";
@@ -507,13 +510,21 @@ function deleteItem(itemid){
 }
 //-------------------------------------------------------------------------------------------------------------------
 function views(itemid){
-    //$('#zoom').attr('src', $('#imageH').attr('src'));
-    //$("#viewsModal").modal();
+    $.get("../index.php/itemimage/"+itemid, function(res){
+        console.log(res);
+        var url = res.picture;
+        console.log(url);
+        $('.imagepreview').attr('src', url);
+        $('#imagemodal').modal('show'); 
+    }, "json");
+    
     $.get("../index.php/viewitem/"+itemid, function(res){
-                swal("Viewed!", "You view the item.", "success");
-            }, "json");
+                //swal("Viewed!", "You view the item.", "success");
+                console.log(res);
+    }, "json");
 
-
+    getAllItems();
+    getData();
 }
 //--------------------------------------------------------------------------------------------------------------------
 function viewRequest(requestId){
@@ -553,6 +564,7 @@ function acceptRequest(requestId){
             swal("Cancelled", "The item is still pending", "error");
         }
     });
+    return false;
 }
 
 //--------------------------------------------------------------------------------------------------------------------
@@ -630,14 +642,16 @@ function showRequestData(records){
 
         // Set chart options
         var options = {'title':'Requests Status',
+                        is3D: true,
                        'width':600,
                        'height':300};
 
         // Instantiate and draw our chart, passing in some options.
         var chart = new google.visualization.PieChart(document.getElementById('trades_chart_div'));
+        //var chart = new google.visualization.PieChart($('#trades_chart_div')[0]);
+
         chart.draw(data, options);
       }
-
 }
 
 function showData(records){
@@ -674,12 +688,15 @@ function showData(records){
         ]);
 
         // Set chart options
-        var options = {'title':'Top Viewed Items',
-                       'width':600,
+        var options = {'title':'Top 5 Viewed Items',
+                        is3D: true,
+                       'width':320,
                        'height':300};
 
         // Instantiate and draw our chart, passing in some options.
-        var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
+        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+        //var chart = new google.visualization.PieChart($('#chart_div')[0]);
+
         chart.draw(data, options);
       }
 }

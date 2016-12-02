@@ -393,42 +393,39 @@ function acceptRequest($requestId){
 	$res = null;
 	if ($db != NULL){
 		$res = $db->query($sql);
-		$db->close();
+		
 	}
 	return $res;
 }
 
 function denyRequest($requestId){
 	$db = getDBConnection();
-	$sql = "UPDATE `requests` SET `decision` = false WHERE `id` = $requestId;";
+	$sql = "UPDATE `requests` r SET `decision` = false WHERE r.id = $requestId;";
 	$res = null;
 	if ($db != NULL){
 		$res = $db->query($sql);
-
 		$db->close();
 	}
 	return $res;
 }
 
 function productViews($itemid){
-  echo "hello";
-    $sql = "UPDATE `items` SET `views` = views+1 WHERE `items`.`itemid` = $itemid";
+	$sql = "UPDATE `items` i SET `views` = `views`+1 WHERE i.itemid = $itemid";
     $res = null;
-  try{
     $db = getDBConnection();
     if ($db != NULL){
-      $db->query($sql);
+      $res = $db->query($sql);
+      $db->close();
     }
-  }catch (Exception $e){}
-  return res;
+  	return $res;
 }
 
 function getGraphData(){
-
+	$user = $_SESSION["id"];
 	$db = getDBConnection();
 	$data = [];
 	if ($db != null){
-		$sql = "SELECT `itemname`, `views` FROM `items` ORDER BY views DESC LIMIT 5";
+		$sql = "SELECT `itemname`, `views` FROM `items` WHERE `userid` <> $user ORDER BY views DESC LIMIT 5";
 		$res = $db->query($sql);
 		while($res && $row = $res->fetch_assoc()){
 			$data[] = $row;
