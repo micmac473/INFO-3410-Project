@@ -390,6 +390,7 @@ function denyRequest($requestId){
 	$res = null;
 	if ($db != NULL){
 		$res = $db->query($sql);
+
 		$db->close();
 	}
 	return $res;
@@ -407,5 +408,22 @@ function productViews($itemid){
   }catch (Exception $e){}
   return res;
 }
+
+function getGraphData(){
+
+	$db = getDBConnection();
+	$data = [];
+	if ($db != null){
+		$sql = "SELECT `itemname`, `views` FROM `items` ORDER BY views DESC LIMIT 5";
+		$res = $db->query($sql);
+		while($res && $row = $res->fetch_assoc()){
+			$data[] = $row;
+		}
+		$db->close();
+	}
+	return $data;
+
+}
+
 
 ?>

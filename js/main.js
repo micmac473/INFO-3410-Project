@@ -11,6 +11,7 @@ $(document).ready(function(){
     getDecisions();
     getUserItems();
     getTrade();
+    getData();
     
     //alert($('#requests > li').length);
 });  
@@ -568,6 +569,59 @@ function denyRequest(requestId){
             swal("Cancelled", "The item is still pending", "error");
         }
     });
+}
+function getData(){//alter for slim 
+    $.get("../index.php/data", processData, "json");
+}
+
+function processData(records){
+    console.log(records);
+    showData(records);
+}
+
+function showData(records){
+      // Load the Visualization API and the corechart package.
+      google.charts.load('current', {'packages':['corechart']});
+
+      // Set a callback to run when the Google Visualization API is loaded.
+      google.charts.setOnLoadCallback(drawChart);
+      var itemname1 = records[0]['itemname'];
+      var itemname2 = records[1]['itemname'];
+      var itemname3 = records[2]['itemname'];
+      var itemname4 = records[3]['itemname'];
+      var itemname5 = records[4]['itemname'];
+      var itemviews1 = parseInt(records[0]['views']);
+      var itemviews2 = parseInt(records[1]['views']);
+      var itemviews3 = parseInt(records[2]['views']);
+      var itemviews4 = parseInt(records[3]['views']);
+      var itemviews5 = parseInt(records[4]['views']);
+      // Callback that creates and populates a data table,
+      // instantiates the pie chart, passes in the data and
+      // draws it.
+      function drawChart() {
+
+        // Create the data table.
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Items');
+        data.addColumn('number', 'Views');
+        data.addRows([
+          [itemname1, itemviews1],
+          [itemname2, itemviews2],
+          [itemname3, itemviews3],
+          [itemname4, itemviews4],
+          [itemname5, itemviews5]
+        ]);
+
+        // Set chart options
+        var options = {'title':'Top Viewed Items',
+                       'width':600,
+                       'height':300};
+
+        // Instantiate and draw our chart, passing in some options.
+        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+
 }
 
 console.log("JavaScript file was successfully loaded in the page");
