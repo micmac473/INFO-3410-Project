@@ -4,7 +4,7 @@ session_start();
 function getDBConnection(){
 	try{ 
 		//$db = new mysqli("localhost","peertrading","k$3eYUdUz_Th","peertrading");
-		$db = new mysqli("localhost","root","","junktrade");
+		$db = new mysqli("localhost","root","","peertrading");
 		if ($db == null && $db->connect_errno > 0)return null;
 		return $db;
 	}catch(Exception $e){ } 

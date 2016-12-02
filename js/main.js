@@ -631,7 +631,7 @@ function showRequestData(records){
         // Set chart options
         var options = {'title':'Requests Status',
                        'width':600,
-                       'height':400};
+                       'height':300};
 
         // Instantiate and draw our chart, passing in some options.
         var chart = new google.visualization.PieChart(document.getElementById('trades_chart_div'));

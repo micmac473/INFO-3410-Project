@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 01, 2016 at 08:12 PM
--- Server version: 10.1.13-MariaDB
--- PHP Version: 7.0.8
+-- Generation Time: Dec 02, 2016 at 07:12 AM
+-- Server version: 10.1.16-MariaDB
+-- PHP Version: 5.6.24
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,10 +17,10 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `junktrade`
+-- Database: `peertrading`
 --
-CREATE DATABASE IF NOT EXISTS `junktrade` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `junktrade`;
+CREATE DATABASE IF NOT EXISTS `peertrading` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `peertrading`;
 
 -- --------------------------------------------------------
 
@@ -48,17 +48,19 @@ INSERT INTO `items` (`itemid`, `itemname`, `itemdescription`, `picture`, `upload
 (2, 'Peas', 'This is my easy peasy item', '../img/easy.png', '2016-11-26 03:38:21', 2, 0),
 (3, 'Money', 'This is my money item', '../img/nomoney.png', '2016-11-26 03:38:42', 2, 0),
 (4, 'Friends', 'This is my friends item', '../img/buddy.png', '2016-11-26 03:38:42', 6, 0),
-(25, 'Dell XPS', 'Processor: i7 3.5 Ghz Quad Core\r\nRam: 12 GB\r\nGraphics: GeForce GTX 980', '../img/xps.png', '2016-11-26 15:54:19', 6, 0),
-(26, 'Logo', 'This is my logo item', '../img/logo.png', '2016-11-26 15:55:07', 6, 0),
+(25, 'Dell XPS', 'Processor: i7 3.5 Ghz Quad Core\r\nRam: 12 GB\r\nGraphics: GeForce GTX 980', '../img/xps.png', '2016-11-26 15:54:19', 6, 1),
+(26, 'Logo', 'This is my logo item', '../img/logo.png', '2016-11-26 15:55:07', 6, 1),
 (27, 'HP Laptop', 'Processor: i5 2.5 Ghz Dual Core\r\nRam: 8 GB\r\nGraphics: Intel ', '../img/hp.jpg', '2016-11-26 15:57:48', 1, 0),
-(29, 'SVG Flag', 'This the flag of St. Vincent and the Grenadines, West Indies', '../img/svgflag.png', '2016-11-27 15:21:11', 39, 0),
-(30, 'Cloud Server', 'Heroku cloud server', '../img/cloudserver.jpg', '2016-11-27 22:57:00', 40, 0),
+(29, 'SVG Flag', 'This the flag of St. Vincent and the Grenadines, West Indies', '../img/svgflag.png', '2016-11-27 15:21:11', 39, 1),
+(30, 'Cloud Server', 'Heroku cloud server', '../img/cloudserver.jpg', '2016-11-27 22:57:00', 40, 2),
 (34, 'Hydrangeas', 'Hydrangeas', '../img/Hydrangeas.jpg', '2016-11-30 13:42:30', 1, 0),
 (36, 'Jellyfish', 'Jellyfish', '../img/Jellyfish.jpg', '2016-11-30 13:45:11', 1, 0),
-(38, 'Nike', 'Color: Red and black\r\nSize: 12\r\nCondition: New\r\nComes with box', '../img/airjordans.jpe', '2016-11-30 19:11:47', 40, 0),
+(38, 'Nike', 'Color: Red and black\r\nSize: 12\r\nCondition: New\r\nComes with box', '../img/airjordans.jpe', '2016-11-30 19:11:47', 40, 1),
 (39, 'Gucci Watch', 'This is real Gucci', '../img/gucciwatch.jpe', '2016-11-30 19:54:55', 40, 1),
-(40, 'Phone', 'Phone', '../img/cq5dam.web.280.280.jpeg', '2016-12-01 15:00:51', 1, 0),
-(42, 'dzf', 'rfd', '../img/Koala.jpg', '2016-12-01 15:10:04', 1, 0);
+(42, 'Piano Keyboard', 'Brand: Yamaha\r\nCondition: Used\r\nComes with everything', '../img/pianokeyboard.jpe', '2016-12-01 15:10:04', 1, 0),
+(44, 'iPhone 6', 'Capacity: 68 GB\r\nRAM: 4 GB\r\nDisplay: Retina\r\nCondition: New', '../img/iphone.jpg', '2016-12-01 23:40:35', 1, 0),
+(45, 'Gucci Belt', 'Genuine Leather,\r\nCondition: New', '../img/guccibelt.jpg', '2016-12-02 00:36:38', 1, 0),
+(46, 'New Era Hat', 'Snapback\r\nColor: Black\r\nSize: 7 1/2', '../img/snapback.jpg', '2016-12-02 00:38:16', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -107,13 +109,13 @@ CREATE TABLE `requests` (
 --
 
 INSERT INTO `requests` (`id`, `requester`, `item2`, `requestee`, `item`, `decision`, `timerequested`) VALUES
-(11, 39, 0, 6, 26, NULL, '2016-11-27 20:05:31'),
-(12, 6, 0, 39, 29, NULL, '2016-11-27 20:06:06'),
-(13, 39, 0, 1, 27, NULL, '2016-11-27 20:08:12'),
-(15, 1, 0, 6, 25, NULL, '2016-11-27 21:34:00'),
-(19, 6, 0, 39, 29, NULL, '2016-11-27 22:30:01'),
-(20, 39, 0, 40, 30, NULL, '2016-11-27 22:57:45'),
-(21, 40, 0, 39, 29, NULL, '2016-11-27 23:01:42'),
+(11, 39, 29, 6, 26, NULL, '2016-11-27 20:05:31'),
+(12, 6, 25, 39, 29, NULL, '2016-11-27 20:06:06'),
+(13, 39, 29, 1, 27, NULL, '2016-11-27 20:08:12'),
+(15, 1, 27, 6, 25, NULL, '2016-11-27 21:34:00'),
+(19, 6, 26, 39, 29, NULL, '2016-11-27 22:30:01'),
+(20, 39, 29, 40, 30, NULL, '2016-11-27 22:57:45'),
+(21, 40, 38, 39, 29, NULL, '2016-11-27 23:01:42'),
 (26, 40, 2, 1, 1, NULL, '2016-11-30 18:56:48'),
 (27, 40, 2, 40, 30, NULL, '2016-11-30 19:07:56'),
 (28, 40, 30, 1, 34, NULL, '2016-11-30 19:08:16'),
@@ -125,7 +127,10 @@ INSERT INTO `requests` (`id`, `requester`, `item2`, `requestee`, `item`, `decisi
 (34, 1, 1, 6, 26, NULL, '2016-11-30 20:44:16'),
 (35, 6, 26, 1, 36, NULL, '2016-11-30 20:47:58'),
 (36, 6, 25, 2, 3, NULL, '2016-11-30 20:48:55'),
-(37, 6, 4, 1, 42, 0, '2016-12-01 15:10:50');
+(37, 6, 4, 1, 42, 0, '2016-12-01 15:10:50'),
+(38, 1, 44, 40, 39, 0, '2016-12-02 00:34:22'),
+(39, 40, 38, 1, 45, 1, '2016-12-02 00:36:54'),
+(40, 40, 30, 1, 46, 0, '2016-12-02 00:39:27');
 
 -- --------------------------------------------------------
 
@@ -218,7 +223,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `items`
 --
 ALTER TABLE `items`
-  MODIFY `itemid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `itemid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 --
 -- AUTO_INCREMENT for table `ratings`
 --
@@ -228,7 +233,7 @@ ALTER TABLE `ratings`
 -- AUTO_INCREMENT for table `requests`
 --
 ALTER TABLE `requests`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 --
 -- AUTO_INCREMENT for table `transaction`
 --
