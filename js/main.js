@@ -297,7 +297,8 @@ function getTrade(){//alter for slim
 
 function processUserTrade(records){
     console.log(records);
-    listUserTrade(records)
+    listUserTrade(records);
+    showRequestData(records);
 }
 
 function listUserTrade(records){
@@ -579,6 +580,54 @@ function processData(records){
     showData(records);
 }
 
+function showRequestData(records){
+      // Load the Visualization API and the corechart package.
+      google.charts.load('current', {'packages':['corechart']});
+
+      // Set a callback to run when the Google Visualization API is loaded.
+      google.charts.setOnLoadCallback(drawChart);
+
+        var accept =0;
+        var deny =0;
+        var pending =0;
+
+      records.forEach(function(el){
+
+        if(el['decision'] == true)
+            accept++;
+        else if (el['decision'] == false)
+            deny++;
+        else 
+            pending++;
+
+      });
+      // Callback that creates and populates a data table,
+      // instantiates the pie chart, passes in the data and
+      // draws it.
+      function drawChart() {
+
+        // Create the data table.
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'decision');
+        data.addColumn('number', 'count');
+        data.addRows([
+          ['Accepted', accept],
+          ['denied', deny],
+          ['pending', pending]
+        ]);
+
+        // Set chart options
+        var options = {'title':'Requests Counter',
+                       'width':600,
+                       'height':300};
+
+        // Instantiate and draw our chart, passing in some options.
+        var chart = new google.visualization.PieChart(document.getElementById('trades_chart_div'));
+        chart.draw(data, options);
+      }
+
+}
+
 function showData(records){
       // Load the Visualization API and the corechart package.
       google.charts.load('current', {'packages':['corechart']});
@@ -621,7 +670,7 @@ function showData(records){
         var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
         chart.draw(data, options);
       }
-
 }
+
 
 console.log("JavaScript file was successfully loaded in the page");

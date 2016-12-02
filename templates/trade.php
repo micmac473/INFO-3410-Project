@@ -15,6 +15,9 @@ include "base.php";
   </div>
 
 </div>  <!-- close container -->  
+
+<div id="trades_chart_div"></div>
+
 <script type="text/template" id="table_headingt">
   <table class="table table-hover table-condensed">
     <thead>
