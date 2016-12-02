@@ -609,7 +609,7 @@ function showRequestData(records){
       google.charts.load('current', {'packages':['corechart']});
 
       // Set a callback to run when the Google Visualization API is loaded.
-      google.charts.setOnLoadCallback(drawChart);
+      google.charts.setOnLoadCallback(drawChart2);
 
         var accept =0;
         var deny =0;
@@ -628,7 +628,7 @@ function showRequestData(records){
       // Callback that creates and populates a data table,
       // instantiates the pie chart, passes in the data and
       // draws it.
-      function drawChart() {
+      function drawChart2() {
 
         // Create the data table.
         var data = new google.visualization.DataTable();
@@ -643,7 +643,7 @@ function showRequestData(records){
         // Set chart options
         var options = {'title':'Requests Status',
                         is3D: true,
-                       'width':600,
+                       'width':430,
                        'height':300};
 
         // Instantiate and draw our chart, passing in some options.
