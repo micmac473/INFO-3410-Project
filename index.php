@@ -144,6 +144,13 @@ $app->get("/homepage", function(Request $request, Response $response){
 	return $response;
 });
 
+$app->get("/data", function(Request $request, Response $response){
+	$data = getGraphData();
+	
+	$response = $response->withJson($data);
+	return $response;
+});
+
 $app->get("/profile", function(Request $request, Response $response){
 	$items = getAllUserItems();
 	
