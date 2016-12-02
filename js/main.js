@@ -219,13 +219,8 @@ function displayRequests(records){
         htmlStr += "<td style='display:none;'>"+ el['id'] +"</td>";
         htmlStr += "<td>"+ el['username'] +"</td>";
         htmlStr += "<td>"+ el['itemname'] +"</td>";
-
-        $.get("../index.php/itemimage/"+el['item'], function(res){
-            //alert(res.picture);
-            htmlStr += "<td><img src=\"" + res.picture + "\" width=\"150\" height=\"128\"></td>";
-        }, "json");
-
-        htmlStr += "<td><img src=\"" + pic + "\" width=\"150\" height=\"128\"></td>";        
+        //htmlStr += "<td><img src=\"" + pic + "\" width=\"150\" height=\"128\"></td>";    
+        htmlStr += "<td><button type='button' class='btn btn-info' onclick=\"viewRequest("+el.id+")\"><i class='fa fa-eye' aria-hidden='true'></i></button> ";    
         htmlStr += "<td><button type='button' class='btn btn-success' onclick=\"acceptRequest("+el.id+")\"><i class='fa fa-check-square-o' aria-hidden='true'></i></button> ";
         htmlStr += "<button type='button' class='btn btn-danger' onclick=\"denyRequest("+el.id+")\"><i class='fa fa-ban' aria-hidden='true'></i></button></td>";
         htmlStr +=" </tr>" ;
@@ -510,7 +505,8 @@ function deleteItem(itemid){
 }
 //-------------------------------------------------------------------------------------------------------------------
 function views(itemid){
-
+    //$('#zoom').attr('src', $('#imageH').attr('src'));
+    //$("#viewsModal").modal();
     $.get("../index.php/viewitem/"+itemid, function(res){
                 swal("Viewed!", "You view the item.", "success");
             }, "json");
@@ -518,7 +514,17 @@ function views(itemid){
 
 }
 //--------------------------------------------------------------------------------------------------------------------
-
+function viewRequest(requestId){
+    console.log(requestId);
+    $.get("../index.php/requestdetails/"+requestId, function(res){
+            console.log(res);
+            
+            $("#requester").val(res.username);
+            $("#requesteritem").val(res.itemname);
+            $('#imagepreview').attr('src', res.picture);
+            $("#requestModalP").modal();
+        }, "json");
+}
 function acceptRequest(requestId){
     swal({
         title: "Accept Request?",

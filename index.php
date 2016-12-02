@@ -113,6 +113,14 @@ $app->get("/itemimage/{id}", function(Request $request, Response $response){
 	return $response;
 });
 
+$app->get("/requestdetails/{id}", function(Request $request, Response $response){
+	$val = $request->getAttribute('id');
+	$request = getRequestDetails($val);
+	
+	$response = $response->withJson($request);
+	return $response;
+});
+
 $app->get("/acceptrequest/{id}", function(Request $request, Response $response){
 	$val = $request->getAttribute('id');
 	$requests = acceptRequest($val);

@@ -217,8 +217,47 @@ unset($_POST);
   <table class="table table-hover table-condensed">
     <thead>
     <tr>
-      <th>From</th><th>Your Item</th><th>Their Item</th><th>Decision</th>
+      <th>From</th><th>For Your Item</th><th>View</th><th>Decision</th>
     </tr>
     </thead>
     <tbody>
 </script>
+
+<!-- Modal -->
+  <div class="modal fade" id="requestModalP" role="dialog">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title" style="text-align: center">Request Details</h4>
+        </div>
+        <div class="modal-body">
+          <form class="form-horizontal" onsubmit="return sendRequest();">
+            <fieldset>
+
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="name">Requester</label>
+              <div class="col-md-8">
+                <input id="requester" name="requester" type="text" disabled placeholder="Item Owner" class="form-control input-md" required="">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="name">Item</label>
+              <div class="col-md-8">
+                <input id="requesteritem" name="requesteritem" type="text" disabled placeholder="Requested Item" class="form-control input-md" required="">
+              </div>
+            </div>
+            <div>
+              <img src="" id="imagepreview" style="width: 270px; height: 180px;">
+            </div>
+            </fieldset>
+          </form>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>

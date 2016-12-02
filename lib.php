@@ -238,6 +238,20 @@ function getRequests(){
 	return $requests;
 }
 
+function getRequestDetails($requestid){
+	$user = $_SESSION["id"];
+	$db = getDBConnection();
+	$rec = null;
+	if ($db != null){
+		$sql = "SELECT * FROM `requests` r, `items` i, `users` u WHERE r.requester = u.id AND i.itemid = r.item2 AND r.requestee = $user AND r.id = $requestid;";
+		$res = $db->query($sql);
+		if ($res){
+			$rec = $res->fetch_assoc();
+		}
+		$db->close();
+	}
+	return $rec;
+}
 function getDecisions(){
 	$user = $_SESSION["id"];
 	$db = getDBConnection();
