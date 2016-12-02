@@ -56,8 +56,8 @@ include "base.php";
             <div class="form-group">
               <label class="col-md-4 control-label" for="selectbasic">Select Your Item</label>
               <div class="col-md-8">
-                <select id="myitems" name="myitems" class="form-control">
-                  <option value="0">Select Item</option>
+                <select id="myitems" name="myitems" class="form-control" required="">
+                  
                 </select>
               </div>
             </div>
